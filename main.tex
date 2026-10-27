@@ -1,0 +1,17 @@
+% !TEX program = xelatex
+% Compilare con XeLaTeX (o LuaLaTeX):  latexmk
+\documentclass[a4paper,11pt]{article}
+\input{preambolo}
+
+\begin{document}
+
+\input{frontespizio}   % copertina
+\input{informazioni}   % tabella "Document Informations"
+\input{storico}        % tabella "Document History"
+\input{indice}         % indice
+
+\input{sezioni/01_introduzione}
+\input{sezioni/02_team}
+\input{sezioni/03_cv}
+
+\end{document}

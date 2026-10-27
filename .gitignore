@@ -1,0 +1,10 @@
+.DS_Store
+cv/
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.xdv
+*.zip

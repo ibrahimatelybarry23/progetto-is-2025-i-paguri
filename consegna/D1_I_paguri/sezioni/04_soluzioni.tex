@@ -1,0 +1,87 @@
+\clearpage
+\section{Analisi dei competitor e dei mock-up}
+
+\subsection{Analisi dei competitor}
+Sono state analizzate tre applicazioni che offrono funzionalità simili o sono fonte di ispirazione per il progetto \textbf{Field Lab}. Per ciascuna sono riportati funzionalità, punti di forza, criticità segnalate dagli utenti e lezioni per il progetto, in particolare le soluzioni da ereditare e gli errori da evitare.
+
+\begingroup
+\SetTblrTemplate{contfoot}{empty}
+\SetTblrTemplate{conthead}{empty}
+\DefTblrTemplate{conthead-text}{nocont}{}
+\DefTblrTemplate{contfoot-text}{nocont}{}
+\SetTblrTemplate{conthead-text}{nocont}
+\SetTblrTemplate{contfoot-text}{nocont}
+\begin{longtblr}[entry=none,label=none]{width=\linewidth,
+             colspec={X[0.8,l]X[1.2,l]X[1,l]X[1.2,l]X[1.3,l]},
+             rowhead=1, rowsep=3pt, colsep=3pt, cells={font=\footnotesize},
+             row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
+Applicazione & Funzionalità principali & Punti di forza & Criticità & Lezioni per il progetto \\
+{\textbf{QField (per QGIS)}\\GIS e rilievo geospaziale open-source} &
+Rilievo di punti, linee e poligoni su mappe offline; GPS/GNSS con indicazione della precisione; form configurabili con foto; sincronizzazione locale o tramite QFieldCloud. &
+Supporta formati cartografici standard (GeoPackage, Shapefile, raster); lavoro offline affidabile anche con layer vettoriali complessi. &
+Interfaccia sovraccarica, poco adatta all'uso con una mano e al sole; richiede molta configurazione preliminare su QGIS; mancano bussola e clinometro; conflitti di sincronizzazione con rete instabile. &
+{\textbf{Ereditare:} mostrare la precisione del punto GPS prima del salvataggio; architettura offline-first.\\\textbf{Evitare:} la complessità GIS per studenti senza esperienza.} \\
+{\textbf{Rock Identifier}\\Classificazione di rocce e minerali, uso consumer} &
+Riconoscimento da foto con scatto guidato; schede con proprietà geologiche; collezione personale con data, posizione e note; strumenti da sensore (magnetometro). &
+Flusso rapido (scatto, anteprima, scheda salvata); archivio visivo organizzato per nome, data e luogo. &
+Riconoscimento automatico poco affidabile (falsi positivi su rocce alterate); contenuti non scientifici e nessuna esportazione strutturata; pubblicità e paywall invadenti. &
+{\textbf{Ereditare:} scheda con foto e dettagli; suggerimenti e autocompletamento dalle liste del docente; galleria dei campioni.\\\textbf{Evitare:} classificazione solo automatica, senza inserimento guidato e note dello studente.} \\
+{\textbf{KoboToolbox / KoboCollect}\\Raccolta dati sul campo, uso umanitario e scientifico} &
+Form modulari (XLSForm, FormBuilder) con vincoli e logica condizionale; compilazione offline con GPS e foto; separazione tra gestione (docente, web) e raccolta (studente, app); esportazione in XLS, CSV, GeoJSON, KML. &
+Memorizzazione offline molto robusta, senza perdita di bozze; ruoli separati, l'operatore trova i moduli già pronti; vincoli stretti sui dati. &
+Componente cartografica debole; interfaccia a scorrimento tipo questionario, lenta per il campionamento rapido; mancano bussola, clinometro e sensori; nessuna gestione di gruppi didattici con regole diverse per disciplina. &
+{\textbf{Ereditare:} console web per il docente e app per lo studente; coda di invio visibile (bozze, inviati, in attesa); vincoli di validazione.\\\textbf{Evitare:} ridurre l'app a un questionario; delegare i sensori ad app esterne.} \\
+\end{longtblr}
+\endgroup
+
+\subsection{Mock-up dell'hackathon di settembre}
+Abbiamo analizzato due mock-up: BallMap, costituito da 14 schermate, e Field Lab, costituito da 23 schermate. Le schermate sono raggruppate per area funzionale; per ciascun gruppo la tabella riporta
+\begin{itemize}
+    \item punti di forza;
+    \item criticità;
+    \item miglioramenti proposti.
+\end{itemize} 
+ 
+
+\subsubsection*{Mock-up 1: BallMap}
+\begingroup
+\SetTblrTemplate{contfoot}{empty}
+\SetTblrTemplate{conthead}{empty}
+\DefTblrTemplate{conthead-text}{nocont}{}
+\DefTblrTemplate{contfoot-text}{nocont}{}
+\SetTblrTemplate{conthead-text}{nocont}
+\SetTblrTemplate{contfoot-text}{nocont}
+\begin{longtblr}[entry=none,label=none]{width=\linewidth,
+             colspec={X[0.7,l]X[1.2,l]X[1.3,l]X[1.3,l]},
+             rowhead=1, rowsep=3pt, colsep=3pt, cells={font=\footnotesize},
+             row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
+Schermate & Punti di forza & Criticità & Miglioramenti proposti \\
+1--4: accesso, mappa, rilevazione, aree & Login intuitivo; mappa semplice con percorsi e attività ben segnalati; trascrizione, registrazione e foto del luogo; posizione attuale sempre disponibile. & Non è spiegato che il sistema distingue le e-mail di docenti e studenti; non si vedono le posizioni dei compagni; la precisione della posizione non è nota; non è chiaro quale sia latitudine e quale longitudine. & Icona \guillemotleft{}info\guillemotright{} sul login; UWB o Bluetooth Mesh/LE per mostrare i compagni sulla mappa; promemoria con animazione per ricalibrare il localizzatore; etichette esplicite per latitudine e longitudine. \\
+5--8: aree e dati & Interfaccia semplice e intuitiva; ultima rilevazione e dati attuali (altitudine, pendenza, ecc.) ben visibili. & Il box \guillemotleft{}Seleziona un'area\guillemotright{} e l'elenco sotto sembrano un menu a tendina; non è specificato se i dati siano attuali o dell'ultima rilevazione; il box \guillemotleft{}attuale\guillemotright{} separato genera dubbi, anche sulla \guillemotleft{}tipologia\guillemotright{}. & Unire i due box; aggiungere un titolo che indichi se i dati sono in tempo reale o dell'ultima rilevazione; aggiungere o togliere il box \guillemotleft{}attuale\guillemotright{} fondendo i dati in un unico segmento. \\
+9--12: compilazione e storico & Dati separati in box distinti, compilazione intuitiva; rilevazioni distinguibili per box nello storico. & Manca l'ora della rilevazione, utile se se ne fanno diverse in poco tempo; nello storico alcune scritte hanno stesso font e colore. & Aggiungere l'ora di salvataggio o una nota sull'ora locale; differenziare il font di scritte e descrizioni. \\
+13--14: revisione e permessi & Descrizione pulita con box \guillemotleft{}Da revisionare\guillemotright{} ben visibile; schema dei permessi molto intuitivo. & Lo \guillemotleft{}Storico rilevazioni\guillemotright{} non mostra quali rilevazioni sono da revisionare; manca una sezione Q\&A su funzioni di studente e docente. & Box \guillemotleft{}Da revisionare\guillemotright{} anche nello storico; breve sezione Q\&A (es.\ se si possano fare rilevazioni tramite trascrizione). \\
+\end{longtblr}
+\endgroup
+
+\subsubsection*{Mock-up 2: Field Lab}
+\begingroup
+\SetTblrTemplate{contfoot}{empty}
+\SetTblrTemplate{conthead}{empty}
+\DefTblrTemplate{conthead-text}{nocont}{}
+\DefTblrTemplate{contfoot-text}{nocont}{}
+\SetTblrTemplate{conthead-text}{nocont}
+\SetTblrTemplate{contfoot-text}{nocont}
+\begin{longtblr}[entry=none,label=none]{width=\linewidth,
+             colspec={X[0.7,l]X[1.2,l]X[1.3,l]X[1.3,l]},
+             rowhead=1, rowsep=3pt, colsep=3pt, cells={font=\footnotesize},
+             row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
+Schermate & Punti di forza & Criticità & Miglioramenti proposti \\
+1--3: login, dashboard, sessione & Layout pulito e branding istituzionale; tre domini chiari (Botanica, Geologia, Chimica) con contatori dei dati locali; metadati della sessione espliciti (coordinate, quota). & Manca l'accesso biometrico (utile con i guanti) e l'indicatore di connettività; troppo spazio bianco e Export con peso pari all'azione primaria; manca un'anteprima cartografica nella sessione. & Accesso biometrico e badge Online/Offline; scheda \guillemotleft{}Ultima attività\guillemotright{} e Export ridimensionato; anteprima della mappa nella sessione. \\
+4--7: botanica & Indici di biodiversità in metric card; codifica Braun-Blanquet in pillole; dropdown e GPS nel form; tabella fitosociologica fedele ai taccuini cartacei. & Numeri degli indici sottili e poco leggibili al sole, senza spiegazioni; l'SOS copre l'ultimo elemento della lista; mancano miniature delle specie; note troppo strette e \guillemotleft{}Conferma\guillemotright{} vicino al bordo; celle sotto i 44 px. & Valori in grassetto e icona \guillemotleft{}info\guillemotright{}; margine contro la sovrapposizione dell'SOS e miniature; area note espandibile e bottom-bar fissa; righe da 48 px e modalità Landscape. \\
+8--11: chimica dell'acqua & Confronto chiaro tra i siti di campionamento per squadra; unità di misura esplicite; card per squadra con progresso; tastierino numerico ottimizzato; badge di calibrazione. & Nessuna codifica colore per i valori fuori norma; \guillemotleft{}—\guillemotright{} confuso con il segno meno; icona di espansione piccola; nessuna validazione dei valori impossibili (pH > 14); tasto \guillemotleft{}Avanti\guillemotright{} coperto dalla tastiera; etichette del grafico illeggibili; manca la ricalibrazione. & \guillemotleft{}N.D.\guillemotright{} al posto di \guillemotleft{}—\guillemotright{} e colore per i valori oltre soglia; card interamente cliccabile con stato della squadra; controllo di validità in tempo reale; pulsante \guillemotleft{}Ricalibra Sonda\guillemotright{} e grafico a pieno schermo. \\
+12--15: gruppo, chat, mappa & Feed cronologico con timestamp e quota; avatar distinti; chat con testo e note vocali; ruoli e stato Online/Offline dei membri; mappa con livelli commutabili. & Nessun filtro per tipologia e foto non ingrandibili; l'SOS copre l'ultimo vocale; nessuna trascrizione dei vocali; conteggio \guillemotleft{}obs.\guillemotright{} a basso contrasto e invito poco evidente; pin sovrapposti, mancano bussola e scala. & Barra di filtri e foto a pieno schermo; Speech-to-Text offline e SOS spostato; font più forte e invito come card piena; clustering dei pin e bussola magnetica. \\
+16--19: report & Banner con i dati chiave e \guillemotleft{}Generate Report\guillemotright{} ben visibile; capitoli standard con stato Ready/Draft; indici inseriti nel testo; anteprima A4 fedele alla stampa. & Non si sceglie il formato del file; non si vede chi ha modificato un capitolo; l'SOS copre il badge dell'ultimo capitolo; testo tagliato e nessuna barra di formattazione; mancano zoom, navigazione e condivisione rapida. & Selettore di formato (PDF/LaTeX) e sezioni riordinabili; avatar dell'ultimo autore; area di testo dinamica con toolbar WYSIWYG; barra di navigazione con pagine e invio via e-mail o Drive. \\
+20--23: profilo, sync, SOS & Header utente pulito con statistiche; toggle per Auto Sync e Bluetooth Mesh; ultima sincronizzazione indicata; contatto del docente a chiamata rapida; conferma SOS con conto alla rovescia. & Icone disomogenee e spazio dei media a basso contrasto; manca \guillemotleft{}Sincronizza ora\guillemotright{} e la notifica dei conflitti; l'SOS si sovrappone al contatto telefonico e manca un test del segnale; \guillemotleft{}Annulla\guillemotright{} piccolo; manca un segnale ottico o acustico. & Icone uniformi; pulsante \guillemotleft{}Sincronizza Ora\guillemotright{} e gestione dei conflitti; SOS in posizione dedicata e \guillemotleft{}Test Segnale SOS\guillemotright{}; \guillemotleft{}Annulla\guillemotright{} più grande e flash lampeggiante. \\
+\end{longtblr}
+\endgroup
+

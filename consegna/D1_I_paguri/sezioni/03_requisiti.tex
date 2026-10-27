@@ -1,0 +1,107 @@
+\section{Coinvolgimento degli stakeholder e requisiti}
+
+\subsection{Stakeholder coinvolti}
+La raccolta di informazioni presso gli stakeholder è stata effettuata esclusivamente tramite questionari rivolti agli studenti e ai docenti del laboratorio. I due gruppi rappresentano rispettivamente gli utilizzatori sul campo e i referenti delle attività didattiche.
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[l]X[l]X[2,l]},
+             rowsep=2pt, cells={font=\small},
+             row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
+Stakeholder & Tecnica utilizzata & Obiettivo della raccolta \\
+Studenti & Questionario & Comprendere le esigenze degli utilizzatori durante le attività del laboratorio \\
+Docenti del laboratorio & Questionario & Raccogliere le esigenze didattiche e le indicazioni per definire i requisiti dell'app \\
+\end{tblr}
+\end{center}
+
+\subsection{Tecniche e modalità}
+Abbiamo utilizzato il questionario come unica modalità di raccolta diretta delle informazioni da studenti e docenti. Il questionario è stato inviato martedì 13 ottobre 2026 sul gruppo WhatsApp del corso di Scienze Ambientali; chi rispondeva indicava il proprio ruolo (studente o docente) e l'ambito disciplinare. Le risposte costituiscono la base per confrontare le esigenze dei due gruppi e precisare le funzionalità proposte.
+
+\subsection{Tempistica}
+Il questionario è stato inviato il 13 ottobre 2026 e le risposte sono state raccolte il 15 ottobre 2026; il numero di risposte per ruolo è riportato nella tabella seguente.
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[l]X[l]X[l]},
+             rowsep=2pt, cells={font=\small},
+             row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
+Rilevazione & Periodo di somministrazione & Risposte raccolte \\
+Questionario agli studenti & 13--15 ottobre 2026 & 5 \\
+Questionario ai docenti & 13--15 ottobre 2026 & 2 \\
+\end{tblr}
+\end{center}
+
+\subsection{Primi risultati}
+Di seguito sono riportati gli esiti del questionario; i requisiti derivati sono elencati nella Sezione~3.5.
+
+
+
+\paragraph{Esiti del questionario}
+Hanno risposto 7 persone: 5 studenti e 2 docenti. Il campione è molto ridotto e i dati vanno letti come indicazioni preliminari. Tutti dichiarano di trovarsi in zone offline \emph{a volte} (4 su 7) o \emph{spesso} (3 su 7). Per gli appunti prevale il taccuino cartaceo (5 su 7), seguito da foto con lo smartphone (3 su 7). Il problema più segnalato è il tempo necessario per trascrivere i dati a casa o in laboratorio (6 su 7); uno studente cita il rischio di smarrire o rovinare i fogli.
+
+La tabella riporta il grado di importanza di alcune funzionalità, su una scala da 1 a 5 (media delle risposte).
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[3,l]X[l,c]X[l,c]},
+             rowsep=2pt, cells={font=\small},
+             row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
+Funzionalità & Studenti (5) & Docenti (2) \\
+Foto e note vocali collegate alle coordinate GPS & 4,6 & 4,0 \\
+Ricerca rapida delle specie botaniche senza internet & 4,6 & 3,0 \\
+Uso 100\% offline & 4,4 & 1,0\textsuperscript{*} \\
+Moduli di inserimento con campi preimpostati & 3,4 & 4,0 \\
+Chat di gruppo con i docenti & 2,8 & 2,0 \\
+\end{tblr}
+\end{center}
+{\small\textsuperscript{*} Un solo docente ha risposto a questa domanda.}
+
+Sulla gestione dell'uscita, la funzione più scelta è il caricamento di guide e dispense in PDF consultabili offline (6 risposte su 7), seguita dalla definizione di itinerario e punti di sosta prima della partenza (4, tutte di studenti). Selezione delle liste di specie o delle variabili chimiche e assegnazione degli studenti ai gruppi sono state indicate rispettivamente da 2 e 2 persone. Per la validazione dei dati, 5 rispondenti su 7 vorrebbero l'esportazione diretta in formati standard (Excel, CSV, GIS) e 4 su 7 la possibilità di correggere o integrare i dati direttamente nell'app.
+
+Il questionario conferma i requisiti di funzionamento offline, di acquisizione di foto e note vocali georeferenziate e di esportazione dei dati. La chat di gruppo ha ricevuto il punteggio più basso e può essere trattata come estensione.
+
+\subsection{Funzionalità}
+Le funzionalità seguenti derivano dalle esigenze emerse dai questionari e dalle proposte del gruppo. In base al questionario, RF26 (ricerca delle specie offline) ha priorità Alta ed è stato aggiunto RF32 (materiali didattici offline). L'elenco è preliminare: ambito, priorità e criteri di accettazione sono da validare con i docenti. Gli identificativi RF sono univoci e progressivi e non indicano l'importanza della funzionalità. Le priorità Alta, Media e Bassa sono proposte del gruppo e indicano rispettivamente le funzioni essenziali, gli strumenti di supporto e le estensioni. Hanno priorità Alta le funzioni indispensabili al ciclo base di raccolta e consegna dei dati sul campo (accesso e gruppi, schede, uso offline e sincronizzazione, mappa e posizione, foto e note vocali, ricerca delle specie, esportazione), tenendo conto delle preferenze espresse nel questionario: foto e note vocali georeferenziate, ricerca delle specie e uso offline hanno le medie più alte, mentre la chat ha la più bassa. Hanno priorità Media funzioni utili ma non indispensabili, come permessi per disciplina, database pluriennale, rilevamento assistito della giacitura e generazione dei report, per le quali il questionario non ha fornito indicazioni. RF31 resta un'estensione opzionale a priorità Bassa.
+
+\begingroup
+\SetTblrTemplate{contfoot}{empty}
+\SetTblrTemplate{conthead}{empty}
+\DefTblrTemplate{conthead-text}{nocont}{}
+\DefTblrTemplate{contfoot-text}{nocont}{}
+\SetTblrTemplate{conthead-text}{nocont}
+\SetTblrTemplate{contfoot-text}{nocont}
+\begin{longtblr}[entry=none,label=none]{width=\linewidth,
+             colspec={Q[l,wd=1cm]X[1.2,l]X[2.4,l]Q[l,wd=1.7cm]},
+             rowhead=1, rowsep=5pt, cells={font=\small},
+             row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
+ID & Funzionalità & Descrizione & Priorità \\
+RF01 & Account personale e autenticazione & Accesso con un account univoco per ogni utente.& Alta \\
+RF02 & Aree studente e docente & Interfacce e operazioni differenziate in base al ruolo.& Alta \\
+RF03 & Gestione dei gruppi & Assegnazione degli studenti ai gruppi e accesso ai rispettivi dati.& Alta \\
+RF04 & Permessi per disciplina & Ogni gruppo consulta i propri dati; per chimica può visualizzare quelli degli altri gruppi in sola lettura.& Media \\
+RF05 & Gestione delle attività e degli itinerari & Organizzazione delle uscite, dei siti e degli stop assegnati ai gruppi; itinerario e punti di sosta definibili sulla mappa prima della partenza (richiesto da 4 studenti su 5).& Alta \\
+RF06 & Schede per quattro discipline & Inserimento di campioni e rilevamenti di botanica, biologia, geologia e chimica, con campi e unità specifici per disciplina e moduli con campi preimpostati.& Alta \\
+RF07 & Database centralizzato pluriennale & Conservazione e consultazione dei dati dell'anno corrente e degli anni precedenti, nel rispetto dei permessi.& Media \\
+RF08 & Raccolta dati offline & Compilazione e salvataggio sul dispositivo anche senza connessione Internet.& Alta \\
+RF09 & Salvataggio delle bozze & Possibilità di riprendere e completare un rilevamento successivamente.& Alta \\
+RF10 & Sincronizzazione automatica & Trasferimento dei dati al server e aggiornamento dei dispositivi autorizzati al ritorno della connessione. La gestione delle modifiche concorrenti è da definire.& Alta \\
+RF11 & Controllo dei dati inseriti & Verifica dei campi obbligatori, dei formati e delle unità di misura, consentendo il salvataggio di bozze incomplete.& Media \\
+RF12 & Modifica e versionamento & Modifica dei rilevamenti mantenendo lo storico delle versioni precedenti, con autore e data.& Alta \\
+RF13 & Filtri e ordinamento & Ricerca, filtro e ordinamento delle tabelle dei campioni e dei rilevamenti.& Media \\
+RF14 & Mappa offline & Consultazione della cartografia precedentemente scaricata e dei punti di rilevamento senza connessione.& Alta \\
+RF15 & Controllo didattico della mappa & Configurazione, modifica e attivazione/disattivazione della mappa da parte del docente. Le limitazioni degli aiuti GPS sono da concordare.& Media \\
+RF16 & Registrazione dei punti geografici & Inserimento della posizione manualmente o tramite GPS, associata a data, gruppo e osservazioni, secondo le modalità consentite dal docente.& Alta \\
+RF17 & Storico geografico & Consultazione dei rilevamenti effettuati nello stesso luogo in momenti diversi, nel rispetto dei permessi.& Bassa \\
+RF18 & Bussola e clinometro & Strumenti integrati per l'orientamento e la misurazione dell'inclinazione, sui dispositivi dotati dei sensori necessari.& Media \\
+RF19 & Rilevamento della giacitura & Inserimento manuale o acquisizione assistita tramite sensori dell'orientazione degli strati rocciosi. L'accuratezza richiesta è da verificare.& Media \\
+RF20 & Associazione dei parametri ambientali & Acquisizione automatica dei dati disponibili, come meteo, temperatura e pressione, conservandone fonte e orario e distinguendoli dalle misure sul campione.& Bassa \\
+RF21 & Note testuali & Aggiunta di osservazioni libere ai campioni e ai rilevamenti.& Alta \\
+RF22 & Note vocali & Registrazione e ascolto di annotazioni audio collegate automaticamente alle coordinate GPS del punto di stop, anche come supporto all'accessibilità.& Alta \\
+RF23 & Fotografie con metadati & Acquisizione e associazione delle foto ai rilevamenti e alle coordinate GPS del punto di stop, con note e informazioni strutturate selezionabili tramite menu.& Alta \\
+RF24 & Annotazione delle fotografie & Aggiunta di scritte e disegni sulle immagini, conservando la fotografia originale.& Bassa \\
+RF25 & Caricamento delle liste tassonomiche & Importazione, da parte del docente, di elenchi di specie e nomi scientifici relativi a un'area, con selezione delle liste o delle variabili chimiche da usare nella giornata.& Alta \\
+RF26 & Autocompletamento dei nomi scientifici & Ricerca rapida e suggerimento delle specie botaniche e biologiche durante la digitazione, a partire dalle liste disponibili sul dispositivo senza connessione.& Alta \\
+RF27 & Chat interna & Comunicazione tra utenti secondo i permessi previsti; i messaggi scritti offline rimangono in attesa della connessione. Nel questionario ha ottenuto l'importanza più bassa (media 2,6 su 5).& Bassa \\
+RF28 & Segnalazione SOS & Invio rapido di un avviso ai docenti, con stato in attesa, inviato o ricevuto. La consegna immediata richiede un canale di comunicazione disponibile.& Media \\
+RF29 & Generazione automatica dei report & Creazione di un documento con dati, tabelle, fotografie e annotazioni selezionati per uscita, gruppo e disciplina. I report offline includono i soli dati locali e la data dell'ultima sincronizzazione.& Media \\
+RF30 & Esportazione e condivisione & Salvataggio e condivisione dei report in PDF e dei dati in formati come CSV o Excel, secondo i permessi di esportazione da concordare. Il questionario indica come preferita l'esportazione diretta in formati standard (Excel, CSV, GIS).& Alta \\
+RF31 & Assistenza alla redazione del report & Proposta di una sintesi delle osservazioni tramite un modello linguistico locale, ad esempio Gemma, già disponibile sul dispositivo. Il testo deve essere verificabile e modificabile dall'utente; misure e calcoli provengono dai dati originali. La generazione del report resta disponibile senza AI.& Bassa \\
+RF32 & Materiali didattici offline & Caricamento, da parte del docente, di guide e dispense in PDF consultabili dagli studenti senza connessione. Indicata da 6 rispondenti su 7.& Alta \\
+\end{longtblr}
+\endgroup
+
+L'assistenza alla redazione del report (RF31) è un'estensione opzionale, subordinata alla verifica di compatibilità, memoria occupata, tempi di generazione, consumo energetico e qualità del testo sui dispositivi previsti. La sintesi proposta deve essere revisionata dall'utente prima dell'esportazione; le interpretazioni scientifiche e le conclusioni restano sotto la sua responsabilità.
