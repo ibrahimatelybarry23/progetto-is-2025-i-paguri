@@ -45,28 +45,10 @@
 \end{center}
 
 
-\subsection{Attività e dipendenze (PERT)}
-\begin{center}
-\begin{tblr}{width=\linewidth, colspec={X[0.4,l]X[l]X[0.8,l]X[0.7,l]X[0.7,l]}, cells={font=\small},
-             row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
-ID & Attività & Predecessori & Durata & Responsabile \\
-A & Login & -- & 1 min & Studente, Docente \\
-B & Caricare la lista delle specie presenti & A & 2 min & Docente \\
-C & Inserire il tipo di terreno & B & 1 min & Docente \\
-D & Creare i gruppi degli studenti & A & 1 min & Docente \\
-E & Moderare le chat & A & 5 min & Docente \\
-H & Unirsi a un gruppo & D & 1 min & Studente \\
-I & Caricare i dati & H & 4 min & Studente \\
-J & Modificare i dati & I & 2 min & Studente \\
-K & Inserire foto & I & 2 min & Studente \\
-L & Scrivere note & I & 3 min & Studente \\
-M & Scrittura della relazione & L & 5 min & Studente \\
-N & Esportare la relazione & M & 1 min & Studente \\
-F & Revisione degli elaborati & N, E & 3 min & Docente \\
-\end{tblr}
-\end{center}
+\subsection{Diagramma PERT}
 
-\paragraph{Diagramma PERT}
+
+
 
 \begin{center}
 \begin{tikzpicture}[
