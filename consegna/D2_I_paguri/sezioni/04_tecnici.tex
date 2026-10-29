@@ -1,16 +1,82 @@
 \section{Processi tecnici}
 
-\subsection{Strumenti e tecniche di sviluppo}
-% TODO: sintesi degli strumenti scelti (rimando alla Sezione~5 del D1): linguaggio, framework, IDE, librerie per mappe e dati.
+\subsection{Metodi, strumenti e tecniche}
 
-\subsection{Metodi per requisiti, analisi e progettazione}
-% TODO: tecniche usate (casi d'uso, user stories, modelli UML, mock-up) e relativi strumenti.
+\subsubsection{Ambiente di sviluppo}
+L'app \textbf{yamnine} è sviluppata per dispositivi Android. Gli strumenti sono quelli proposti nella Sezione~5 del D1 e sono riepilogati qui con il loro ruolo nel processo di sviluppo.
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[l]X[1.3,l]X[1.5,l]},
+             rowsep=2pt, cells={font=\small},
+             row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
+Ambito & Strumento & Utilizzo nel progetto \\
+Sviluppo dell'app & Android Studio & IDE ufficiale; scrittura del codice, debug e test su emulatore \\
+Test su dispositivo & Smartphone Android fisico & Prove di GPS, fotocamera, microfono e sensori, non riproducibili sull'emulatore \\
+Mappe e posizione & OpenStreetMap con libreria (osmdroid o MapLibre) & Mappe scaricabili e consultabili offline \\
+Dati locali & SQLite tramite Room & Salvataggio di rilievi e bozze sul dispositivo senza connessione \\
+Controllo versione & Git e GitHub & Repository condiviso del codice e della documentazione \\
+Comunicazione & WhatsApp & Coordinamento quotidiano del team \\
+Documentazione & \LaTeX\ (XeLaTeX) & Redazione dei deliverable \\
+\end{tblr}
+\end{center}
+La scelta della libreria per le mappe e del servizio di sincronizzazione o consegna dei dati ai docenti resta aperta e sarà definita con i committenti.
 
-\subsection{Implementazione e standard di codifica}
-% TODO: convenzioni di codice, struttura del repository, branching.
+\subsubsection{Linguaggi}
+\begin{itemize}
+    \item \textbf{Java}: linguaggio di sviluppo dell'app Android.
+    \item \textbf{SQL}: definizione e interrogazione del database locale SQLite (tramite Room).
+    \item \textbf{XML}: layout delle schermate Android.
+    \item \textbf{\LaTeX}: documentazione di progetto.
+\end{itemize}
 
-\subsection{Verifica, validazione e test}
-% TODO: livelli di test (unitari, integrazione, accettazione con i docenti, usabilità sul campo) e criteri di superamento.
+\subsubsection{Standard e linee guida}
+\begin{itemize}
+    \item \textbf{Codice}: convenzioni standard di Java (nomi di classi in \emph{UpperCamelCase}, di metodi e variabili in \emph{lowerCamelCase}, costanti in maiuscolo), codice commentato dove la logica non è evidente e nessuna duplicazione di funzioni già esistenti.
+    \item \textbf{Interfaccia}: linee guida Material Design di Android, con attenzione all'uso all'aperto emerso dall'analisi dei mock-up (D1, Sezione~4): testo leggibile al sole, elementi toccabili sufficientemente grandi e uso con una mano.
+    \item \textbf{Requisiti e modelli}: i requisiti seguono gli identificativi RF del D1; i modelli di analisi e progettazione usano la notazione UML.
+    \item \textbf{Documenti}: tutti i deliverable usano il formato comune del corso e lo stesso modello \LaTeX.
+\end{itemize}
 
-\subsection{Rilascio e documentazione}
-% TODO: come si consegna l'app (APK/store), manuali e documentazione prodotta.
+\subsection{Documentazione}
+Il piano della documentazione indica quali documenti produce il progetto, chi ne è responsabile e quando vengono revisionati.
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[0.8,l]X[1.6,l]X[l]X[1.4,l]},
+             rowsep=2pt, cells={font=\small},
+             row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
+Documento & Contenuto & Responsabile & Revisione \\
+D0 & Proposta di progetto & Team Leader & Prima della consegna \\
+D1 & Contesto, requisiti, analisi dei competitor e dei mock-up, strumenti & Team & Prima della consegna \\
+D2 & Piano di progetto (questo documento) & Team Leader & Prima della consegna; aggiornato a ogni modifica della pianificazione \\
+Verbali & Decisioni e azioni delle riunioni (Appendice~B) & Un membro a turno & Condivisi nel gruppo entro la riunione successiva \\
+Manuale utente & Istruzioni per studenti e docenti & Team & Dopo il completamento delle funzioni principali, con prova sul campo \\
+\end{tblr}
+\end{center}
+Ogni documento ha un autore principale e viene letto da almeno un altro membro prima della consegna. Le modifiche sono registrate nella tabella \emph{Document History} dell'inizio del documento, con data, versione e autore. I documenti sono salvati nel repository GitHub del progetto, in modo che versione corrente e storico siano sempre accessibili a tutto il team.
+
+\subsection{Funzionalità di supporto al progetto}
+
+\subsubsection{Pianificazione della qualità}
+Il piano stabilisce chi controlla che cosa e in quale momento; i criteri di accettazione sono da concordare con i docenti.
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1.2,l]X[1.4,l]X[l]X[1.2,l]},
+             rowsep=2pt, cells={font=\small},
+             row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
+Oggetto & Attività di controllo & Chi controlla & Quando \\
+Documenti & Revisione di correttezza, completezza e coerenza con il D1 & Un membro diverso dall'autore & Prima di ogni consegna \\
+Codice & Revisione tramite pull request e rispetto delle convenzioni & Un membro diverso dall'autore & Prima dell'integrazione nel ramo principale \\
+Funzioni dell'app & Test unitari e di integrazione (ad es.\ salvataggio offline, sincronizzazione) & Chi sviluppa la funzione & Durante lo sviluppo \\
+Requisiti RF a priorità Alta & Verifica rispetto ai criteri di accettazione & Team Leader & A ogni rilascio intermedio \\
+Usabilità sul campo & Prova con studenti e docenti, anche all'aperto e senza connessione & Team con i docenti & Prima del rilascio finale \\
+\end{tblr}
+\end{center}
+Un'attività è considerata completata solo dopo il controllo previsto. Le non conformità riscontrate sono registrate come \emph{issue} su GitHub, assegnate a un membro e chiuse dopo la correzione e la verifica.
+
+\subsubsection{Gestione delle configurazioni}
+Per la gestione delle configurazioni il team usa \textbf{Git} con un repository su \textbf{GitHub}, che contiene codice dell'app e documentazione \LaTeX.
+\begin{itemize}
+    \item \textbf{Struttura}: un ramo principale (\texttt{main}) sempre stabile e funzionante; ogni funzione o documento è sviluppato in un ramo separato.
+    \item \textbf{Integrazione}: le modifiche entrano nel ramo principale solo tramite pull request, approvata da almeno un altro membro.
+    \item \textbf{Commit}: piccoli e frequenti, con un messaggio che descrive la modifica.
+    \item \textbf{Versioni}: i rilasci e le consegne dei deliverable sono contrassegnati da un \emph{tag} (ad es.\ \texttt{D2-v1.0}), che consente di ritrovare la configurazione consegnata.
+    \item \textbf{Modifiche ai requisiti}: sono discusse con il Team Leader e registrate come issue prima di essere inserite nel progetto.
+\end{itemize}
+Il controllo della configurazione e della qualità è trattato dal punto di vista gestionale anche nella Sezione~3.5.
