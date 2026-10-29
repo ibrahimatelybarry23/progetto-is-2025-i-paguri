@@ -1,7 +1,6 @@
 \section{Pianificazione delle attività e delle risorse}
 
 \subsection{Work Breakdown Structure (WBS)}
-Il lavoro è scomposto per ruolo. Dopo il login, comune a tutti, studente e docente svolgono attività distinte. Lo studente si unisce a un gruppo, carica i dati e li completa con modifiche, foto e note, poi scrive ed esporta la relazione. Il docente prepara l'uscita (lista delle specie, tipo di terreno, gruppi), modera le chat e revisiona gli elaborati.
 
 \begin{center}
 \begin{tikzpicture}[
@@ -68,8 +67,6 @@ F & Revisione degli elaborati & N, E & 3 min & Docente \\
 \end{center}
 
 \paragraph{Diagramma PERT}
-Ogni nodo riporta l'attività con la sua durata; nella prima riga ci sono inizio e fine al più presto, nella seconda inizio e fine al più tardi (in minuti). Le attività sono:
-A~Login (1), B~Caricare la lista delle specie presenti (2), C~Inserire il tipo di terreno (1), D~Creare i gruppi degli studenti (1), E~Moderare le chat (5), F~Revisione degli elaborati (3), H~Unirsi a un gruppo (1), I~Caricare i dati (4), J~Modificare i dati (2), K~Inserire foto (2), L~Scrivere note (3), M~Scrittura della relazione (5), N~Esportare la relazione (1).
 
 \begin{center}
 \begin{tikzpicture}[
@@ -119,12 +116,10 @@ A~Login (1), B~Caricare la lista delle specie presenti (2), C~Inserire il tipo d
 \end{tikzpicture}
 \end{center}
 
-Il cammino critico è A--D--H--I--L--M--N--F, con una durata complessiva di 19 minuti: su queste attività inizio al più presto e al più tardi coincidono. Le altre hanno un margine (slack): 1 minuto per J e K, 9 per E e 15 per B e C.
 
 \subsection{Diagramma di Gantt}
 \noindent\begin{minipage}{\linewidth}
 \setlength{\parskip}{8pt}
-Il diagramma riporta le attività sull'asse del tempo, in minuti, a partire dall'inizio al più presto calcolato con il PERT. Le barre arancioni sono le attività del cammino critico, quelle gialle le altre; il tratteggio indica il margine entro cui un'attività può slittare senza ritardare la fine (19 minuti).
 
 \begin{center}
 \begin{tikzpicture}[x=0.6cm, y=0.55cm]

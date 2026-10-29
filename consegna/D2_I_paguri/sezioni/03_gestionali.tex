@@ -12,12 +12,9 @@ In caso di ritardo, l'ambito si riduce rinviando i requisiti a priorità Media e
 \subsection{Monitoraggio e controllo}
 L'avanzamento è controllato rispetto al diagramma di Gantt (Sezione~5.3) e alla ripartizione dei compiti di ogni deliverable (Sezione~2).
 \begin{itemize}
-    \item \textbf{Riunione settimanale} del team (in presenza o online) per verificare lo stato delle attività, i problemi aperti e i compiti della settimana successiva; le decisioni sono riportate in un breve verbale (Appendice~B).
-    \item \textbf{Stato delle attività}: ogni attività è tracciata come \emph{issue} su GitHub con responsabile e stato (da fare, in corso, completata), così l'avanzamento è visibile a tutti.
-    \item \textbf{Indicatori}: percentuale di attività completate rispetto al piano, numero di requisiti RF implementati e verificati, issue aperte e giorni mancanti alla scadenza del deliverable.
+    \item \textbf{Riunione settimanale} del team in presenza  per verificare lo stato delle attività, i compiti della settimana successiva.
     \item \textbf{Revisione prima della consegna}: alcuni giorni prima di ogni scadenza il team rilegge insieme il documento compilato e verifica che tutte le sezioni siano complete.
 \end{itemize}
-Se un'attività accumula ritardo, il responsabile lo segnala subito sul gruppo; nella riunione successiva il team ridistribuisce il lavoro o riduce l'ambito secondo le priorità indicate sopra. Il referente di progetto, Ibrahima Tely Barry, interviene se il ritardo mette a rischio una consegna.
 
 \subsection{Gestione dei rischi}
 I rischi sono stati individuati dal team e valutati per probabilità e impatto (Alta, Media, Bassa). Sono riesaminati nella riunione settimanale e aggiornati a ogni deliverable.
@@ -37,9 +34,8 @@ R2 & Poca esperienza del team nello sviluppo Android & Alta & Media & Prototipi 
 R3 & Requisiti instabili o non validati dai docenti & Media & Alta & Validazione dei requisiti con i docenti prima dello sviluppo, modifiche registrate come issue \\
 R4 & Complessità del funzionamento offline e della sincronizzazione & Alta & Alta & Architettura offline-first fin dall'inizio, test senza connessione, sincronizzazione semplice prima di quella automatica \\
 R5 & Sensori (GPS, bussola, clinometro) assenti o imprecisi su alcuni dispositivi & Media & Media & Test su dispositivo fisico, inserimento manuale sempre disponibile come alternativa \\
-R6 & Indisponibilità temporanea di un membro (esami, malattia) & Media & Media & Rotazione dei compiti, codice e documenti condivisi su GitHub, sostituzione da parte di un altro membro \\
-R7 & Perdita di lavoro o conflitti tra versioni & Bassa & Alta & Git e GitHub, commit frequenti, pull request revisionate, nessuna modifica diretta sul ramo principale \\
-R8 & Scarso coinvolgimento degli utenti finali (il questionario del D1 ha raccolto 7 risposte) & Media & Media & Nuove occasioni di confronto con docenti e studenti, prove di usabilità sul campo \\
+R6 & Perdita di lavoro o conflitti tra versioni & Bassa & Alta & Git e GitHub, commit frequenti, pull request revisionate, nessuna modifica diretta sul ramo principale \\
+R7 & Scarso coinvolgimento degli utenti finali (il questionario del D1 ha raccolto 7 risposte) & Media & Media & Nuove occasioni di confronto con docenti e studenti, prove di usabilità sul campo \\
 \end{longtblr}
 \endgroup
 
@@ -51,5 +47,3 @@ R8 & Scarso coinvolgimento degli utenti finali (il questionario del D1 ha raccol
 \end{itemize}
 Le decisioni importanti prese in chat vengono riportate nel verbale della riunione successiva, in modo che restino documentate.
 
-\subsection{Gestione della configurazione e della qualità}
-Codice e documenti sono gestiti con Git in un repository GitHub condiviso. Le modifiche entrano nel ramo principale tramite pull request revisionate da un altro membro, e ogni consegna è contrassegnata da un tag che permette di ritrovare la versione consegnata. Ogni documento e ogni funzione sono controllati da un membro diverso dall'autore prima della consegna o dell'integrazione; un'attività è considerata conclusa solo dopo questo controllo. Le regole operative di versionamento e il piano della qualità (chi controlla, che cosa e quando) sono descritti nella Sezione~4.3.
