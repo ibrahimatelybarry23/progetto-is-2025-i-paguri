@@ -1,24 +1,34 @@
 \section{Organizzazione del progetto}
 
 \subsection{Modello di processo}
-% TODO: modello di ciclo di vita scelto (es. incrementale, Scrum, a cascata) e motivazione.
+Per lo sviluppo della nostra applicazione adotteremo un modello di processo ibrido, che combina elementi del modello Waterfall e della metodologia Agile: in questo modo tramite il modello Waterfall potremo allinearci rigorosamente al calendario accademico scelto dal docente, caratterizzato da una sequenza di 7 deliverable (D1--D7) con scadenze temporali fisse e contenuti predefiniti; mentre a livello operativo interno, il modello Agile favorisce una comunicazione costante e trasparente tra i membri del gruppo, permettendo di sviluppare e testare l'applicazione Android per moduli successivi. In questo modo è possibile verificare continuamente le funzionalità sul campo (come l'acquisizione GPS, la gestione della fotocamera e il salvataggio dei dati offline), intercettare eventuali bug e accogliere miglioramenti senza compromettere il rispetto delle scadenze formali.
 
-\subsection{Relazioni tra le fasi del processo}
-% TODO: fasi (requisiti, progettazione, implementazione, test, rilascio), input/output di ciascuna e loro relazioni. Si può inserire un diagramma.
+\subsection{Struttura organizzativa e Responsabilità Progetto}
+Il team di lavoro è composto da 5 membri e adotta una struttura organizzativa orizzontale e paritetica. Non è prevista una suddivisione dei ruoli specifica o compiti tecnici rigidi; puntiamo invece su una rotazione dei compiti da scandire per ciascun deliverable. In occasione di ogni consegna, il carico di lavoro complessivo viene scomposto in parti equivalenti, assegnando una specifica responsabilità di stesura e compito a ciascun componente del gruppo.
 
-\subsection{Struttura organizzativa e ruoli}
+In questo modo ciascun componente produce in autonomia la propria sezione assegnata, inclusi file testuali, tabelle, schemi, ecc. Questi documenti vengono poi aggregati e convertiti in un progetto LaTeX unificato. In questa fase ci si avvale dell'assistenza di strumenti di Intelligenza Artificiale per supportare la generazione del codice LaTeX (convertito poi in PDF e revisionato congiuntamente dal gruppo per verificarne la correttezza e la coerenza).
+
+Per la presente consegna (D2 - Piano di Progetto) e per le attività complessive di sviluppo, la ripartizione dei compiti e delle aree di presidio è strutturata come segue:
+
 \begin{center}
-\begin{tblr}{width=\linewidth, colspec={X[l]X[l]X[l]}, cells={font=\small},
+\begin{tblr}{width=\linewidth, colspec={X[1.2,l]X[1,l]X[2,l]}, cells={font=\small},
              row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
 Membro & Ruolo & Responsabilità \\
-Ibrahima Tely Barry & Team Leader & % TODO
-\\
-Damiano Scarpa & & \\
-Claudia Cogoni & & \\
-Nicola Sossai & & \\
-Taj Uddin & & \\
+Ibrahima Tely Barry & Referente di Progetto & Referente unico per comunicazioni formali con il docente e sottomissione consegne su Moodle. \\
+Damiano Scarpa & Membro del Team & Redazione Sezione 2 (Organizzazione del progetto); sviluppo UI/UX e layout Android. \\
+Claudia Cogoni & Membro del Team & Redazione Sezione 3 (Processi gestionali e rischi); sviluppo software e data layer. \\
+Nicola Sossai & Membro del Team & Redazione Sezione 4 (Processi tecnici e ambiente); sviluppo software e architettura. \\
+Taj Uddin & Membro del Team & Redazione Sezione 5 (Pianificazione e stima costi); testing e Quality Assurance. \\
 \end{tblr}
 \end{center}
 
-\subsection{Interfacce con l'esterno}
-% TODO: rapporti con docenti (committenti), studenti (utenti), ateneo; canali e frequenza di contatto.
+\subsection{Interfacce Organizzative}
+Le modalità di comunicazione del team si articolano su tre livelli:
+\begin{itemize}
+    \item \textbf{Interfaccia con il Docente:} Un unico componente del gruppo, Ibrahima Tely Barry, funge da referente ufficiale per le eventuali comunicazioni formali e per l'invio delle consegne su Moodle.
+    \item \textbf{Interfaccia con gli Utenti Finali (Docenti e Studenti di Scienze Ambientali):} La relazione con gli stakeholder per la raccolta e la validazione dei requisiti è avvenuta principalmente attraverso:
+    \begin{itemize}
+        \item Un questionario tramite Google Form preparato e distribuito per la consegna D1, utile a mappare i bisogni concreti degli utenti.
+        \item La partecipazione all'incontro online su Zoom organizzato dal professore con i responsabili del Laboratorio in Campo.
+    \end{itemize}
+\end{itemize}
