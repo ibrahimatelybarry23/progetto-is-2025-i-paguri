@@ -1,23 +1,55 @@
 \section{Processi gestionali}
 
 \subsection{Obiettivi e priorità}
-% TODO: obiettivi di gestione e priorità tra tempi, costi, qualità.
+L'obiettivo di gestione è consegnare i sette deliverable (D1--D7) nelle date fissate dal docente e arrivare a un'app Android funzionante che copra i requisiti a priorità Alta del D1. Tra i tre vincoli di progetto le priorità sono:
+\begin{enumerate}
+    \item \textbf{Tempi}: le scadenze dei deliverable sono fisse e non negoziabili, quindi hanno la precedenza su tutto.
+    \item \textbf{Qualità}: a parità di tempo si preferisce consegnare meno funzionalità ma verificate, partendo dai requisiti RF a priorità Alta (uso offline, schede, mappa, foto e note georeferenziate, esportazione).
+    \item \textbf{Costi}: il progetto non ha budget economico; il costo coincide con le ore di lavoro dei membri e con strumenti gratuiti o open source, per cui non è un vincolo critico.
+\end{enumerate}
+In caso di ritardo, l'ambito si riduce rinviando i requisiti a priorità Media e Bassa, senza spostare le scadenze.
 
 \subsection{Monitoraggio e controllo}
-% TODO: come si misura l'avanzamento (riunioni, stato attività, metriche), con quale frequenza e chi interviene in caso di scostamenti.
+L'avanzamento è controllato rispetto al diagramma di Gantt (Sezione~5.3) e alla ripartizione dei compiti di ogni deliverable (Sezione~2).
+\begin{itemize}
+    \item \textbf{Riunione settimanale} del team (in presenza o online) per verificare lo stato delle attività, i problemi aperti e i compiti della settimana successiva; le decisioni sono riportate in un breve verbale (Appendice~B).
+    \item \textbf{Stato delle attività}: ogni attività è tracciata come \emph{issue} su GitHub con responsabile e stato (da fare, in corso, completata), così l'avanzamento è visibile a tutti.
+    \item \textbf{Indicatori}: percentuale di attività completate rispetto al piano, numero di requisiti RF implementati e verificati, issue aperte e giorni mancanti alla scadenza del deliverable.
+    \item \textbf{Revisione prima della consegna}: alcuni giorni prima di ogni scadenza il team rilegge insieme il documento compilato e verifica che tutte le sezioni siano complete.
+\end{itemize}
+Se un'attività accumula ritardo, il responsabile lo segnala subito sul gruppo; nella riunione successiva il team ridistribuisce il lavoro o riduce l'ambito secondo le priorità indicate sopra. Il referente di progetto, Ibrahima Tely Barry, interviene se il ritardo mette a rischio una consegna.
 
 \subsection{Gestione dei rischi}
-\begin{center}
-\begin{tblr}{width=\linewidth, colspec={X[0.4,l]X[l]X[0.7,l]X[0.7,l]X[l]}, cells={font=\small},
+I rischi sono stati individuati dal team e valutati per probabilità e impatto (Alta, Media, Bassa). Sono riesaminati nella riunione settimanale e aggiornati a ogni deliverable.
+\begingroup
+\SetTblrTemplate{contfoot}{empty}
+\SetTblrTemplate{conthead}{empty}
+\DefTblrTemplate{conthead-text}{nocont}{}
+\DefTblrTemplate{contfoot-text}{nocont}{}
+\SetTblrTemplate{conthead-text}{nocont}
+\SetTblrTemplate{contfoot-text}{nocont}
+\begin{longtblr}[entry=none,label=none]{width=\linewidth,
+             colspec={X[0.4,l]X[l]X[0.7,l]X[0.7,l]X[1.4,l]}, rowhead=1, cells={font=\small},
              row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
 ID & Rischio & Probabilità & Impatto & Mitigazione \\
-R1 & & & & \\
-R2 & & & & \\
-\end{tblr}
-\end{center}
+R1 & Ritardo nella consegna di un deliverable & Media & Alta & Attività tracciate su GitHub, revisione alcuni giorni prima della scadenza, riduzione dell'ambito secondo le priorità \\
+R2 & Poca esperienza del team nello sviluppo Android & Alta & Media & Prototipi semplici all'inizio, documentazione ufficiale, sviluppo per moduli successivi \\
+R3 & Requisiti instabili o non validati dai docenti & Media & Alta & Validazione dei requisiti con i docenti prima dello sviluppo, modifiche registrate come issue \\
+R4 & Complessità del funzionamento offline e della sincronizzazione & Alta & Alta & Architettura offline-first fin dall'inizio, test senza connessione, sincronizzazione semplice prima di quella automatica \\
+R5 & Sensori (GPS, bussola, clinometro) assenti o imprecisi su alcuni dispositivi & Media & Media & Test su dispositivo fisico, inserimento manuale sempre disponibile come alternativa \\
+R6 & Indisponibilità temporanea di un membro (esami, malattia) & Media & Media & Rotazione dei compiti, codice e documenti condivisi su GitHub, sostituzione da parte di un altro membro \\
+R7 & Perdita di lavoro o conflitti tra versioni & Bassa & Alta & Git e GitHub, commit frequenti, pull request revisionate, nessuna modifica diretta sul ramo principale \\
+R8 & Scarso coinvolgimento degli utenti finali (il questionario del D1 ha raccolto 7 risposte) & Media & Media & Nuove occasioni di confronto con docenti e studenti, prove di usabilità sul campo \\
+\end{longtblr}
+\endgroup
 
 \subsection{Gestione delle comunicazioni}
-% TODO: strumenti e regole di comunicazione interna (riunioni, chat) e verso i committenti.
+\begin{itemize}
+    \item \textbf{Interne al team}: un gruppo WhatsApp per il coordinamento quotidiano e le domande rapide; riunioni settimanali per decisioni e avanzamento; GitHub (issue e pull request) per tutto ciò che riguarda codice e documenti, così le discussioni tecniche restano legate al lavoro a cui si riferiscono.
+    \item \textbf{Con il docente}: solo tramite il referente di progetto, che invia le consegne su Moodle e gestisce le comunicazioni formali (Sezione~2.3).
+    \item \textbf{Con gli utenti finali}: questionari (Google Form) e incontri, anche online su Zoom, con i docenti e gli studenti del Laboratorio in Campo per raccogliere e validare i requisiti.
+\end{itemize}
+Le decisioni importanti prese in chat vengono riportate nel verbale della riunione successiva, in modo che restino documentate.
 
 \subsection{Gestione della configurazione e della qualità}
-% TODO: controllo versione, convenzioni, revisioni dei documenti e del codice, criteri di accettazione.
+Codice e documenti sono gestiti con Git in un repository GitHub condiviso. Le modifiche entrano nel ramo principale tramite pull request revisionate da un altro membro, e ogni consegna è contrassegnata da un tag che permette di ritrovare la versione consegnata. Ogni documento e ogni funzione sono controllati da un membro diverso dall'autore prima della consegna o dell'integrazione; un'attività è considerata conclusa solo dopo questo controllo. Le regole operative di versionamento e il piano della qualità (chi controlla, che cosa e quando) sono descritti nella Sezione~4.3.
