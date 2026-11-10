@@ -17,23 +17,72 @@ Per chiarezza nella lettura, la matrice segue la seguente convenzione:
 un segno x all'incrocio tra la \emph{riga $R_i$} e la \emph{colonna $C_j$} indica che il requisito in riga ($R_i$) dipende dal requisito in colonna ($C_j$).
 
 \vspace{1em}
-
 \begin{center}
+\begin{adjustbox}{max totalsize={\textwidth}{\textheight}}
 \begin{tblr}{
-  colspec = { Q[l,bg=grigio] *{6}{Q[c,8mm]} },
+  colspec = { Q[l,bg=grigio] *{32}{Q[c,8mm]} },
   cells = {font=\small},
   row{1} = {bg=grigio},
   hlines = {wd=0.5pt, fg=bianco},
   vlines = {wd=0.5pt, fg=bianco},
-  % Colorazione differenziata per le righe (RF in giallo, RNF in verde)
-  row{2-3} = {bg=magnoliaRF},
-  row{4} = {bg=platinoRNF}
+  % Colorazione differenziata per le righe (RF in magnolia, RNF in platino)
+  row{2-33} = {bg=magnoliaRF},
+  row{34-52} = {bg=platinoRNF}
 }
-      & RF-01 & RF-02 & RF-03 & RF-04 & RF-05 & \dots \\
-RF-01  &       &       &       &       &       &       \\
-RF-02  &   x   &       &       &       &       &       \\
-RNF-01 &   x   &   x   &       &       &       &       \\
+  & RF-01 & RF-02 & RF-03 & RF-04 & RF-05 & RF-06 & RF-07 & RF-08 & RF-09 & RF-10 & RF-11 & RF-12 & RF-13 & RF-14 & RF-15 & RF-16 & RF-17 & RF-18 & RF-19 & RF-20 & RF-21 & RF-22 & RF-23 & RF-24 & RF-25 & RF-26 & RF-27 & RF-28 & RF-29 & RF-30 & RF-31 & RF-32 \\
+RF-01 \\
+RF-02 & x \\
+RF-03 & x & x \\
+RF-04 & x & x \\
+RF-05 & x & x \\
+RF-06 &  & x \\
+RF-07 & x \\
+RF-08 &  &  &  &  &  & x \\
+RF-09 &  &  &  &  &  & x &  & x \\
+RF-10 & x &  & x &  &  &  &  & x \\
+RF-11 &  &  &  &  &  & x \\
+RF-12 & x &  &  &  &  & x \\
+RF-13 &  &  & x &  &  & x &  &  &  & x \\
+RF-14 &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  & x \\
+RF-15 &  & x &  &  &  &  &  &  &  &  &  &  &  & x &  & x \\
+RF-16 \\
+RF-17 &  &  &  &  &  &  & x &  &  &  &  &  &  & x &  & x \\
+RF-18 \\
+RF-19 &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  & x \\
+RF-20 &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  & x \\
+RF-21 &  &  &  &  &  & x \\
+RF-22 &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  & x \\
+RF-23 &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  & x &  &  &  &  & x \\
+RF-24 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x \\
+RF-25 &  & x &  &  &  &  &  & x \\
+RF-26 &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x \\
+RF-27 & x & x & x \\
+RF-28 &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  & x \\
+RF-29 &  &  & x &  &  & x &  &  &  & x &  &  &  &  &  &  &  &  &  &  & x &  & x \\
+RF-30 &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x \\
+RF-31 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  & x \\
+RF-32 &  & x &  &  &  &  &  & x \\
+RNF-01 \\
+RNF-02 &  &  &  &  &  &  &  & x \\
+RNF-03 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x & x \\
+RNF-04 & x &  & x &  &  &  &  &  &  & x \\
+RNF-05 &  &  &  &  &  &  &  &  &  & x \\
+RNF-06 &  &  &  &  &  & x &  & x & x &  &  &  &  & x &  & x &  &  &  &  & x & x & x &  & x & x \\
+RNF-07 &  &  &  &  &  &  &  & x & x \\
+RNF-08 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x \\
+RNF-09 &  &  &  &  &  & x \\
+RNF-10 \\
+RNF-11 & x & x & x & x \\
+RNF-12 & x &  &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x & x \\
+RNF-13 \\
+RNF-14 \\
+RNF-15 \\
+RNF-16 \\
+RNF-17 & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x &  &  &  &  &  & x & x &  &  &  & x \\
+RNF-18 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  & x \\
+RNF-19 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x \\
 \end{tblr}
+\end{adjustbox}
 \end{center}
 
 \end{document}
