@@ -7,15 +7,15 @@
 \begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
              column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
 Funzione & Account personale e autenticazione \\
-Descrizione & \\
-Input & \\
-Sorgente & \\
-Output & \\
-Destinazione & \\
-Richiede & \\
-Precondizioni & \\
-Postcondizioni & \\
-Effetti collaterali & \\
+Descrizione & L'utente (studente o docente) apre l'app e inserisce le proprie credenziali. Il sistema verifica che corrispondano a un account esistente e, se sono corrette, apre la sessione e mostra l'area corrispondente al ruolo dell'utente (RF02). La sessione resta attiva sul dispositivo, così da poter usare l'app anche sul campo senza connessione. \\
+Input & Email istituzionale, password \\
+Sorgente & Email e password inserite dall'utente; account e ruolo dal server di autenticazione \\
+Output & Sessione utente attiva, con identificativo e ruolo dell'utente \\
+Destinazione & Memoria locale del dispositivo (sessione salvata); schermo (area studente o docente) \\
+Richiede & Account già registrato per l'utente, con ruolo assegnato \\
+Precondizioni & L'app è installata e l'utente non è autenticato; al primo accesso il dispositivo è connesso a Internet \\
+Postcondizioni & L'utente è autenticato e vede solo le funzioni previste dal suo ruolo; se le credenziali sono errate l'utente resta non autenticato e viene mostrato un messaggio di errore \\
+Effetti collaterali & Nessuno \\
 Definizione & RF01 (Sezione 3) \\
 \end{tblr}
 \end{center}
