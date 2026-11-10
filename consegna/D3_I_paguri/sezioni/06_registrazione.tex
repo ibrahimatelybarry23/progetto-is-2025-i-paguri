@@ -1,0 +1,26 @@
+\section{Procedure di registrazione dei test}
+
+\subsection{Struttura di un caso di test}
+% TODO: campi che descrivono ogni caso di test: numero identificativo, descrizione, precondizioni, valori di input, output attesi, postcondizioni attese; all'esecuzione si aggiungono output e postcondizioni riscontrati ed esito.
+
+\subsection{Registrazione dei risultati}
+% TODO: dove si registrano i test (es. GitHub issues, foglio condiviso), come si segnalano i malfunzionamenti e come si tiene traccia delle correzioni.
+
+\subsection{Casi di test}
+% TODO: elenco dei casi di test. Esito positivo = malfunzionamento rilevato.
+
+\begingroup
+\SetTblrTemplate{contfoot}{empty}
+\SetTblrTemplate{conthead}{empty}
+\DefTblrTemplate{conthead-text}{nocont}{}
+\DefTblrTemplate{contfoot-text}{nocont}{}
+\SetTblrTemplate{conthead-text}{nocont}
+\SetTblrTemplate{contfoot-text}{nocont}
+\begin{longtblr}[entry=none,label=none]{width=\linewidth,
+             colspec={X[0.5,l]X[l]X[l]X[l]X[l]X[l]X[0.6,l]X[0.7,l]}, rowhead=1,
+             cells={font=\footnotesize},
+             row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
+TC & Precond. & Input & Output attesi & Output riscontrato & PostCond. & Esito & Priorità \\
+ & & & & & & & \\
+\end{longtblr}
+\endgroup
