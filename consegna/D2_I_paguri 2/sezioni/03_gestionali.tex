@@ -1,0 +1,42 @@
+\section{Processi gestionali}
+
+\subsection{Obiettivi e priorità}
+L'obiettivo di gestione è consegnare i sette deliverable (D1--D7) nelle date fissate dal docente e arrivare a un'app Android funzionante che copra i requisiti a priorità Alta del D1. 
+
+\subsection{Monitoraggio e controllo}
+L'avanzamento è controllato rispetto al diagramma di Gantt (Sezione~5.3) e alla ripartizione dei compiti di ogni deliverable (Sezione~2).
+\begin{itemize}
+    \item \textbf{Riunione settimanale} del team in presenza  per verificare lo stato delle attività, i compiti della settimana successiva.
+    \item \textbf{Revisione prima della consegna}: alcuni giorni prima di ogni scadenza il team rilegge insieme il documento  e verifica che tutte le sezioni siano complete.
+\end{itemize}
+
+\subsection{Gestione dei rischi}
+I rischi sono stati individuati dal team e valutati per probabilità e impatto (Alta, Media, Bassa). Sono riesaminati nella riunione settimanale e aggiornati a ogni deliverable.
+\begingroup
+\SetTblrTemplate{contfoot}{empty}
+\SetTblrTemplate{conthead}{empty}
+\DefTblrTemplate{conthead-text}{nocont}{}
+\DefTblrTemplate{contfoot-text}{nocont}{}
+\SetTblrTemplate{conthead-text}{nocont}
+\SetTblrTemplate{contfoot-text}{nocont}
+\begin{longtblr}[entry=none,label=none]{width=\linewidth,
+             colspec={X[0.4,l]X[l]X[0.7,l]X[0.7,l]X[1.4,l]}, rowhead=1, cells={font=\small},
+             row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
+ID & Rischio & Probabilità & Impatto & Mitigazione \\
+R1 & Ritardo nella consegna di un deliverable & Media & Alta & Attività tracciate su GitHub, revisione alcuni giorni prima della scadenza, riduzione dell'ambito secondo le priorità \\
+R2 & Poca esperienza del team nello sviluppo Android & Alta & Media & Prototipi semplici all'inizio, documentazione ufficiale, sviluppo per moduli successivi \\
+R3 & Requisiti instabili o non validati dai docenti & Media & Alta & Validazione dei requisiti con i docenti prima dello sviluppo, modifiche registrate come issue \\
+R4 & Complessità del funzionamento offline e della sincronizzazione & Alta & Alta & Architettura offline-first fin dall'inizio, test senza connessione, sincronizzazione semplice prima di quella automatica \\
+R5 & Sensori (GPS, bussola, clinometro) assenti o imprecisi su alcuni dispositivi & Media & Media & Test su dispositivo fisico, inserimento manuale sempre disponibile come alternativa \\
+R6 & Perdita di lavoro o conflitti tra versioni & Bassa & Alta & Git e GitHub, commit frequenti, pull request revisionate, nessuna modifica diretta sul ramo principale \\
+R7 & Scarso coinvolgimento degli utenti finali (il questionario del D1 ha raccolto 7 risposte) & Media & Media & Nuove occasioni di confronto con docenti e studenti, prove di usabilità sul campo \\
+\end{longtblr}
+\endgroup
+
+\subsection{Gestione delle comunicazioni}
+\begin{itemize}
+    \item \textbf{Interne al team}: un gruppo WhatsApp; riunioni settimanali per decisioni e avanzamento; GitHub  per tutto ciò che riguarda codice e documenti.
+    \item \textbf{Con il docente}: solo tramite il referente di progetto, che invia le consegne su Moodle e gestisce le comunicazioni formali (Sezione~2.3).
+    \item \textbf{Con gli utenti finali}: questionari fatti con Google Form.
+\end{itemize}
+

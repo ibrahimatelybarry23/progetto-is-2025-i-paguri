@@ -25,7 +25,7 @@ Definizione & RF01 (Sezione 3) \\
 \begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
              column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
 Funzione & Aree studente e docente \\
-Descrizione & L'utente (studente o docente) dopo aver effetutato l'autenticazione  \\
+Descrizione & L'utente dopo aver effetutato l'autenticazione  acede alla rispettiva area \\
 Input & Ruolo dell'utente \\
 Sorgente & Sessione utente salvata sul dispositivo (RF01) \\
 Output & Interfaccia e menu dell'area studente o docente \\
@@ -43,9 +43,9 @@ Definizione & RF02 (Sezione 3) \\
 \begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
              column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
 Funzione & Gestione dei gruppi \\
-Descrizione & Il docente crea un gruppo indicandone il nome e la disciplina e vi assegna gli studenti scegliendoli dall'elenco degli iscritti. Ogni studente vede il gruppo a cui appartiene e accede ai dati raccolti dal gruppo. Il docente può modificare la composizione dei gruppi. \\
-Input & Nome del gruppo, disciplina, elenco degli studenti da assegnare \\
-Sorgente & Nome, disciplina e studenti selezionati dal docente; elenco degli iscritti dal server \\
+Descrizione & Il docente crea un gruppo indicandone il nome e la disciplina e vi assegna gli studenti che sono iscritti. Ogni studente vede il gruppo a cui appartiene e accede ai dati raccolti dal gruppo. Il docente può modificare la composizione dei gruppi. \\
+Input & Nome e id  del gruppo, disciplina, elenco degli studenti da assegnare \\
+Sorgente & Nome e id, disciplina e studenti selezionati dal docente; elenco degli iscritti dal server \\
 Output & Gruppo creato o modificato, con i suoi membri \\
 Destinazione & Server; dispositivi dei membri alla sincronizzazione (RF10) \\
 Richiede & Account studente esistenti (RF01) \\
@@ -79,7 +79,7 @@ Definizione & RF04 (Sezione 3) \\
 \begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
              column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
 Funzione & Gestione delle attività e degli itinerari \\
-Descrizione & Il docente crea un'uscita indicando data e siti, definisce sulla mappa l'itinerario e i punti di sosta (stop) e li assegna ai gruppi. Gli studenti, prima della partenza, vedono l'uscita, l'itinerario e gli stop del proprio gruppo. \\
+Descrizione & Il docente crea un'uscita indicando data e siti, definisce sulla mappa l'itinerario e i punti di sosta  e li assegna ai gruppi. Gli studenti, prima della partenza, vedono l'uscita, l'itinerario e gli stop del proprio gruppo. \\
 Input & Data dell'uscita, siti, itinerario, punti di sosta, gruppi assegnati \\
 Sorgente & Data e siti inseriti dal docente; itinerario e stop disegnati dal docente sulla mappa; gruppi dal database (RF03) \\
 Output & Uscita con itinerario e stop assegnati ai gruppi \\
@@ -295,7 +295,7 @@ Definizione & RF16 (Sezione 3) \\
 \begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
              column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
 Funzione & Storico geografico \\
-Descrizione & L'utente seleziona un luogo sulla mappa e il sistema mostra i rilevamenti effettuati in quel luogo in momenti diversi, anche in anni diversi, secondo i permessi. \\
+Descrizione & L'utente seleziona un luogo sulla mappa e il sistema mostra i rilevamenti effettuati in quel luogo in momenti diversi,secondo i permessi. \\
 Input & Luogo selezionato, raggio di ricerca \\
 Sorgente & Utente; rilevamenti dal database centralizzato (RF07) \\
 Output & Elenco cronologico dei rilevamenti nel luogo \\
