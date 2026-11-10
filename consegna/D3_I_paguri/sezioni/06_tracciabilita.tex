@@ -1,13 +1,39 @@
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{tabularray}
+
+% Definizione dei colori per la tracciabilità
+\definecolor{grigio}{HTML}{ECECEC}
+\definecolor{bianco}{HTML}{FFFFFF}
+\definecolor{magnoliaRF}{HTML}{F8F4FF}
+\definecolor{platinoRNF}{HTML}{E5E4E2}
+
+\begin{document}
+
 \section{Tabella di tracciabilità}
-% TODO: matrice delle dipendenze e dei possibili conflitti tra requisiti (RF e RNF in riga, RF in colonna). La matrice non è simmetrica: spiegare come va letta (es. "x" = il requisito in riga dipende dal requisito in colonna).
+
+La matrice di tracciabilità evidenzia le dipendenze ed i possibili conflitti tra i requisiti del sistema.
+Per chiarezza nella lettura, la matrice segue la seguente convenzione:
+un segno x all'incrocio tra la \emph{riga $R_i$} e la \emph{colonna $C_j$} indica che il requisito in riga ($R_i$) dipende dal requisito in colonna ($C_j$).
+
+\vspace{1em}
 
 \begin{center}
-\begin{tblr}{colspec={Q[l]*{6}{Q[c,8mm]}}, cells={font=\small},
-             row{1}={bg=arancio}, column{1}={bg=grigio},
-             hlines={wd=0.5pt, fg=arancio}, vlines={wd=0.5pt, fg=arancio}}
-     & RF-01 & RF-02 & RF-03 & RF-04 & RF-05 & \dots \\
-RF-01 & & & & & & \\
-RF-02 & & & & & & \\
-RNF-01 & & & & & & \\
+\begin{tblr}{
+  colspec = { Q[l,bg=grigio] *{6}{Q[c,8mm]} },
+  cells = {font=\small},
+  row{1} = {bg=grigio},
+  hlines = {wd=0.5pt, fg=bianco},
+  vlines = {wd=0.5pt, fg=bianco},
+  % Colorazione differenziata per le righe (RF in giallo, RNF in verde)
+  row{2-3} = {bg=magnoliaRF},
+  row{4} = {bg=platinoRNF}
+}
+      & RF-01 & RF-02 & RF-03 & RF-04 & RF-05 & \dots \\
+RF-01  &       &       &       &       &       &       \\
+RF-02  &   x   &       &       &       &       &       \\
+RNF-01 &   x   &   x   &       &       &       &       \\
 \end{tblr}
 \end{center}
+
+\end{document}
