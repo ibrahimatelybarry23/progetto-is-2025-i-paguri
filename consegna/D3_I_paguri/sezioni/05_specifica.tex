@@ -1,20 +1,579 @@
 \section{Specifica dei requisiti funzionali}
-% TODO: per ogni requisito funzionale compilare il form semi-strutturato, partendo dal template del caso d'uso corrispondente; deve essere coerente con la definizione del requisito nella Sezione 3.
+% Per ogni requisito funzionale compilare il form, partendo dal caso d'uso corrispondente (Sezione 2).
+% Il form deve essere coerente con la definizione del requisito nella Sezione 3.
 
-\subsubsection*{RF-01 -- Nome funzione}
+\subsubsection*{RF01 -- Account personale e autenticazione}
 \begin{center}
 \begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
              column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
-Funzione & \\
-Descrizione & \\
-Input & \\
-Sorgente & \\
-Output & \\
-Destinazione & \\
-Richiede & \\
-Precondizioni & \\
-Postcondizioni & \\
-Effetti collaterali & \\
-Definizione & RF-01 (Sezione 3) \\
+Funzione & Account personale e autenticazione \\
+Descrizione & L'utente (studente o docente) apre l'app e inserisce le proprie credenziali. Il sistema verifica che corrispondano a un account esistente e, se sono corrette, apre la sessione e mostra l'area corrispondente al ruolo dell'utente (RF02). La sessione resta attiva sul dispositivo, così da poter usare l'app anche sul campo senza connessione. \\
+Input & Email istituzionale, password \\
+Sorgente & Email e password inserite dall'utente; account e ruolo dal server di autenticazione \\
+Output & Sessione utente attiva, con identificativo e ruolo dell'utente \\
+Destinazione & Memoria locale del dispositivo (sessione salvata); schermo (area studente o docente) \\
+Richiede & Account già registrato per l'utente, con ruolo assegnato \\
+Precondizioni & L'app è installata e l'utente non è autenticato; al primo accesso il dispositivo è connesso a Internet \\
+Postcondizioni & L'utente è autenticato e vede solo le funzioni previste dal suo ruolo; se le credenziali sono errate l'utente resta non autenticato e viene mostrato un messaggio di errore \\
+Effetti collaterali & Nessuno \\
+Definizione & RF01 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF02 -- Aree studente e docente}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Aree studente e docente \\
+Descrizione & L'utente dopo aver effetutato l'autenticazione  acede alla rispettiva area \\
+Input & Ruolo dell'utente \\
+Sorgente & Sessione utente salvata sul dispositivo (RF01) \\
+Output & Interfaccia e menu dell'area studente o docente \\
+Destinazione & Schermo \\
+Richiede & Ruolo assegnato all'account (studente o docente) \\
+Precondizioni & L'utente è autenticato \\
+Postcondizioni & L'utente vede e può eseguire solo le operazioni consentite dal suo ruolo \\
+Effetti collaterali & Nessuno \\
+Definizione & RF02 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF03 -- Gestione dei gruppi}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Gestione dei gruppi \\
+Descrizione & Il docente crea un gruppo indicandone il nome e la disciplina e vi assegna gli studenti che sono iscritti. Ogni studente vede il gruppo a cui appartiene e accede ai dati raccolti dal gruppo. Il docente può modificare la composizione dei gruppi. \\
+Input & Nome e id  del gruppo, disciplina, elenco degli studenti da assegnare \\
+Sorgente & Nome e id, disciplina e studenti selezionati dal docente; elenco degli iscritti dal server \\
+Output & Gruppo creato o modificato, con i suoi membri \\
+Destinazione & Server; dispositivi dei membri alla sincronizzazione (RF10) \\
+Richiede & Account studente esistenti (RF01) \\
+Precondizioni & Il docente è autenticato e si trova nell'area docente \\
+Postcondizioni & Il gruppo esiste con i membri indicati e ogni membro può accedere ai dati del gruppo; i dati già raccolti dal gruppo non cambiano \\
+Effetti collaterali & Gli studenti aggiunti ricevono il gruppo e i relativi dati alla sincronizzazione successiva \\
+Definizione & RF03 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF04 -- Permessi per disciplina}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Permessi per disciplina \\
+Descrizione & Quando un utente apre i dati raccolti, il sistema mostra i dati del proprio gruppo con permesso di modifica. Per la disciplina chimica il sistema mostra anche i dati degli altri gruppi, in sola lettura. Il docente vede i dati di tutti i gruppi. \\
+Input & Utente, gruppo e disciplina dei dati richiesti \\
+Sorgente & Sessione utente (RF01); gruppo e disciplina dal database \\
+Output & Elenco dei dati visibili, ciascuno con il proprio permesso (modifica o sola lettura) \\
+Destinazione & Schermo \\
+Richiede & Gruppi definiti (RF03) e dati associati a gruppo e disciplina (RF06) \\
+Precondizioni & L'utente è autenticato e appartiene a un gruppo \\
+Postcondizioni & L'utente vede solo i dati consentiti e può modificare solo quelli del proprio gruppo; i dati non vengono modificati \\
+Effetti collaterali & Nessuno \\
+Definizione & RF04 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF05 -- Gestione delle attività e degli itinerari}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Gestione delle attività e degli itinerari \\
+Descrizione & Il docente crea un'uscita indicando data e siti, definisce sulla mappa l'itinerario e i punti di sosta  e li assegna ai gruppi. Gli studenti, prima della partenza, vedono l'uscita, l'itinerario e gli stop del proprio gruppo. \\
+Input & Data dell'uscita, siti, itinerario, punti di sosta, gruppi assegnati \\
+Sorgente & Data e siti inseriti dal docente; itinerario e stop disegnati dal docente sulla mappa; gruppi dal database (RF03) \\
+Output & Uscita con itinerario e stop assegnati ai gruppi \\
+Destinazione & Server; dispositivi dei membri dei gruppi alla sincronizzazione (RF10) \\
+Richiede & Gruppi esistenti (RF03); mappa dell'area disponibile (RF14) \\
+Precondizioni & Il docente è autenticato e il dispositivo è connesso per pubblicare l'uscita \\
+Postcondizioni & L'uscita è pubblicata e ogni gruppo vede l'itinerario e gli stop assegnati \\
+Effetti collaterali & Itinerario, stop e mappa vengono scaricati sui dispositivi per l'uso offline \\
+Definizione & RF05 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF06 -- Schede per quattro discipline}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Schede per quattro discipline \\
+Descrizione & Durante un'uscita lo studente sceglie la disciplina (botanica, biologia, geologia o chimica) e compila la scheda del campione o del rilevamento. Ogni scheda ha campi e unità di misura specifici della disciplina e alcuni campi preimpostati (data, ora, gruppo, stop). Al salvataggio il sistema registra la scheda. \\
+Input & Disciplina, valori dei campi della scheda, stop di riferimento \\
+Sorgente & Disciplina e valori inseriti dallo studente; data, ora e gruppo dal dispositivo e dalla sessione; stop dall'uscita (RF05) \\
+Output & Scheda del campione o del rilevamento salvata \\
+Destinazione & Database locale del dispositivo; server alla sincronizzazione (RF10) \\
+Richiede & Uscita attiva assegnata al gruppo (RF05) \\
+Precondizioni & Lo studente è autenticato e appartiene a un gruppo con un'uscita attiva \\
+Postcondizioni & La scheda è salvata e associata a gruppo, disciplina, stop, data e autore \\
+Effetti collaterali & La scheda viene messa in coda di sincronizzazione; i dati vengono controllati (RF11) \\
+Definizione & RF06 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF07 -- Database centralizzato pluriennale}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Database centralizzato pluriennale \\
+Descrizione & Il sistema conserva sul server i dati raccolti in tutti gli anni. L'utente seleziona anno, uscita o disciplina e consulta i dati dell'anno corrente e degli anni precedenti, secondo i propri permessi. \\
+Input & Anno, uscita, disciplina (filtri di consultazione) \\
+Sorgente & Filtri scelti dall'utente; dati dal database centralizzato sul server \\
+Output & Elenco dei dati richiesti \\
+Destinazione & Schermo \\
+Richiede & Dati salvati e sincronizzati negli anni precedenti (RF10) \\
+Precondizioni & L'utente è autenticato e il dispositivo è connesso a Internet \\
+Postcondizioni & L'utente visualizza i dati consentiti dai suoi permessi (RF04); i dati non vengono modificati \\
+Effetti collaterali & Nessuno \\
+Definizione & RF07 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF08 -- Raccolta dati offline}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Raccolta dati offline \\
+Descrizione & Lo studente compila e salva schede, note, foto e posizioni anche senza connessione Internet. Il sistema salva tutto sul dispositivo e segnala quali dati non sono ancora stati sincronizzati. \\
+Input & Dati di schede, note, foto e posizioni \\
+Sorgente & Utente e sensori del dispositivo \\
+Output & Dati salvati localmente, marcati come non sincronizzati \\
+Destinazione & Database locale del dispositivo \\
+Richiede & Dati dell'uscita, liste e mappe già scaricati sul dispositivo (RF05, RF14, RF25) \\
+Precondizioni & L'utente è autenticato (sessione salvata, RF01); il dispositivo non è connesso \\
+Postcondizioni & I dati sono salvati sul dispositivo e restano disponibili anche dopo la chiusura dell'app \\
+Effetti collaterali & I dati vengono messi in coda di sincronizzazione (RF10) \\
+Definizione & RF08 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF09 -- Salvataggio delle bozze}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Salvataggio delle bozze \\
+Descrizione & Lo studente può salvare una scheda incompleta come bozza e riprenderla in seguito. Le bozze compaiono in un elenco dedicato; quando lo studente la completa e la conferma, la bozza diventa una scheda definitiva. \\
+Input & Scheda parzialmente compilata \\
+Sorgente & Utente \\
+Output & Bozza salvata oppure scheda completata \\
+Destinazione & Database locale del dispositivo \\
+Richiede & Scheda aperta (RF06) \\
+Precondizioni & Lo studente sta compilando una scheda \\
+Postcondizioni & La bozza è salvata con i campi già inseriti e può essere riaperta; una volta confermata diventa scheda definitiva \\
+Effetti collaterali & Nessuno \\
+Definizione & RF09 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF10 -- Sincronizzazione automatica}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Sincronizzazione automatica \\
+Descrizione & Quando il dispositivo torna connesso, il sistema invia al server i dati locali non ancora sincronizzati e scarica le modifiche fatte dagli altri dispositivi autorizzati. Al termine aggiorna lo stato di sincronizzazione dei dati e la data dell'ultima sincronizzazione. \\
+Input & Dati locali non sincronizzati; modifiche presenti sul server \\
+Sorgente & Database locale del dispositivo; server \\
+Output & Dati allineati tra dispositivo e server; data dell'ultima sincronizzazione \\
+Destinazione & Server; database locale del dispositivo \\
+Richiede & Dati salvati localmente (RF08) \\
+Precondizioni & L'utente è autenticato e il dispositivo è connesso a Internet \\
+Postcondizioni & I dati del dispositivo e del server sono allineati e non risultano più dati in attesa; in caso di errore i dati restano in coda e la sincronizzazione viene ritentata \\
+Effetti collaterali & Gli altri dispositivi autorizzati ricevono i nuovi dati; la gestione delle modifiche concorrenti è da definire \\
+Definizione & RF10 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF11 -- Controllo dei dati inseriti}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Controllo dei dati inseriti \\
+Descrizione & Al salvataggio di una scheda il sistema controlla i campi obbligatori, il formato dei valori e le unità di misura. Se ci sono errori li evidenzia e chiede di correggerli, ma consente comunque di salvare la scheda come bozza (RF09). \\
+Input & Valori dei campi della scheda \\
+Sorgente & Scheda compilata dall'utente (RF06) \\
+Output & Esito del controllo con l'elenco dei campi errati \\
+Destinazione & Schermo \\
+Richiede & Regole di validazione definite per ogni disciplina \\
+Precondizioni & L'utente sta salvando una scheda \\
+Postcondizioni & Una scheda definitiva è salvata solo se supera il controllo; altrimenti resta bozza e i campi errati sono evidenziati \\
+Effetti collaterali & Nessuno \\
+Definizione & RF11 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF12 -- Modifica e versionamento}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Modifica e versionamento \\
+Descrizione & L'utente apre un rilevamento già salvato e ne modifica i campi. Il sistema salva la nuova versione e conserva le precedenti, indicando per ciascuna autore e data. L'utente può consultare lo storico delle versioni. \\
+Input & Rilevamento da modificare, nuovi valori dei campi \\
+Sorgente & Rilevamento dal database locale; nuovi valori dall'utente; autore e data dalla sessione e dal dispositivo \\
+Output & Nuova versione del rilevamento e storico delle versioni \\
+Destinazione & Database locale del dispositivo; server alla sincronizzazione (RF10) \\
+Richiede & Rilevamento esistente (RF06); permesso di modifica (RF04) \\
+Precondizioni & L'utente è autenticato e ha il permesso di modificare il rilevamento \\
+Postcondizioni & Il rilevamento mostra la nuova versione e le versioni precedenti restano consultabili con autore e data \\
+Effetti collaterali & La modifica viene messa in coda di sincronizzazione \\
+Definizione & RF12 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF13 -- Filtri e ordinamento}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Filtri e ordinamento \\
+Descrizione & Nelle tabelle dei campioni e dei rilevamenti l'utente cerca per testo, filtra per disciplina, gruppo, data o stop e ordina per una colonna. Il sistema aggiorna la tabella mostrando solo i risultati corrispondenti. \\
+Input & Testo di ricerca, filtri, criterio di ordinamento \\
+Sorgente & Utente; dati dal database locale \\
+Output & Tabella filtrata e ordinata \\
+Destinazione & Schermo \\
+Richiede & Dati salvati (RF06) \\
+Precondizioni & L'utente è autenticato e sta visualizzando una tabella di dati \\
+Postcondizioni & La tabella mostra solo i dati che soddisfano i filtri, nell'ordine scelto; i dati non vengono modificati \\
+Effetti collaterali & Nessuno \\
+Definizione & RF13 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF14 -- Mappa offline}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Mappa offline \\
+Descrizione & Prima dell'uscita la cartografia dell'area viene scaricata sul dispositivo. Sul campo l'utente consulta la mappa e i punti di rilevamento anche senza connessione. \\
+Input & Area geografica dell'uscita; punti di rilevamento \\
+Sorgente & Cartografia scaricata dal server; punti dal database locale \\
+Output & Mappa con i punti di rilevamento \\
+Destinazione & Schermo \\
+Richiede & Cartografia dell'area già scaricata; mappa attivata dal docente (RF15) \\
+Precondizioni & L'utente è autenticato e ha un'uscita attiva \\
+Postcondizioni & L'utente visualizza la mappa e i punti senza bisogno di connessione \\
+Effetti collaterali & Nessuno \\
+Definizione & RF14 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF15 -- Controllo didattico della mappa}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Controllo didattico della mappa \\
+Descrizione & Il docente configura la mappa di un'uscita (area, livelli visibili, punti), la modifica e la attiva o disattiva per gli studenti, anche limitando gli aiuti GPS secondo le modalità concordate. \\
+Input & Configurazione della mappa, stato attiva o disattiva, limitazioni GPS \\
+Sorgente & Docente \\
+Output & Mappa configurata per l'uscita \\
+Destinazione & Server; dispositivi degli studenti alla sincronizzazione (RF10) \\
+Richiede & Uscita esistente (RF05) \\
+Precondizioni & Il docente è autenticato \\
+Postcondizioni & Gli studenti vedono la mappa solo se attivata e con le limitazioni impostate dal docente \\
+Effetti collaterali & La configurazione viene inviata ai dispositivi degli studenti \\
+Definizione & RF15 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF16 -- Registrazione dei punti geografici}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Registrazione dei punti geografici \\
+Descrizione & Lo studente registra un punto geografico acquisendo la posizione dal GPS oppure inserendo le coordinate a mano, secondo le modalità consentite dal docente. Il punto viene associato a data, gruppo e osservazioni. \\
+Input & Coordinate, osservazioni \\
+Sorgente & GPS del dispositivo oppure utente; data dal dispositivo; gruppo dalla sessione \\
+Output & Punto geografico salvato \\
+Destinazione & Database locale del dispositivo; server alla sincronizzazione (RF10) \\
+Richiede & Uscita attiva (RF05); modalità di inserimento consentite dal docente (RF15) \\
+Precondizioni & Lo studente è autenticato; per l'acquisizione automatica il GPS è attivo \\
+Postcondizioni & Il punto è salvato con coordinate, data, gruppo e osservazioni ed è visibile sulla mappa \\
+Effetti collaterali & Il punto viene messo in coda di sincronizzazione \\
+Definizione & RF16 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF17 -- Storico geografico}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Storico geografico \\
+Descrizione & L'utente seleziona un luogo sulla mappa e il sistema mostra i rilevamenti effettuati in quel luogo in momenti diversi,secondo i permessi. \\
+Input & Luogo selezionato, raggio di ricerca \\
+Sorgente & Utente; rilevamenti dal database centralizzato (RF07) \\
+Output & Elenco cronologico dei rilevamenti nel luogo \\
+Destinazione & Schermo \\
+Richiede & Rilevamenti georeferenziati (RF16) e database pluriennale (RF07) \\
+Precondizioni & L'utente è autenticato e il dispositivo è connesso \\
+Postcondizioni & L'utente visualizza lo storico consentito dai suoi permessi; i dati non vengono modificati \\
+Effetti collaterali & Nessuno \\
+Definizione & RF17 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF18 -- Bussola e clinometro}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Bussola e clinometro \\
+Descrizione & L'utente apre la bussola o il clinometro. Il sistema legge i sensori del dispositivo e mostra in tempo reale l'orientamento o l'inclinazione; l'utente può salvare la misura nella scheda. \\
+Input & Letture di magnetometro e accelerometro \\
+Sorgente & Sensori del dispositivo \\
+Output & Direzione (gradi) o inclinazione (gradi) misurata \\
+Destinazione & Schermo; scheda del rilevamento se la misura viene salvata \\
+Richiede & Dispositivo dotato dei sensori necessari \\
+Precondizioni & L'utente è autenticato \\
+Postcondizioni & La misura è mostrata e, se salvata, è associata alla scheda; se i sensori mancano lo strumento non è disponibile e resta l'inserimento manuale \\
+Effetti collaterali & Nessuno \\
+Definizione & RF18 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF19 -- Rilevamento della giacitura}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Rilevamento della giacitura \\
+Descrizione & Nella scheda di geologia lo studente inserisce a mano direzione e inclinazione di uno strato roccioso oppure le acquisisce appoggiando il dispositivo sulla superficie, usando bussola e clinometro (RF18). \\
+Input & Direzione, immersione e inclinazione dello strato \\
+Sorgente & Utente oppure sensori del dispositivo (RF18) \\
+Output & Giacitura salvata nella scheda di geologia \\
+Destinazione & Database locale del dispositivo; server alla sincronizzazione (RF10) \\
+Richiede & Scheda di geologia aperta (RF06) \\
+Precondizioni & Lo studente è autenticato e sta compilando una scheda di geologia \\
+Postcondizioni & La giacitura è salvata nella scheda indicando se è stata inserita a mano o acquisita dai sensori \\
+Effetti collaterali & Nessuno \\
+Definizione & RF19 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF20 -- Associazione dei parametri ambientali}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Associazione dei parametri ambientali \\
+Descrizione & Al salvataggio di un rilevamento il sistema acquisisce, se disponibili, parametri ambientali come meteo, temperatura e pressione, ne conserva fonte e orario e li tiene distinti dalle misure fatte sul campione. \\
+Input & Parametri ambientali disponibili \\
+Sorgente & Sensori del dispositivo (es. barometro) o servizio meteo esterno \\
+Output & Parametri ambientali associati al rilevamento, con fonte e orario \\
+Destinazione & Database locale del dispositivo; server alla sincronizzazione (RF10) \\
+Richiede & Rilevamento in fase di salvataggio (RF06) \\
+Precondizioni & È disponibile almeno una fonte di dati ambientali \\
+Postcondizioni & I parametri sono salvati con fonte e orario, separati dalle misure sul campione; se nessuna fonte è disponibile il rilevamento è salvato senza parametri \\
+Effetti collaterali & Nessuno \\
+Definizione & RF20 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF21 -- Note testuali}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Note testuali \\
+Descrizione & L'utente aggiunge un'osservazione testuale libera a un campione o a un rilevamento. \\
+Input & Testo della nota \\
+Sorgente & Utente \\
+Output & Nota salvata e associata al campione o rilevamento \\
+Destinazione & Database locale del dispositivo; server alla sincronizzazione (RF10) \\
+Richiede & Campione o rilevamento esistente (RF06) \\
+Precondizioni & L'utente è autenticato e ha il permesso di modifica (RF04) \\
+Postcondizioni & La nota è visibile nella scheda insieme ad autore e data \\
+Effetti collaterali & La nota viene messa in coda di sincronizzazione \\
+Definizione & RF21 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF22 -- Note vocali}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Note vocali \\
+Descrizione & L'utente registra una nota vocale dal punto di stop. Il sistema la collega automaticamente alle coordinate GPS dello stop e la rende ascoltabile dalla scheda. \\
+Input & Audio registrato, coordinate dello stop \\
+Sorgente & Microfono del dispositivo; GPS o coordinate dello stop (RF16) \\
+Output & Nota vocale salvata con coordinate, data e autore \\
+Destinazione & Database locale del dispositivo; server alla sincronizzazione (RF10) \\
+Richiede & Stop attivo dell'uscita (RF05); permesso di uso del microfono \\
+Precondizioni & L'utente è autenticato e si trova in uno stop \\
+Postcondizioni & La nota vocale è associata allo stop e può essere ascoltata \\
+Effetti collaterali & La nota viene messa in coda di sincronizzazione \\
+Definizione & RF22 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF23 -- Fotografie con metadati}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Fotografie con metadati \\
+Descrizione & Lo studente scatta una foto dalla scheda di un rilevamento. Il sistema associa alla foto le coordinate GPS del punto di stop, data e ora, e permette di aggiungere una nota e informazioni strutturate scelte da menu. \\
+Input & Immagine, coordinate GPS, nota (opzionale), voci da menu (opzionali) \\
+Sorgente & Fotocamera; GPS o coordinate dello stop; nota e voci dall'utente \\
+Output & Fotografia salvata con i metadati \\
+Destinazione & Database locale del dispositivo; server alla sincronizzazione (RF10) \\
+Richiede & Rilevamento esistente del gruppo (RF06); permesso di uso della fotocamera \\
+Precondizioni & Lo studente è autenticato ed è nella scheda di un rilevamento del proprio gruppo \\
+Postcondizioni & La foto è associata al rilevamento con coordinate, data e ora; gli altri dati del rilevamento non cambiano \\
+Effetti collaterali & La foto viene messa in coda di sincronizzazione \\
+Definizione & RF23 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF24 -- Annotazione delle fotografie}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Annotazione delle fotografie \\
+Descrizione & L'utente apre una foto e vi aggiunge scritte e disegni. Il sistema salva l'annotazione come livello separato, conservando la fotografia originale. \\
+Input & Foto, scritte e disegni \\
+Sorgente & Foto dal database locale (RF23); annotazioni dall'utente \\
+Output & Foto annotata \\
+Destinazione & Database locale del dispositivo; server alla sincronizzazione (RF10) \\
+Richiede & Foto esistente (RF23) \\
+Precondizioni & L'utente è autenticato e ha il permesso di modifica \\
+Postcondizioni & La foto annotata è visibile e l'originale resta invariato e consultabile \\
+Effetti collaterali & Nessuno \\
+Definizione & RF24 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF25 -- Caricamento delle liste tassonomiche}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Caricamento delle liste tassonomiche \\
+Descrizione & Il docente importa elenchi di specie e nomi scientifici relativi a un'area e sceglie quali liste, o quali variabili chimiche, usare in una giornata. Le liste vengono rese disponibili sui dispositivi degli studenti. \\
+Input & File delle liste tassonomiche, selezione delle liste o variabili chimiche per la giornata \\
+Sorgente & File caricato dal docente; selezione dal docente \\
+Output & Liste tassonomiche disponibili per l'uscita \\
+Destinazione & Server; dispositivi degli studenti alla sincronizzazione (RF10) \\
+Richiede & Uscita esistente (RF05); file in un formato supportato \\
+Precondizioni & Il docente è autenticato e il dispositivo è connesso \\
+Postcondizioni & Le liste selezionate sono associate all'uscita; se il file non è valido viene mostrato un errore e non viene importato nulla \\
+Effetti collaterali & Le liste vengono scaricate sui dispositivi per l'uso offline (RF26) \\
+Definizione & RF25 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF26 -- Autocompletamento dei nomi scientifici}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Autocompletamento dei nomi scientifici \\
+Descrizione & Mentre lo studente digita il nome di una specie in una scheda di botanica o biologia, il sistema suggerisce i nomi scientifici corrispondenti presi dalle liste presenti sul dispositivo, anche senza connessione. \\
+Input & Testo digitato \\
+Sorgente & Utente; liste tassonomiche dal database locale (RF25) \\
+Output & Elenco di nomi suggeriti; nome selezionato inserito nella scheda \\
+Destinazione & Schermo; campo della scheda \\
+Richiede & Liste tassonomiche scaricate sul dispositivo (RF25) \\
+Precondizioni & Lo studente sta compilando una scheda di botanica o biologia \\
+Postcondizioni & Il nome scelto è inserito nel campo della scheda; se non ci sono corrispondenze lo studente può scrivere il nome a mano \\
+Effetti collaterali & Nessuno \\
+Definizione & RF26 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF27 -- Chat interna}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Chat interna \\
+Descrizione & L'utente scrive un messaggio a un altro utente o al gruppo, secondo i permessi. Se il dispositivo è offline il messaggio resta in attesa e viene inviato quando torna la connessione. \\
+Input & Testo del messaggio, destinatari \\
+Sorgente & Utente \\
+Output & Messaggio inviato o in attesa \\
+Destinazione & Server; dispositivi dei destinatari \\
+Richiede & Destinatari consentiti dai permessi \\
+Precondizioni & L'utente è autenticato \\
+Postcondizioni & Il messaggio è consegnato ai destinatari oppure resta in attesa con stato visibile \\
+Effetti collaterali & I destinatari ricevono una notifica \\
+Definizione & RF27 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF28 -- Segnalazione SOS}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Segnalazione SOS \\
+Descrizione & Lo studente preme il pulsante SOS. Il sistema invia ai docenti un avviso con la posizione e mostra lo stato dell'avviso (in attesa, inviato, ricevuto). \\
+Input & Richiesta di SOS, posizione attuale \\
+Sorgente & Utente; GPS del dispositivo \\
+Output & Avviso SOS con stato \\
+Destinazione & Dispositivi dei docenti; schermo dello studente (stato) \\
+Richiede & Canale di comunicazione disponibile per la consegna immediata \\
+Precondizioni & Lo studente è autenticato \\
+Postcondizioni & I docenti ricevono l'avviso con la posizione; se non c'è connessione l'avviso resta in attesa e viene inviato appena possibile \\
+Effetti collaterali & Notifica ai docenti \\
+Definizione & RF28 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF29 -- Generazione automatica dei report}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Generazione automatica dei report \\
+Descrizione & L'utente seleziona uscita, gruppo e disciplina e il sistema genera un documento con dati, tabelle, fotografie e annotazioni. Se il report è generato offline contiene solo i dati locali e la data dell'ultima sincronizzazione. \\
+Input & Uscita, gruppo, disciplina, contenuti da includere \\
+Sorgente & Utente; dati dal database locale o dal server \\
+Output & Documento di report \\
+Destinazione & Schermo; memoria del dispositivo \\
+Richiede & Dati raccolti (RF06, RF21--RF23) \\
+Precondizioni & L'utente è autenticato e ha i permessi sui dati selezionati (RF04) \\
+Postcondizioni & Il report è generato con i soli dati consentiti; i dati originali non vengono modificati \\
+Effetti collaterali & Nessuno \\
+Definizione & RF29 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF30 -- Esportazione e condivisione}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Esportazione e condivisione \\
+Descrizione & L'utente esporta un report in PDF oppure i dati in CSV o Excel e li condivide tramite le app del dispositivo, secondo i permessi di esportazione. \\
+Input & Report o dati da esportare, formato (PDF, CSV, Excel) \\
+Sorgente & Utente; report (RF29) o dati dal database \\
+Output & File esportato \\
+Destinazione & Memoria del dispositivo; app di condivisione scelta dall'utente \\
+Richiede & Report generato (RF29) o dati salvati; permesso di esportazione \\
+Precondizioni & L'utente è autenticato \\
+Postcondizioni & Il file è creato nel formato scelto e può essere condiviso; i dati originali non vengono modificati \\
+Effetti collaterali & Nessuno \\
+Definizione & RF30 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF31 -- Assistenza alla redazione del report}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Assistenza alla redazione del report \\
+Descrizione & L'utente chiede una sintesi delle osservazioni. Un modello linguistico locale (es. Gemma) propone un testo che l'utente rivede e modifica prima dell'esportazione; misure e calcoli restano quelli dei dati originali. La generazione del report resta possibile senza AI. \\
+Input & Osservazioni e dati selezionati per il report \\
+Sorgente & Database locale; report in preparazione (RF29) \\
+Output & Testo di sintesi proposto e modificabile \\
+Destinazione & Report in preparazione \\
+Richiede & Modello linguistico installato sul dispositivo; dispositivo compatibile \\
+Precondizioni & L'utente sta preparando un report \\
+Postcondizioni & Il report contiene la sintesi solo dopo la revisione dell'utente; i dati e le misure non vengono modificati \\
+Effetti collaterali & Consumo di memoria e batteria durante la generazione \\
+Definizione & RF31 (Sezione 3) \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{RF32 -- Materiali didattici offline}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3,l]}, cells={font=\small},
+             column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
+Funzione & Materiali didattici offline \\
+Descrizione & Il docente carica guide e dispense in PDF. Gli studenti le scaricano sul dispositivo e le consultano anche senza connessione. \\
+Input & File PDF dei materiali \\
+Sorgente & Docente \\
+Output & Materiali disponibili per gli studenti \\
+Destinazione & Server; dispositivi degli studenti alla sincronizzazione (RF10) \\
+Richiede & File in formato PDF \\
+Precondizioni & Il docente è autenticato e il dispositivo è connesso per il caricamento \\
+Postcondizioni & I materiali sono consultabili dagli studenti anche offline \\
+Effetti collaterali & I materiali vengono scaricati sui dispositivi degli studenti \\
+Definizione & RF32 (Sezione 3) \\
 \end{tblr}
 \end{center}

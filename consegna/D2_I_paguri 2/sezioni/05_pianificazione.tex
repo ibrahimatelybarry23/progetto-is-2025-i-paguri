@@ -1,0 +1,138 @@
+\section{Pianificazione delle attività e delle risorse}
+
+\subsection{Work Breakdown Structure (WBS)}
+
+\begin{center}
+\begin{tikzpicture}[
+    att/.style={fill=giallo, font=\small\bfseries, align=center,
+                minimum width=2.4cm, minimum height=0.8cm, text width=2.3cm},
+    arr/.style={-{Stealth[length=2.5mm]}, draw=freccia, line width=1.2pt, rounded corners=6pt}]
+  \node[att] (login) at (4,0)    {Login};
+  \node[att] (stu)   at (0,-1.5) {Studente};
+  \node[att] (doc)   at (8,-1.5) {Docente};
+  % studente
+  \node[att] (grp)   at (0,-3.2)  {Unirsi a un gruppo disponibile};
+  \node[att] (car)   at (0,-4.9)  {Caricare i dati};
+  \node[att] (mod)   at (-3,-6.6) {Modificare i dati};
+  \node[att] (foto)  at (0,-6.6)  {Inserire foto};
+  \node[att] (note)  at (3,-6.6)  {Scrivere note};
+  \node[att] (rel)   at (0,-8.3)  {Scrittura relazione};
+  \node[att] (esp)   at (0,-10)   {Esporta relazione};
+  % docente
+  \node[att] (lista) at (6.6,-3.2)  {Caricare lista di specie presenti};
+  \node[att] (terr)  at (6.6,-5.2)  {Inserire tipo di terreno};
+  \node[att] (crea)  at (9.4,-3.2)  {Creare i gruppi degli studenti};
+  \node[att] (chat)  at (9.4,-5.2)  {Moderare le chat};
+  \node[att] (rev)   at (9.4,-7.2)  {Revisione degli elaborati};
+
+  \draw[arr] (login.south) -- ++(0,-0.3) -| (stu.north);
+  \draw[arr] (login.south) -- ++(0,-0.3) -| (doc.north);
+  \draw[arr] (stu) -- (grp);
+  \draw[arr] (grp) -- (car);
+  \draw[arr] (car.south) -- ++(0,-0.4) -| (mod.north);
+  \draw[arr] (car) -- (foto);
+  \draw[arr] (car.south) -- ++(0,-0.4) -| (note.north);
+  \draw[arr] (mod.south) |- (rel.west);
+  \draw[arr] (foto) -- (rel);
+  \draw[arr] (note.south) |- (rel.east);
+  \draw[arr] (rel) -- (esp);
+  \draw[arr] (doc.south) -- ++(0,-0.4) -| (lista.north);
+  \draw[arr] (doc.south) -- ++(0,-0.4) -| (crea.north);
+  \draw[arr] (lista) -- (terr);
+  \draw[arr] (crea) -- (chat);
+  \draw[arr] (chat) -- (rev);
+\end{tikzpicture}
+\end{center}
+
+
+\subsection{Diagramma PERT}
+
+
+
+
+\begin{center}
+\begin{tikzpicture}[
+    scale=0.95, transform shape,
+    arr/.style={-{Stealth[length=2.5mm]}, draw=freccia, line width=1.2pt, rounded corners=6pt},
+    pics/pert/.style n args={5}{code={
+      \fill[giallo] (0,0) rectangle (2.9,0.7);
+      \node[font=\scriptsize\bfseries, align=left, text width=2.75cm, anchor=west] at (0.02,0.35) {#1};
+      \draw[line width=0.8pt] (0,-1.2) rectangle (2.9,0);
+      \draw[line width=0.8pt] (1.45,-1.2) -- (1.45,0) (0,-0.6) -- (2.9,-0.6);
+      \node[font=\small\bfseries] at (0.725,-0.3) {#2};
+      \node[font=\small\bfseries] at (2.175,-0.3) {#3};
+      \node[font=\small\bfseries] at (0.725,-0.9) {#4};
+      \node[font=\small\bfseries] at (2.175,-0.9) {#5};
+      \coordinate (-top)   at (1.45,0.7);
+      \coordinate (-bot)   at (1.45,-1.2);
+      \coordinate (-left)  at (0,0.35);
+      \coordinate (-right) at (2.9,0.35);
+    }}]
+  \pic (A) at (3.3,0)     {pert={A. Login (1 min)}{0}{1}{0}{1}};
+  \pic (B) at (0,-2.5)    {pert={B. Lista specie (2 min)}{1}{3}{16}{18}};
+  \pic (D) at (3.3,-2.5)  {pert={D. Creare i gruppi (1 min)}{1}{2}{1}{2}};
+  \pic (E) at (6.6,-2.5)  {pert={E. Moderare le chat (5 min)}{2}{7}{11}{16}};
+  \pic (C) at (0,-5)      {pert={C. Tipo terreno (1 min)}{3}{4}{18}{19}};
+  \pic (H) at (3.3,-5)    {pert={H. Unirsi al gruppo (1 min)}{2}{3}{2}{3}};
+  \pic (I) at (3.3,-7.5)  {pert={I. Caricare i dati (4 min)}{3}{7}{3}{7}};
+  \pic (J) at (0,-10)     {pert={J. Modificare i dati (2 min)}{7}{9}{8}{10}};
+  \pic (L) at (3.3,-10)   {pert={L. Scrivere le note (3 min)}{7}{10}{7}{10}};
+  \pic (K) at (6.6,-10)   {pert={K. Inserire le foto (2 min)}{7}{9}{8}{10}};
+  \pic (M) at (3.3,-12.5) {pert={M. Scrittura relazione (5 min)}{10}{15}{10}{15}};
+  \pic (N) at (3.3,-15)   {pert={N. Esporta relazione (1 min)}{15}{16}{15}{16}};
+  \pic (F) at (3.3,-17.5) {pert={F. Revisione elaborati (3 min)}{16}{19}{16}{19}};
+
+  \draw[arr] (A-left) -- ++(-1.5,0) -- (B-top);
+  \draw[arr] (A-bot) -- (D-top);
+  \draw[arr] (A-right) -- ++(1.5,0) -- (E-top);
+  \draw[arr] (B-bot) -- (C-top);
+  \draw[arr] (D-bot) -- (H-top);
+  \draw[arr] (H-bot) -- (I-top);
+  \draw[arr] (I-left) -- ++(-1.5,0) -- (J-top);
+  \draw[arr] (I-bot) -- (L-top);
+  \draw[arr] (I-right) -- ++(1.5,0) -- (K-top);
+  \draw[arr] (L-bot) -- (M-top);
+  \draw[arr] (M-bot) -- (N-top);
+  \draw[arr] (N-bot) -- (F-top);
+  \draw[arr] (E-right) -- ++(0.6,0) |- (F-right);
+\end{tikzpicture}
+\end{center}
+
+
+\subsection{Diagramma di Gantt}
+\noindent\begin{minipage}{\linewidth}
+\setlength{\parskip}{8pt}
+
+\begin{center}
+\begin{tikzpicture}[x=0.6cm, y=0.55cm]
+  % griglia e asse del tempo
+  \foreach \t in {0,...,19} {
+    \draw[grigio] (\t,0.5) -- (\t,-13);
+    \node[font=\scriptsize, anchor=north] at (\t,-13) {\t};
+  }
+  \node[font=\scriptsize\bfseries, anchor=north] at (9.5,-13.6) {Tempo (minuti)};
+  % riga: {etichetta}/inizio/fine/fine al più tardi/critica (1 = sì)
+  \foreach \lab/\es/\ef/\lf/\crit [count=\r] in {
+      {A. Login}/0/1/1/1,
+      {D. Creare i gruppi}/1/2/2/1,
+      {B. Lista specie}/1/3/18/0,
+      {E. Moderare le chat}/2/7/16/0,
+      {H. Unirsi al gruppo}/2/3/3/1,
+      {C. Tipo terreno}/3/4/19/0,
+      {I. Caricare i dati}/3/7/7/1,
+      {J. Modificare i dati}/7/9/10/0,
+      {K. Inserire le foto}/7/9/10/0,
+      {L. Scrivere le note}/7/10/10/1,
+      {M. Scrittura relazione}/10/15/15/1,
+      {N. Esporta relazione}/15/16/16/1,
+      {F. Revisione elaborati}/16/19/19/1} {
+    \node[font=\small, anchor=east] at (-0.2,-\r+0.5) {\lab};
+    \ifnum\crit=1 \def\col{arancio}\else \def\col{giallo}\fi
+    \fill[\col] (\es,-\r+0.15) rectangle (\ef,-\r+0.85);
+    \ifnum\lf>\ef \draw[dashed, freccia, line width=0.8pt] (\ef,-\r+0.5) -- (\lf,-\r+0.5); \fi
+  }
+\end{tikzpicture}
+\end{center}
+\end{minipage}
+
+
