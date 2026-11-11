@@ -24,7 +24,7 @@ RNF-05 & Al ritorno della connessione i dati devono essere sincronizzati in temp
 ID & Requisito & Metrica & Valore soglia \\
 RNF-06 & Tutte le funzioni di raccolta dati a priorità Alta devono essere disponibili senza rete. & Percentuale delle funzioni di raccolta dati a priorità Alta utilizzabili con il dispositivo in modalità aereo & 100\% \\
 RNF-07 & Un rilevamento o una bozza salvati non devono andare persi in caso di chiusura inattesa dell'app o di batteria scarica. & Rilevamenti e bozze salvati persi dopo una chiusura forzata dell'app o lo spegnimento del dispositivo & 0 \\
-RNF-08 & L'app, con il GPS attivo, deve permettere al dispositivo di arrivare alla fine di un'intera giornata di uscita. & Autonomia del dispositivo con GPS attivo e uso tipico dell'app & $\geq$ 8 ore \\
+RNF-08 & L'app, con il GPS attivo, deve permettere al dispositivo di arrivare alla fine di un'intera giornata di uscita. & Autonomia del dispositivo con GPS attivo e uso tipico dell'app & Intera giornata di uscita \\
 \end{tblr}
 \end{center}
 
@@ -33,8 +33,8 @@ RNF-08 & L'app, con il GPS attivo, deve permettere al dispositivo di arrivare al
 \begin{tblr}{width=\linewidth, colspec={X[0.6,l]X[2,l]X[1.6,l]X[1.1,l]}, cells={font=\small},
              row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
 ID & Requisito & Metrica & Valore soglia \\
-RNF-09 & Un nuovo utente deve saper registrare un rilevamento senza assistenza dopo un breve tutorial. & Percentuale di nuovi utenti che, dopo il tutorial, registrano un rilevamento senza aiuto; durata del tutorial & $\geq$ 80\% degli utenti; tutorial $\leq$ 5 minuti \\
-RNF-10 & I testi devono essere leggibili alla luce del sole. & Rapporto di contrasto tra testo e sfondo (linee guida WCAG 2.1) & $\geq$ 4,5:1 \\
+RNF-09 & Un nuovo utente deve saper registrare un rilevamento senza assistenza dopo un breve tutorial. & Registrazione di un rilevamento da parte di un nuovo utente dopo il tutorial & Senza assistenza, dopo un breve tutorial \\
+RNF-10 & I testi devono essere leggibili alla luce del sole. & Leggibilità dei testi all'aperto & Testi leggibili alla luce diretta del sole \\
 \end{tblr}
 \end{center}
 
@@ -44,7 +44,7 @@ RNF-10 & I testi devono essere leggibili alla luce del sole. & Rapporto di contr
              row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
 ID & Requisito & Metrica & Valore soglia \\
 RNF-11 & Ogni utente deve accedere solo ai dati consentiti dal proprio ruolo e dal proprio gruppo. & Accessi a dati non consentiti rilevati nei test sui permessi & 0 \\
-RNF-12 & I dati scambiati con il server devono essere protetti durante la trasmissione. & Percentuale delle comunicazioni con il server cifrate tramite HTTPS (TLS 1.2 o superiore) & 100\% \\
+RNF-12 & I dati scambiati con il server devono essere protetti durante la trasmissione. & Comunicazioni con il server protette durante la trasmissione & 100\% \\
 \end{tblr}
 \end{center}
 
@@ -53,7 +53,7 @@ RNF-12 & I dati scambiati con il server devono essere protetti durante la trasmi
 \begin{tblr}{width=\linewidth, colspec={X[0.6,l]X[2,l]X[1.6,l]X[1.1,l]}, cells={font=\small},
              row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
 ID & Requisito & Metrica & Valore soglia \\
-RNF-13 & L'app deve funzionare sui dispositivi Android degli studenti. & Versione minima di Android supportata & Android 8.0 (API 26) \\
+RNF-13 & L'app deve funzionare sui dispositivi Android degli studenti. & Versione minima di Android supportata & Android 8 \\
 \end{tblr}
 \end{center}
 
@@ -75,6 +75,6 @@ RNF-16 & Ogni deliverable deve essere consegnato entro la scadenza e nel formato
 ID & Requisito & Metrica & Valore soglia \\
 RNF-17 & Il trattamento dei dati personali deve rispettare il GDPR (Regolamento UE 2016/679). & Presenza di informativa e richiesta del consenso al primo accesso; dati personali raccolti solo se necessari & Conformità verificata prima del rilascio \\
 RNF-18 & La posizione dell'utente deve essere salvata solo quando registra un rilevamento (punto, foto, nota) o invia un SOS; può essere mostrata sulla mappa senza essere salvata. & Posizioni salvate al di fuori di questi eventi & 0 \\
-RNF-19 & I dati devono poter essere esportati in formati standard apribili dai programmi usati dai docenti (RF-30). & Formati di esportazione disponibili & CSV, XLSX e PDF \\
+RNF-19 & I dati devono poter essere esportati in formati standard apribili dai programmi usati dai docenti (RF-30). & Formati di esportazione disponibili & Formati standard apribili dai programmi usati dai docenti \\
 \end{tblr}
 \end{center}
