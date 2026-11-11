@@ -1,29 +1,80 @@
 \section{Definizione dei requisiti non funzionali}
-% TODO: proprietà e vincoli sul sistema e sul processo di sviluppo; per ogni RNF indicare metrica e valore soglia.
+
+I requisiti non funzionali descrivono le proprietà e i vincoli del sistema e del processo di sviluppo. Sono raggruppati in requisiti di prodotto, di processo ed esterni; per ciascuno sono indicati la metrica con cui viene verificato e il valore soglia da rispettare.
 
 \subsection{Requisiti di prodotto}
+
+\subsubsection*{Efficienza}
 \begin{center}
-\begin{tblr}{width=\linewidth, colspec={X[0.6,l]X[2,l]X[1.2,l]X[1,l]}, cells={font=\small},
+\begin{tblr}{width=\linewidth, colspec={X[0.6,l]X[2,l]X[1.6,l]X[1.1,l]}, cells={font=\small},
              row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
 ID & Requisito & Metrica & Valore soglia \\
-RNF-01 & & & \\
+RNF-01 & L'app deve avviarsi in tempi brevi. & Tempo tra l'apertura dell'app e la visualizzazione della schermata iniziale & $\leq$ 5 secondi \\
+RNF-02 & Il salvataggio di un rilevamento sul dispositivo deve essere rapido. & Tempo tra il tocco del pulsante ``Salva'' e la conferma di avvenuto salvataggio & $\leq$ 2 secondi \\
+RNF-03 & Il suggerimento dei nomi delle specie deve funzionare senza connessione e senza rallentare la digitazione. & Tempo di comparsa dei suggerimenti, senza connessione, con una lista di almeno 5.000 specie & $\leq$ 1 secondo \\
+RNF-04 & Il sistema deve gestire tutti i partecipanti a un'uscita (circa 50 studenti e 12 docenti) collegati contemporaneamente, con un margine, senza cali di prestazione. & Numero di utenti collegati contemporaneamente con tempi di risposta entro le soglie di RNF-01, RNF-02 e RNF-05 & $\geq$ 70 utenti \\
+RNF-05 & Al ritorno della connessione i dati devono essere sincronizzati in tempi ragionevoli. & Tempo tra il ritorno della connessione e il completamento della sincronizzazione & $\leq$ 5 minuti \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{Affidabilità e uso sul campo}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[0.6,l]X[2,l]X[1.6,l]X[1.1,l]}, cells={font=\small},
+             row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
+ID & Requisito & Metrica & Valore soglia \\
+RNF-06 & Tutte le funzioni di raccolta dati a priorità Alta devono essere disponibili senza rete. & Percentuale delle funzioni di raccolta dati a priorità Alta utilizzabili con il dispositivo in modalità aereo & 100\% \\
+RNF-07 & Un rilevamento o una bozza salvati non devono andare persi in caso di chiusura inattesa dell'app o di batteria scarica. & Rilevamenti e bozze salvati persi dopo una chiusura forzata dell'app o lo spegnimento del dispositivo & 0 \\
+RNF-08 & L'app, con il GPS attivo, deve permettere al dispositivo di arrivare alla fine di un'intera giornata di uscita. & Autonomia del dispositivo con GPS attivo e uso tipico dell'app & $\geq$ 8 ore \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{Usabilità e accessibilità}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[0.6,l]X[2,l]X[1.6,l]X[1.1,l]}, cells={font=\small},
+             row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
+ID & Requisito & Metrica & Valore soglia \\
+RNF-09 & Un nuovo utente deve saper registrare un rilevamento senza assistenza dopo un breve tutorial. & Percentuale di nuovi utenti che, dopo il tutorial, registrano un rilevamento senza aiuto; durata del tutorial & $\geq$ 80\% degli utenti; tutorial $\leq$ 5 minuti \\
+RNF-10 & I testi devono essere leggibili alla luce del sole. & Rapporto di contrasto tra testo e sfondo (linee guida WCAG 2.1) & $\geq$ 4,5:1 \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{Sicurezza}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[0.6,l]X[2,l]X[1.6,l]X[1.1,l]}, cells={font=\small},
+             row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
+ID & Requisito & Metrica & Valore soglia \\
+RNF-11 & Ogni utente deve accedere solo ai dati consentiti dal proprio ruolo e dal proprio gruppo. & Accessi a dati non consentiti rilevati nei test sui permessi & 0 \\
+RNF-12 & I dati scambiati con il server devono essere protetti durante la trasmissione. & Percentuale delle comunicazioni con il server cifrate tramite HTTPS (TLS 1.2 o superiore) & 100\% \\
+\end{tblr}
+\end{center}
+
+\subsubsection*{Compatibilità}
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[0.6,l]X[2,l]X[1.6,l]X[1.1,l]}, cells={font=\small},
+             row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
+ID & Requisito & Metrica & Valore soglia \\
+RNF-13 & L'app deve funzionare sui dispositivi Android degli studenti. & Versione minima di Android supportata & Android 8.0 (API 26) \\
 \end{tblr}
 \end{center}
 
 \subsection{Requisiti di processo}
 \begin{center}
-\begin{tblr}{width=\linewidth, colspec={X[0.6,l]X[2,l]X[1.2,l]X[1,l]}, cells={font=\small},
+\begin{tblr}{width=\linewidth, colspec={X[0.6,l]X[2,l]X[1.6,l]X[1.1,l]}, cells={font=\small},
              row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
 ID & Requisito & Metrica & Valore soglia \\
-RNF-.. & & & \\
+RNF-14 & L'app deve essere sviluppata in Java con Android Studio. & Linguaggio e ambiente di sviluppo del codice dell'app & 100\% del codice in Java, progetto Android Studio \\
+RNF-15 & Il codice deve rispettare le convenzioni di Java (D2, Sezione 4). & Violazioni delle convenzioni segnalate nella revisione del codice & 0 \\
+RNF-16 & Ogni deliverable deve essere consegnato entro la scadenza e nel formato richiesto dal corso. & Percentuale di deliverable consegnati entro la scadenza e nel formato del corso & 100\% \\
 \end{tblr}
 \end{center}
 
 \subsection{Requisiti esterni}
 \begin{center}
-\begin{tblr}{width=\linewidth, colspec={X[0.6,l]X[2,l]X[1.2,l]X[1,l]}, cells={font=\small},
+\begin{tblr}{width=\linewidth, colspec={X[0.6,l]X[2,l]X[1.6,l]X[1.1,l]}, cells={font=\small},
              row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
 ID & Requisito & Metrica & Valore soglia \\
-RNF-.. & & & \\
+RNF-17 & Il trattamento dei dati personali deve rispettare il GDPR (Regolamento UE 2016/679). & Presenza di informativa e richiesta del consenso al primo accesso; dati personali raccolti solo se necessari & Conformità verificata prima del rilascio \\
+RNF-18 & La posizione dell'utente deve essere salvata solo quando registra un rilevamento (punto, foto, nota) o invia un SOS; può essere mostrata sulla mappa senza essere salvata. & Posizioni salvate al di fuori di questi eventi & 0 \\
+RNF-19 & I dati devono poter essere esportati in formati standard apribili dai programmi usati dai docenti (RF-30). & Formati di esportazione disponibili & CSV, XLSX e PDF \\
 \end{tblr}
 \end{center}
