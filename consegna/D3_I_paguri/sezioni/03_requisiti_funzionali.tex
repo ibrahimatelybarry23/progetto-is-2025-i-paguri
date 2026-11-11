@@ -1,15 +1,62 @@
 \section{Definizione dei requisiti funzionali}
 
-\subsection{Requisiti funzionali}
-% TODO: elenco dei servizi offerti dal sistema (hw+sw), ordinati per priorità (prima quelli "core"), con la motivazione di ciascuno.
+La presente sezione definisce i servizi offerti dal sistema, inteso come integrazione tra componente software (applicazione mobile Android e servizi di sincronizzazione) e componente hardware del dispositivo (ricevitore GPS/GNSS, fotocamera, microfono, altoparlante, magnetometro, accelerometro/giroscopio e memoria locale).
 
-\begin{center}
-\begin{tblr}{width=\linewidth, colspec={X[0.6,l]X[2,l]X[0.7,l]X[2,l]}, cells={font=\small},
-             row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
+In continuità con quanto stabilito nello Studio di Fattibilità (D1) e nel Piano di Progetto (D2), ciascun requisito mantiene il proprio codice identificativo univoco (\texttt{RF-01}--\texttt{RF-32}) per garantirne la tracciabilità nelle sezioni successive. I requisiti sono ordinati per livello di priorità: prima i requisiti essenziali a priorità \textbf{Alta} (\emph{core}), quindi i requisiti di supporto a priorità \textbf{Media}; i requisiti aggiuntivi a priorità \textbf{Bassa} sono raccolti nella sottosezione dedicata alle possibili evoluzioni future del sistema.
+
+\subsection{Requisiti funzionali}
+
+\begin{longtblr}[
+  label=none,
+  entry=none
+]{
+  width=\linewidth,
+  rowhead=1,
+  colspec={X[0.48,l] X[2.15,l] X[0.55,l] X[1.62,l]},
+  cells={font=\small},
+  row{1}={bg=arancio, font=\small\bfseries},
+  hline{2-Z}={wd=0.5pt, fg=arancio}
+}
 ID & Requisito & Priorità & Motivazione \\
-RF-01 & & & \\
-\end{tblr}
-\end{center}
+RF-01 & \textbf{Account personale e Login:} Consente l'accesso all'applicazione tramite account univoco basato su e-mail istituzionale, salvando la sessione nella memoria locale del dispositivo. & Alta & Necessario per identificare l'autore di ogni rilevamento e differenziare i permessi. \\
+RF-02 & \textbf{Aree dedicate:} Il software presenta interfacce e funzionalità dedicate al ruolo (studente o docente) sullo schermo del dispositivo. & Alta & Separazione netta tra gestione e raccolta già validata. \\
+RF-03 & \textbf{Gestione dei gruppi:} Il software permette al docente di creare gruppi di lavoro e agli studenti di unirsi al proprio gruppo, limitando la modifica ai soli dati del proprio team. & Alta & Le attività del Laboratorio in Campo si svolgono in gruppi di 3--4 studenti. \\
+RF-05 & \textbf{Gestione delle attività e degli itinerari:} Il sistema consente al docente di organizzare uscite o siti sulla mappa prima della partenza, rendendoli consultabili sui dispositivi dei gruppi assegnati. & Alta & Richiesto dagli studenti (4,0/5) nel questionario D1 (Sez.~3.4) per orientarsi durante l'escursione. \\
+RF-06 & \textbf{Schede di rilevamento disciplinari:} L'app offre moduli strutturati e campi preimpostati (come menu a tendina su touchscreen) specifici per ciascuna disciplina. & Alta & Richiesto dai docenti (4,0/5), accelerando i tempi di trascrizione. \\
+RF-08 & \textbf{Raccolta dati offline:} Il software consente compilazione, lettura e salvataggio persistente di schede, mappe e allegati direttamente nella memoria locale del dispositivo hardware. & Alta & Tutti i rispondenti al questionario dichiarano di trovarsi offline (\emph{a volte} 4/7 o \emph{spesso} 3/7) durante le uscite. \\
+RF-09 & \textbf{Salvataggio delle bozze:} L'app salva localmente su storage interno anche rilevamenti incompleti come bozze per riprenderli in un secondo momento. & Alta & Sul campo il tempo per campione deve essere rapido e possono esserci interruzioni; può essere necessaria una revisione accurata in seguito. \\
+RF-10 & \textbf{Sincronizzazione automatica:} Quando è presente copertura dati o Wi-Fi tramite il modulo di rete del dispositivo, il sistema trasferisce automaticamente i dati locali al server rendendoli disponibili al gruppo. & Alta & Elimina la trascrizione manuale post-uscita e abilita la scheda condivisa di gruppo. \\
+RF-12 & \textbf{Data History:} Il sistema permette di correggere o integrare rilevamenti, conservando lo storico delle versioni precedenti con autore, data e ora. & Alta & Richiesto da 4 su 7 dei rispondenti al questionario e dagli studenti in data 02/10 (BallMap e FieldLab). Evita sovrascritture accidentali e garantisce tracciabilità scientifica. \\
+RF-14 & \textbf{Mappa offline:} L'app dispone di mappe scaricabili preventivamente in memoria locale con punti di rilevamento salvati, consultabili senza rete. & Alta & Utile per annotazioni (già presenti e non) da appuntare direttamente sulla mappa, anche in assenza di rete. \\
+RF-16 & \textbf{Registrazione dei punti geografici:} Il sistema acquisisce automaticamente le coordinate tramite il ricevitore GPS hardware dello smartphone. & Alta & Fondamentale registrare il luogo preciso con semplicità e immediatezza. \\
+RF-21 & \textbf{Note testuali:} Il software permette di inserire osservazioni testuali libere tramite tastiera su schermo all'interno di ogni campione o rilevamento. & Alta & Sostituisce il taccuino cartaceo e consente note aggiuntive. \\
+RF-22 & \textbf{Note vocali:} L'app utilizza microfono e altoparlante del dispositivo per registrare e riascoltare annotazioni audio in locale, collegandole automaticamente alle coordinate GPS del punto. & Alta & È la funzionalità più apprezzata nel questionario D1 (4,6/5) ed è fondamentale per l'accessibilità e inclusività (studenti con disabilità). \\
+RF-23 & \textbf{Fotografie con metadati:} L'app integra la fotocamera del dispositivo per scattare foto con anteprima, collegandole al rilevamento, alle coordinate GPS e a metadati/note. & Alta & Valutata 4,6/5 dagli studenti e 4,0/5 dai docenti; elimina la necessità di collegare a posteriori foto e appunti/note. \\
+RF-25 & \textbf{Caricamento delle liste tassonomiche:} Consente al docente di caricare e aggiornare annualmente elenchi di specie e variabili chimiche, rendendoli disponibili offline sullo storage del telefono. & Alta & Richiesto espressamente dalla Prof.ssa Fantinato e dagli studenti per evitare errori di trascrizione dei nomi scientifici. \\
+RF-26 & \textbf{Autocompletamento dei nomi scientifici:} Sfruttando le liste tassonomiche salvate in locale, il software suggerisce in tempo reale le specie corrispondenti durante la digitazione. & Alta & Consente di velocizzare l'inserimento testuale sul campo. \\
+RF-30 & \textbf{Esportazione e condivisione:} Consente di esportare i dati raccolti e i report in formati standard (CSV, PDF, \dots) salvandoli nella memoria locale o condividendoli con altri utenti. & Alta & Richiesto da 5 su 7 nel questionario D1. \\
+RF-32 & \textbf{Materiali didattici offline:} Il docente può caricare guide e dispense in PDF che l'app salva sullo storage locale dello smartphone per la consultazione offline. & Alta & Funzione di gestione dell'uscita più votata in assoluto (6 rispondenti su 7). \\
+RF-04 & \textbf{Permessi per disciplina:} Il sistema applica regole di visibilità dei dati degli altri gruppi differenziate in base alla materia, selezionabili dal docente. & Media & Esigenza didattica emersa negli incontri del 02/10 e del 19/10. \\
+RF-07 & \textbf{Database centralizzato pluriennale:} L'applicazione archivia e rende consultabili i dati degli anni precedenti secondo regole disciplinari scelte dal docente. & Media & Risolve il problema della mancanza di un archivio storico unico. \\
+RF-11 & \textbf{Validazione dei dati inseriti:} L'app verifica formati, campi obbligatori, unità di misura e range di ammissibilità prima dell'invio definitivo. & Media & Previene errori di battitura sul campo. \\
+RF-13 & \textbf{Filtri e ordinamento:} Il software permette di filtrare, cercare e ordinare le liste e la galleria dei campioni per disciplina, data/ora, gruppo o stato di revisione e sincronizzazione. & Media & Richiesto per gestire comodamente grandi quantità di osservazioni durante la revisione. \\
+RF-15 & \textbf{Controllo didattico della mappa:} Il docente può configurare, modificare o disattivare temporaneamente la visualizzazione della mappa e degli aiuti GPS sui dispositivi degli studenti. & Media & In alcune attività didattiche gli studenti devono esercitarsi a leggere la mappa cartacea senza affidarsi all'app. \\
+RF-18 & \textbf{Bussola e clinometro integrati:} L'app legge magnetometro e accelerometro/giroscopio hardware dello smartphone per fornire bussola e clinometro integrati. & Media & Evita che lo studente debba passare continuamente ad app di terze parti. \\
+RF-19 & \textbf{Rilevamento della giacitura:} Il sistema permette l'acquisizione assistita tramite sensori integrati o l'inserimento manuale delle misure angolari (direzione e inclinazione) degli strati rocciosi. & Media & Richiesta specifica di Geologia. \\
+RF-28 & \textbf{Segnalazione SOS:} Comando rapido che invia ai docenti la posizione GPS e un avviso tramite il modulo di rete cellulare del dispositivo. & Media & Sicurezza durante le escursioni in montagna. \\
+RF-29 & \textbf{Generazione automatica dei report:} Il software aggrega dati, tabelle, foto e note selezionati per uscita, gruppo e disciplina in una bozza strutturata di relazione. & Media & Riduce il lavoro di composizione della relazione multidisciplinare finale. \\
+\end{longtblr}
 
 \subsection{Possibili evoluzioni del sistema}
-% TODO: requisiti aggiuntivi che potrebbero essere implementati in futuro.
+
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[0.48,l] X[2.15,l] X[0.55,l] X[1.62,l]}, cells={font=\small},
+             row{1}={bg=arancio, font=\small\bfseries}, hline{2-Z}={wd=0.5pt, fg=arancio}}
+ID & Requisito & Priorità & Motivazione \\
+RF-17 & \textbf{Storico geografico e Heatmaps:} Consultazione su mappa di tutte le osservazioni effettuate nello stesso luogo in anni diversi e generazione di heatmap per area. & Bassa & Utile per analisi longitudinali, non fondamentale per il flusso base della raccolta sul campo. \\
+RF-20 & \textbf{Associazione automatica parametri ambientali:} Registrazione automatica di temperatura, pressione, meteo e quota tramite sensori del dispositivo o servizi meteo online. & Bassa & Arricchisce il contesto del campione, ma non tutti gli smartphone hanno sensori dedicati e in campo spesso non c'è rete. \\
+RF-24 & \textbf{Annotazione sulle fotografie:} Possibilità di disegnare o aggiungere etichette sulle immagini tramite touchscreen, conservando l'originale. & Bassa & Migliora la leggibilità di dettagli nelle foto ed è utile per annotazioni aggiuntive, ma non fondamentale. \\
+RF-27 & \textbf{Chat interna:} Messaggistica interna tra membri del gruppo e docenti con accodamento offline. & Bassa & Ha ottenuto il punteggio più basso nel questionario (2,8/5 per gli studenti, 2,0/5 per i docenti). \\
+RF-31 & \textbf{Assistenza AI alla redazione del report:} Sintesi automatica delle osservazioni tramite elaborazione locale sul dispositivo. & Bassa & Funzionalità innovativa proposta, ma non richiesta e potenzialmente onerosa per memoria e batteria sui dispositivi. \\
+\end{tblr}
+\end{center}
