@@ -1,10 +1,61 @@
 \section{Introduzione}
 
+Il presente documento definisce e specifica i requisiti del sistema di supporto alle attività del Laboratorio in Campo di Scienze Ambientali. Descrive gli attori e i casi d'uso del sistema, i requisiti funzionali e non funzionali, la specifica dei requisiti funzionali e le dipendenze tra i requisiti, e costituisce il riferimento per la progettazione, lo sviluppo e il collaudo dell'applicazione.
+
 \subsection{Descrizione generale del sistema}
-% TODO: funzionalità generali del sistema, considerato come hardware + software (smartphone, sensori, app, eventuale backend).
+Il sistema è una piattaforma integrata hardware e software per la raccolta e la gestione dei dati durante le uscite didattiche sul campo nelle discipline di botanica, biologia, geologia e chimica. Permette agli studenti di registrare campioni e rilevamenti anche in assenza di connessione e ai docenti di organizzare le uscite e consultare i dati raccolti dai gruppi.
+
+Il sistema è composto da tre parti:
+\begin{itemize}
+    \item \textbf{Hardware client}: smartphone Android dotati di GPS, fotocamera, microfono e sensori di movimento (magnetometro e accelerometro, usati per bussola e clinometro).
+    \item \textbf{Software client}: applicazione Android con approccio \emph{offline-first} per la compilazione delle schede di rilevamento, la consultazione della mappa offline, l'acquisizione di foto, note e posizioni, la generazione dei report e l'esportazione dei dati.
+    \item \textbf{Software server}: servizio centrale per l'autenticazione degli utenti, l'archiviazione dei dati di tutti gli anni e la sincronizzazione tra i dispositivi quando la connessione è disponibile.
+\end{itemize}
 
 \subsection{Coinvolgimento degli stakeholder}
-% TODO: come sono stati coinvolti gli stakeholder nell'analisi dei requisiti (questionario Google Form, incontro Zoom con i responsabili del Laboratorio in Campo, ...).
+Gli stakeholder (studenti e docenti del Laboratorio in Campo) sono stati coinvolti nell'analisi dei requisiti attraverso:
+\begin{itemize}
+    \item un \textbf{questionario su Google Form}, rivolto a studenti e docenti;
+    \item un \textbf{incontro online su Zoom}, organizzato dal docente del corso con i responsabili del Laboratorio in Campo, per chiarire le attività svolte durante le uscite e le esigenze dei docenti.
+\end{itemize}
+
+Al questionario hanno risposto 7 persone (5 studenti e 2 docenti); il campione è ridotto e i risultati vanno letti come indicazioni preliminari. Tutti i rispondenti dichiarano di trovarsi in zone prive di connessione \emph{a volte} (4 su 7) o \emph{spesso} (3 su 7). Per prendere appunti prevale il taccuino cartaceo (5 su 7), seguito dalle foto scattate con lo smartphone (3 su 7). La principale criticità è il tempo necessario per trascrivere i dati a casa o in laboratorio (6 su 7), insieme al rischio di smarrire o rovinare i fogli cartacei.
+
+La tabella seguente riporta l'importanza attribuita ad alcune funzionalità, su una scala da 1 a 5 (media delle risposte):
+
+\begin{center}
+\begin{tblr}{width=\linewidth, colspec={X[3,l]X[1,c]X[1,c]},
+             rowsep=2pt, cells={font=\small},
+             row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
+Funzionalità & Studenti (5) & Docenti (2) \\
+Foto e note vocali collegate alle coordinate GPS & 4,6 & 4,0 \\
+Ricerca rapida delle specie botaniche senza internet & 4,6 & 3,0 \\
+Uso 100\% offline & 4,4 & 1,0\textsuperscript{*} \\
+Moduli di inserimento con campi preimpostati & 3,4 & 4,0 \\
+Chat di gruppo con i docenti & 2,8 & 2,0 \\
+\end{tblr}
+\end{center}
+{\small\textsuperscript{*} Un solo docente ha risposto a questa domanda.}
+
+Per la gestione dell'uscita, la funzionalità più richiesta è il caricamento di guide e dispense in PDF consultabili offline (6 risposte su 7), seguita dalla pianificazione dell'itinerario e dei punti di sosta prima della partenza (4 risposte su 7, tutte di studenti). Per la validazione dei dati, 5 rispondenti su 7 chiedono l'esportazione diretta in formati standard (Excel, CSV, GIS) e 4 su 7 la possibilità di correggere o integrare i dati direttamente nell'app.
+
+L'indagine conferma i requisiti di funzionamento offline, di acquisizione di foto e note vocali georeferenziate e di esportazione dei dati. La chat di gruppo, che ha ottenuto il punteggio più basso, è trattata come estensione a priorità Bassa.
 
 \subsection{Definizioni, acronimi e riferimenti}
-% TODO: glossario (RF, RNF, UC, ...) e riferimenti ai documenti D1 e D2.
+
+\subsubsection*{Definizioni e acronimi}
+\begin{itemize}
+    \item \textbf{RF}: Requisito Funzionale.
+    \item \textbf{RNF}: Requisito Non Funzionale.
+    \item \textbf{UC}: Caso d'Uso (\emph{Use Case}).
+    \item \textbf{Offline-first}: approccio per cui l'app funziona senza connessione e sincronizza i dati con il server quando la rete torna disponibile.
+    \item \textbf{Sincronizzazione}: trasferimento dei dati salvati sul dispositivo al server e aggiornamento degli altri dispositivi autorizzati.
+    \item \textbf{GIS}: \emph{Geographic Information System}, sistema per la gestione dei dati geografici.
+    \item \textbf{SOS}: segnalazione di emergenza inviata ai docenti con la posizione GPS.
+\end{itemize}
+
+\subsubsection*{Riferimenti}
+\begin{itemize}
+    \item \textbf{D1 -- Studio di fattibilità}: analisi del dominio, del contesto operativo e delle esigenze degli utenti; contiene l'elenco preliminare dei requisiti funzionali.
+    \item \textbf{D2 -- Piano di Progetto}: organizzazione del team, processi gestionali e tecnici, pianificazione delle attività.
+\end{itemize}
