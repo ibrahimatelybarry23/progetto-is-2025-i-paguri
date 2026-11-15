@@ -104,6 +104,12 @@
 
 % --- Tabelle -----------------------------------------------------------
 \usepackage{tabularray}
+
+% Tabelle lunghe (longtblr): nessuna didascalia ne' scritta "continua" quando vanno a pagina nuova
+\SetTblrTemplate{caption}{empty}
+\SetTblrTemplate{capcont}{empty}
+\SetTblrTemplate{contfoot}{empty}
+\SetTblrTemplate{conthead}{empty}
 % Margini cella del Word: 100 twip = 5 pt su ogni lato.
 % \tw{n}: larghezza del testo di una colonna larga n twip nel Word
 % (1 twip = 1/20 pt), tolti i 5 pt di margine a sinistra e a destra.

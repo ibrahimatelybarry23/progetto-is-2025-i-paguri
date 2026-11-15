@@ -113,8 +113,7 @@ I casi d'uso sono rappresentati in due diagrammi (scenari): il primo raccoglie i
 Per ogni caso d'uso è riportato il template completo. Il campo \emph{Requisiti} indica i requisiti funzionali (Sezione~3) realizzati dal caso d'uso. Le alternative sono numerate in base al passo dello scenario principale da cui hanno origine (ad esempio, \emph{4a} è un'alternativa al passo 4).
 
 \subsubsection*{UC01 -- Autenticarsi}
-\begin{center}
-\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small},
+\begin{longtblr}[entry=none,label=none]{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small}, rowsep=1.5pt,
              column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
 Nome caso d'uso & Autenticarsi \\
 Goal & L'utente accede all'app con il proprio account e vede le funzioni previste dal suo ruolo. \\
@@ -126,12 +125,10 @@ Trigger & L'utente apre l'app senza una sessione attiva. \\
 Scenario principale & {1. L'utente apre l'app. \\ 2. Il sistema mostra la schermata di accesso. \\ 3. L'utente inserisce e-mail istituzionale e password. \\ 4. Il sistema invia le credenziali al server, che le verifica. \\ 5. Il sistema salva la sessione sul dispositivo. \\ 6. Il sistema mostra l'area studente o docente in base al ruolo dell'utente.} \\
 Alternative & {1a. Se sul dispositivo è già salvata una sessione, il sistema mostra direttamente l'area dell'utente, anche senza connessione. \\ 4a. Se le credenziali sono errate, il sistema mostra un messaggio di errore e torna al passo 3. \\ 4b. Se al primo accesso il dispositivo non è connesso, il sistema chiede di connettersi e riprovare.} \\
 Postcondizioni & L'utente è autenticato e vede solo le funzioni previste dal suo ruolo. \\
-\end{tblr}
-\end{center}
+\end{longtblr}
 
 \subsubsection*{UC02 -- Gestire i gruppi}
-\begin{center}
-\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small},
+\begin{longtblr}[entry=none,label=none]{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small}, rowsep=1.5pt,
              column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
 Nome caso d'uso & Gestire i gruppi \\
 Goal & Il docente crea i gruppi di lavoro e vi assegna gli studenti. \\
@@ -143,12 +140,10 @@ Trigger & Il docente seleziona la gestione dei gruppi nell'area docente. \\
 Scenario principale & {1. Il docente apre la gestione dei gruppi. \\ 2. Il sistema mostra i gruppi esistenti e l'elenco degli studenti iscritti. \\ 3. Il docente crea un nuovo gruppo indicando nome e disciplina. \\ 4. Il docente seleziona gli studenti da assegnare al gruppo. \\ 5. Il sistema salva il gruppo sul server. \\ 6. Il sistema mostra il gruppo con i suoi membri.} \\
 Alternative & {3a. Il docente seleziona un gruppo esistente e aggiunge o rimuove studenti; il caso d'uso prosegue dal passo 5. \\ 5a. Se la connessione non è disponibile, il sistema segnala che il gruppo non può essere salvato e conserva i dati inseriti.} \\
 Postcondizioni & Il gruppo esiste con i membri indicati; ogni membro accede ai dati del gruppo secondo i permessi della propria disciplina. \\
-\end{tblr}
-\end{center}
+\end{longtblr}
 
 \subsubsection*{UC03 -- Organizzare un'uscita}
-\begin{center}
-\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small},
+\begin{longtblr}[entry=none,label=none]{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small}, rowsep=1.5pt,
              column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
 Nome caso d'uso & Organizzare un'uscita \\
 Goal & Il docente prepara un'uscita con l'itinerario e i punti di sosta assegnati ai gruppi. \\
@@ -160,12 +155,10 @@ Trigger & Il docente seleziona la creazione di una nuova uscita. \\
 Scenario principale & {1. Il docente seleziona la creazione di una nuova uscita. \\ 2. Il sistema chiede la data e l'area dell'uscita. \\ 3. Il docente inserisce data e area. \\ 4. Il sistema mostra la mappa dell'area. \\ 5. Il docente traccia sulla mappa l'itinerario e i punti di sosta (stop). \\ 6. Il docente assegna gli stop ai gruppi. \\ 7. Il docente indica se la mappa è attiva per gli studenti e con quali limitazioni dell'uso del GPS. \\ 8. Il docente pubblica l'uscita. \\ 9. Il sistema salva l'uscita sul server e la rende disponibile ai gruppi assegnati.} \\
 Alternative & {1a. Il docente seleziona un'uscita già pubblicata per modificarla; il caso d'uso prosegue dal passo 4. \\ 8a. Se la connessione non è disponibile, il sistema segnala che l'uscita non può essere pubblicata e la conserva sul dispositivo.} \\
 Postcondizioni & L'uscita è pubblicata; ogni gruppo vede l'itinerario e gli stop assegnati; mappa e dati dell'uscita vengono scaricati sui dispositivi alla sincronizzazione (UC12). \\
-\end{tblr}
-\end{center}
+\end{longtblr}
 
 \subsubsection*{UC04 -- Caricare liste tassonomiche e materiali}
-\begin{center}
-\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small},
+\begin{longtblr}[entry=none,label=none]{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small}, rowsep=1.5pt,
              column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
 Nome caso d'uso & Caricare liste tassonomiche e materiali \\
 Goal & Il docente rende disponibili agli studenti, anche senza connessione, le liste delle specie e le dispense dell'uscita. \\
@@ -177,12 +170,10 @@ Trigger & Il docente apre la sezione dei materiali di un'uscita. \\
 Scenario principale & {1. Il docente apre la sezione dei materiali dell'uscita. \\ 2. Il sistema mostra le liste e i materiali già caricati. \\ 3. Il docente carica un file con un elenco di specie oppure una dispensa in PDF. \\ 4. Il sistema verifica il formato del file. \\ 5. Il docente sceglie le liste, o le variabili chimiche, da usare nella giornata. \\ 6. Il sistema associa liste e materiali all'uscita e li salva sul server.} \\
 Alternative & {4a. Se il formato del file non è valido, il sistema mostra un messaggio di errore e non importa il file.} \\
 Postcondizioni & Liste e materiali sono associati all'uscita e vengono scaricati sui dispositivi degli studenti alla sincronizzazione (UC12), per l'uso offline. \\
-\end{tblr}
-\end{center}
+\end{longtblr}
 
 \subsubsection*{UC05 -- Compilare una scheda di rilevamento}
-\begin{center}
-\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small},
+\begin{longtblr}[entry=none,label=none]{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small}, rowsep=1.5pt,
              column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
 Nome caso d'uso & Compilare una scheda di rilevamento \\
 Goal & Lo studente registra un campione o un rilevamento della propria disciplina, anche senza connessione. \\
@@ -194,12 +185,10 @@ Trigger & Lo studente seleziona la creazione di un nuovo rilevamento in uno stop
 Scenario principale & {1. Lo studente sceglie lo stop e seleziona la creazione di un nuovo rilevamento. \\ 2. Il sistema chiede la disciplina. \\ 3. Lo studente sceglie la disciplina. \\ 4. Il sistema mostra la scheda con i campi specifici della disciplina e precompila data, ora, gruppo e stop. \\ 5. Lo studente compila i campi della scheda. \\ 6. Lo studente preme ``Salva''. \\ 7. Il sistema controlla i campi obbligatori, i formati e le unità di misura. \\ 8. Il sistema acquisisce, se disponibili, i parametri ambientali e ne registra fonte e orario. \\ 9. Il sistema salva la scheda sul dispositivo e conferma il salvataggio. \\ 10. Il sistema mette la scheda in coda di sincronizzazione.} \\
 Alternative & {5a. Lo studente interrompe la compilazione e salva la scheda come bozza; potrà riprenderla dall'elenco delle bozze. \\ 7a. Se ci sono campi mancanti o errati, il sistema li evidenzia; lo studente li corregge (passo 5) oppure salva la scheda come bozza. \\ 8a. Se nessuna fonte di parametri ambientali è disponibile, la scheda viene salvata senza di essi.} \\
 Postcondizioni & La scheda è salvata sul dispositivo, associata a gruppo, disciplina, stop, data e autore, ed è in attesa di sincronizzazione. \\
-\end{tblr}
-\end{center}
+\end{longtblr}
 
 \subsubsection*{UC06 -- Registrare un punto geografico}
-\begin{center}
-\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small},
+\begin{longtblr}[entry=none,label=none]{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small}, rowsep=1.5pt,
              column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
 Nome caso d'uso & Registrare un punto geografico \\
 Goal & Lo studente salva la posizione di un punto di rilevamento. \\
@@ -211,12 +200,10 @@ Trigger & Lo studente seleziona la registrazione della posizione, oppure il caso
 Scenario principale & {1. Lo studente richiede la registrazione della posizione. \\ 2. Il sistema legge la posizione dal GPS. \\ 3. Il sistema mostra le coordinate sulla mappa. \\ 4. Lo studente aggiunge eventuali osservazioni. \\ 5. Lo studente conferma. \\ 6. Il sistema salva il punto con coordinate, data, gruppo e osservazioni.} \\
 Alternative & {2a. Se il GPS non è disponibile, o se il docente non consente l'acquisizione automatica, lo studente inserisce le coordinate a mano.} \\
 Postcondizioni & Il punto è salvato, è visibile sulla mappa ed è in coda di sincronizzazione. \\
-\end{tblr}
-\end{center}
+\end{longtblr}
 
 \subsubsection*{UC07 -- Misurare la giacitura}
-\begin{center}
-\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small},
+\begin{longtblr}[entry=none,label=none]{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small}, rowsep=1.5pt,
              column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
 Nome caso d'uso & Misurare la giacitura \\
 Goal & Lo studente misura direzione e inclinazione di uno strato roccioso. \\
@@ -228,12 +215,10 @@ Trigger & Lo studente seleziona la misura della giacitura nella scheda. \\
 Scenario principale & {1. Lo studente seleziona la misura della giacitura. \\ 2. Il sistema attiva bussola e clinometro e mostra i valori in tempo reale. \\ 3. Lo studente appoggia il dispositivo sulla superficie dello strato. \\ 4. Lo studente conferma la misura. \\ 5. Il sistema inserisce direzione e inclinazione nella scheda, indicando che sono state acquisite dai sensori.} \\
 Alternative & {2a. Se il dispositivo non ha i sensori necessari, il sistema consente solo l'inserimento manuale dei valori. \\ 3a. Lo studente sceglie di inserire i valori a mano; il sistema li inserisce nella scheda indicando l'inserimento manuale.} \\
 Postcondizioni & La giacitura è salvata nella scheda, con l'indicazione della modalità di acquisizione (sensori o manuale). \\
-\end{tblr}
-\end{center}
+\end{longtblr}
 
 \subsubsection*{UC08 -- Aggiungere foto e note}
-\begin{center}
-\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small},
+\begin{longtblr}[entry=none,label=none]{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small}, rowsep=1.5pt,
              column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
 Nome caso d'uso & Aggiungere foto e note \\
 Goal & Lo studente documenta un rilevamento con fotografie, note testuali o note vocali. \\
@@ -245,12 +230,10 @@ Trigger & Lo studente seleziona l'aggiunta di una foto, di una nota o di una not
 Scenario principale & {1. Lo studente sceglie il tipo di contenuto: foto, nota testuale o nota vocale. \\ 2. Il sistema apre la fotocamera, il campo di testo o il registratore. \\ 3. Lo studente scatta la foto, scrive la nota o registra l'audio. \\ 4. Il sistema associa al contenuto la posizione dello stop (UC06), la data e l'ora. \\ 5. Lo studente aggiunge eventualmente una nota e le informazioni strutturate proposte dai menu. \\ 6. Lo studente conferma. \\ 7. Il sistema salva il contenuto e lo associa al rilevamento.} \\
 Alternative & {2a. Se il permesso di uso della fotocamera o del microfono è negato, il sistema spiega come concederlo e torna alla scheda. \\ 5a. Lo studente aggiunge scritte o disegni sulla foto; il sistema salva l'annotazione conservando la fotografia originale.} \\
 Postcondizioni & Il contenuto è associato al rilevamento con coordinate, data e autore ed è in coda di sincronizzazione. \\
-\end{tblr}
-\end{center}
+\end{longtblr}
 
 \subsubsection*{UC09 -- Cercare il nome di una specie}
-\begin{center}
-\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small},
+\begin{longtblr}[entry=none,label=none]{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small}, rowsep=1.5pt,
              column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
 Nome caso d'uso & Cercare il nome di una specie \\
 Goal & Lo studente inserisce rapidamente il nome scientifico corretto di una specie, anche senza connessione. \\
@@ -262,12 +245,10 @@ Trigger & Lo studente inizia a digitare nel campo del nome della specie. \\
 Scenario principale & {1. Lo studente digita le prime lettere del nome. \\ 2. Il sistema cerca nelle liste presenti sul dispositivo e mostra i nomi corrispondenti. \\ 3. Lo studente seleziona il nome corretto. \\ 4. Il sistema inserisce il nome nel campo della scheda.} \\
 Alternative & {2a. Se non ci sono corrispondenze, lo studente scrive il nome a mano.} \\
 Postcondizioni & Il nome della specie è inserito nella scheda. \\
-\end{tblr}
-\end{center}
+\end{longtblr}
 
 \subsubsection*{UC10 -- Modificare un rilevamento}
-\begin{center}
-\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small},
+\begin{longtblr}[entry=none,label=none]{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small}, rowsep=1.5pt,
              column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
 Nome caso d'uso & Modificare un rilevamento \\
 Goal & Lo studente corregge o integra un rilevamento già salvato senza perdere le versioni precedenti. \\
@@ -279,12 +260,10 @@ Trigger & Lo studente seleziona un rilevamento dall'elenco e ne chiede la modifi
 Scenario principale & {1. Lo studente apre l'elenco dei rilevamenti del gruppo. \\ 2. Lo studente cerca, filtra o ordina l'elenco. \\ 3. Lo studente seleziona un rilevamento e ne chiede la modifica. \\ 4. Il sistema mostra la scheda con i valori attuali. \\ 5. Lo studente modifica i campi. \\ 6. Lo studente salva. \\ 7. Il sistema controlla i dati come nel passo 7 di UC05. \\ 8. Il sistema salva la nuova versione con autore e data e conserva le versioni precedenti.} \\
 Alternative & {3a. Se il rilevamento è visibile in sola lettura (ad esempio i dati di chimica di un altro gruppo), il sistema non consente la modifica. \\ 8a. Lo studente consulta lo storico delle versioni del rilevamento.} \\
 Postcondizioni & Il rilevamento è aggiornato, le versioni precedenti restano consultabili e la modifica è in coda di sincronizzazione. \\
-\end{tblr}
-\end{center}
+\end{longtblr}
 
 \subsubsection*{UC11 -- Consultare dati, mappa e materiali}
-\begin{center}
-\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small},
+\begin{longtblr}[entry=none,label=none]{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small}, rowsep=1.5pt,
              column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
 Nome caso d'uso & Consultare dati, mappa e materiali \\
 Goal & L'utente consulta i dati raccolti, la mappa e i materiali didattici secondo i propri permessi. \\
@@ -296,12 +275,10 @@ Trigger & L'utente apre la sezione dei dati, della mappa o dei materiali. \\
 Scenario principale & {1. L'utente sceglie cosa consultare: dati raccolti, mappa o materiali didattici. \\ 2. Il sistema mostra i contenuti presenti sul dispositivo consentiti dai permessi dell'utente. \\ 3. L'utente filtra e ordina i dati, oppure seleziona un punto sulla mappa o un materiale. \\ 4. Il sistema mostra i dettagli dell'elemento selezionato.} \\
 Alternative & {2a. Se l'utente richiede i dati degli anni precedenti o lo storico di un luogo, il sistema li scarica dal server se il dispositivo è connesso; altrimenti segnala che serve la connessione. \\ 2b. Se il docente ha disattivato la mappa per l'uscita, il sistema non la mostra allo studente.} \\
 Postcondizioni & L'utente ha visualizzato i contenuti richiesti; i dati non vengono modificati. \\
-\end{tblr}
-\end{center}
+\end{longtblr}
 
 \subsubsection*{UC12 -- Sincronizzare i dati}
-\begin{center}
-\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small},
+\begin{longtblr}[entry=none,label=none]{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small}, rowsep=1.5pt,
              column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
 Nome caso d'uso & Sincronizzare i dati \\
 Goal & I dati del dispositivo e quelli del server vengono allineati. \\
@@ -313,12 +290,10 @@ Trigger & Il dispositivo rileva che la connessione è di nuovo disponibile. \\
 Scenario principale & {1. Il sistema rileva che la connessione è disponibile. \\ 2. Il sistema invia al server i dati in coda di sincronizzazione. \\ 3. Il server registra i dati e ne conferma la ricezione. \\ 4. Il sistema scarica le modifiche fatte dagli altri dispositivi autorizzati. \\ 5. Il sistema aggiorna lo stato dei dati e la data dell'ultima sincronizzazione.} \\
 Alternative & {2a. Se la connessione si interrompe durante l'invio, i dati non confermati restano in coda e la sincronizzazione riprende al successivo ritorno della connessione. \\ 3a. Se lo stesso dato è stato modificato su più dispositivi, il conflitto viene gestito secondo modalità ancora da definire (RF-10).} \\
 Postcondizioni & I dati del dispositivo e del server sono allineati e non risultano dati in attesa. \\
-\end{tblr}
-\end{center}
+\end{longtblr}
 
 \subsubsection*{UC13 -- Generare ed esportare un report}
-\begin{center}
-\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small},
+\begin{longtblr}[entry=none,label=none]{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small}, rowsep=1.5pt,
              column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
 Nome caso d'uso & Generare ed esportare un report \\
 Goal & L'utente ottiene un documento o un file con i dati di un'uscita, da consegnare o analizzare. \\
@@ -330,12 +305,10 @@ Trigger & L'utente seleziona la generazione di un report. \\
 Scenario principale & {1. L'utente seleziona uscita, gruppo e disciplina. \\ 2. L'utente sceglie i contenuti da includere: dati, tabelle, foto e note. \\ 3. Il sistema genera il report e ne mostra l'anteprima. \\ 4. L'utente sceglie il formato di esportazione: PDF per il report, CSV o Excel per i dati. \\ 5. Il sistema crea il file. \\ 6. L'utente salva il file o lo condivide tramite le app del dispositivo.} \\
 Alternative & {3a. Se il dispositivo è offline, il report contiene solo i dati presenti sul dispositivo e la data dell'ultima sincronizzazione. \\ 3b. L'utente chiede una sintesi all'assistente basato su un modello linguistico locale, se disponibile; il sistema propone un testo che l'utente rivede e modifica prima dell'esportazione. \\ 4a. Se l'utente non ha il permesso di esportazione, l'opzione non è disponibile.} \\
 Postcondizioni & Il file è creato nel formato scelto; i dati originali non vengono modificati. \\
-\end{tblr}
-\end{center}
+\end{longtblr}
 
 \subsubsection*{UC14 -- Inviare un SOS}
-\begin{center}
-\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small},
+\begin{longtblr}[entry=none,label=none]{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small}, rowsep=1.5pt,
              column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
 Nome caso d'uso & Inviare un SOS \\
 Goal & Lo studente avvisa rapidamente i docenti in caso di emergenza. \\
@@ -347,12 +320,10 @@ Trigger & Lo studente preme il pulsante SOS. \\
 Scenario principale & {1. Lo studente preme il pulsante SOS. \\ 2. Il sistema chiede la conferma dell'invio. \\ 3. Lo studente conferma. \\ 4. Il sistema legge la posizione dal GPS. \\ 5. Il sistema invia l'avviso con la posizione ai docenti. \\ 6. Il sistema mostra lo stato dell'avviso (in attesa, inviato, ricevuto).} \\
 Alternative & {3a. Se lo studente annulla, nessun avviso viene inviato. \\ 5a. Se la connessione non è disponibile, l'avviso resta in attesa con stato visibile e viene inviato appena possibile.} \\
 Postcondizioni & I docenti hanno ricevuto l'avviso con la posizione, oppure l'avviso è in attesa di invio con stato visibile allo studente. \\
-\end{tblr}
-\end{center}
+\end{longtblr}
 
 \subsubsection*{UC15 -- Comunicare in chat}
-\begin{center}
-\begin{tblr}{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small},
+\begin{longtblr}[entry=none,label=none]{width=\linewidth, colspec={X[1,l]X[3.4,l]}, cells={font=\small}, rowsep=1.5pt,
              column{1}={bg=grigio}, hline{1-Z}={wd=0.5pt, fg=arancio}}
 Nome caso d'uso & Comunicare in chat \\
 Goal & L'utente scambia messaggi con altri utenti. \\
@@ -364,5 +335,4 @@ Trigger & L'utente apre la chat. \\
 Scenario principale & {1. L'utente apre la chat. \\ 2. Il sistema mostra le conversazioni consentite dai permessi dell'utente. \\ 3. L'utente sceglie i destinatari. \\ 4. L'utente scrive e invia il messaggio. \\ 5. Il sistema consegna il messaggio e ne mostra lo stato.} \\
 Alternative & {5a. Se il dispositivo è offline, il messaggio resta in attesa e viene inviato al ritorno della connessione.} \\
 Postcondizioni & Il messaggio è consegnato ai destinatari, oppure è in attesa di invio con stato visibile. \\
-\end{tblr}
-\end{center}
+\end{longtblr}
