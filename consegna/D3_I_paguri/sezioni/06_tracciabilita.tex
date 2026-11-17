@@ -8,72 +8,77 @@
 La matrice di tracciabilità evidenzia le dipendenze ed i possibili conflitti tra i requisiti del sistema.
 Per chiarezza nella lettura, la matrice segue la seguente convenzione:
 un segno x all'incrocio tra la \emph{riga $R_i$} e la \emph{colonna $C_j$} indica che il requisito in riga ($R_i$) dipende dal requisito in colonna ($C_j$).
+La colonna \emph{Tot.} riporta il numero di requisiti da cui dipende il requisito in riga; la riga \emph{Totale} riporta il numero di requisiti che dipendono dal requisito in colonna.
+Le righe dei requisiti funzionali (RF) e non funzionali (RNF) hanno colori diversi.
 
 \vspace{1em}
 \begin{center}
-\begin{adjustbox}{max totalsize={\textwidth}{\textheight}}
+\begin{adjustbox}{max totalsize={\textwidth}{0.9\textheight}}
 \begin{tblr}{
-  colspec = { Q[l,bg=grigio] *{32}{Q[c,8mm]} },
-  cells = {font=\small},
-  row{1} = {bg=grigio},
+  colspec = { Q[l,bg=grigio] *{32}{Q[c,4.6mm]} Q[c,7mm] },
+  cells = {font=\scriptsize, rowsep=0.6pt},
+  row{1} = {bg=grigio, font=\scriptsize\bfseries},
+  row{2-33} = {bg=magnoliaRF},
+  row{34-52} = {bg=platinoRNF},
+  row{Z} = {bg=grigio, font=\scriptsize\bfseries},
+  column{1} = {bg=grigio, font=\scriptsize\bfseries},
+  column{Z} = {bg=grigio, font=\scriptsize\bfseries},
   hlines = {wd=0.5pt, fg=bianco},
   vlines = {wd=0.5pt, fg=bianco},
-  % Colorazione differenziata per le righe (RF in magnolia, RNF in platino)
-  row{2-33} = {bg=magnoliaRF},
-  row{34-52} = {bg=platinoRNF}
 }
-  & RF-01 & RF-02 & RF-03 & RF-04 & RF-05 & RF-06 & RF-07 & RF-08 & RF-09 & RF-10 & RF-11 & RF-12 & RF-13 & RF-14 & RF-15 & RF-16 & RF-17 & RF-18 & RF-19 & RF-20 & RF-21 & RF-22 & RF-23 & RF-24 & RF-25 & RF-26 & RF-27 & RF-28 & RF-29 & RF-30 & RF-31 & RF-32 \\
-RF-01 \\
-RF-02 & x \\
-RF-03 & x & x \\
-RF-04 & x & x \\
-RF-05 & x & x \\
-RF-06 &  & x \\
-RF-07 & x \\
-RF-08 &  &  &  &  &  & x \\
-RF-09 &  &  &  &  &  & x &  & x \\
-RF-10 & x &  & x &  &  &  &  & x \\
-RF-11 &  &  &  &  &  & x \\
-RF-12 & x &  &  &  &  & x \\
-RF-13 &  &  & x &  &  & x &  &  &  & x \\
-RF-14 &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  & x \\
-RF-15 &  & x &  &  &  &  &  &  &  &  &  &  &  & x &  & x \\
-RF-16 \\
-RF-17 &  &  &  &  &  &  & x &  &  &  &  &  &  & x &  & x \\
-RF-18 \\
-RF-19 &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  & x \\
-RF-20 &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  & x \\
-RF-21 &  &  &  &  &  & x \\
-RF-22 &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  & x \\
-RF-23 &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  & x &  &  &  &  & x \\
-RF-24 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x \\
-RF-25 &  & x &  &  &  &  &  & x \\
-RF-26 &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x \\
-RF-27 & x & x & x \\
-RF-28 &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  & x \\
-RF-29 &  &  & x &  &  & x &  &  &  & x &  &  &  &  &  &  &  &  &  &  & x &  & x \\
-RF-30 &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x \\
-RF-31 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  & x \\
-RF-32 &  & x &  &  &  &  &  & x \\
-RNF-01 \\
-RNF-02 &  &  &  &  &  &  &  & x \\
-RNF-03 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x & x \\
-RNF-04 & x &  & x &  &  &  &  &  &  & x \\
-RNF-05 &  &  &  &  &  &  &  &  &  & x \\
-RNF-06 &  &  &  &  &  & x &  & x & x &  &  &  &  & x &  & x &  &  &  &  & x & x & x &  & x & x \\
-RNF-07 &  &  &  &  &  &  &  & x & x \\
-RNF-08 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x \\
-RNF-09 &  &  &  &  &  & x \\
-RNF-10 \\
-RNF-11 & x & x & x & x \\
-RNF-12 & x &  &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x & x \\
-RNF-13 \\
-RNF-14 \\
-RNF-15 \\
-RNF-16 \\
-RNF-17 & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x &  &  &  &  &  & x & x &  &  &  & x \\
-RNF-18 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  & x \\
-RNF-19 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x \\
+  & \rotatebox{90}{RF-01} & \rotatebox{90}{RF-02} & \rotatebox{90}{RF-03} & \rotatebox{90}{RF-04} & \rotatebox{90}{RF-05} & \rotatebox{90}{RF-06} & \rotatebox{90}{RF-07} & \rotatebox{90}{RF-08} & \rotatebox{90}{RF-09} & \rotatebox{90}{RF-10} & \rotatebox{90}{RF-11} & \rotatebox{90}{RF-12} & \rotatebox{90}{RF-13} & \rotatebox{90}{RF-14} & \rotatebox{90}{RF-15} & \rotatebox{90}{RF-16} & \rotatebox{90}{RF-17} & \rotatebox{90}{RF-18} & \rotatebox{90}{RF-19} & \rotatebox{90}{RF-20} & \rotatebox{90}{RF-21} & \rotatebox{90}{RF-22} & \rotatebox{90}{RF-23} & \rotatebox{90}{RF-24} & \rotatebox{90}{RF-25} & \rotatebox{90}{RF-26} & \rotatebox{90}{RF-27} & \rotatebox{90}{RF-28} & \rotatebox{90}{RF-29} & \rotatebox{90}{RF-30} & \rotatebox{90}{RF-31} & \rotatebox{90}{RF-32} & \rotatebox{90}{Tot.} \\
+RF-01 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 0 \\
+RF-02 & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 1 \\
+RF-03 & x & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 2 \\
+RF-04 & x & x & x &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 4 \\
+RF-05 & x & x & x &  &  &  &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 4 \\
+RF-06 &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 1 \\
+RF-07 & x &  &  & x &  & x &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 4 \\
+RF-08 &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 1 \\
+RF-09 &  &  &  &  &  & x &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 2 \\
+RF-10 & x &  & x &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 3 \\
+RF-11 &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 1 \\
+RF-12 & x &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 2 \\
+RF-13 &  &  & x &  &  & x &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 3 \\
+RF-14 &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 2 \\
+RF-15 &  & x &  &  &  &  &  &  &  &  &  &  &  & x &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 3 \\
+RF-16 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 0 \\
+RF-17 &  &  &  &  &  &  & x &  &  &  &  &  &  & x &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 3 \\
+RF-18 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 0 \\
+RF-19 &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 2 \\
+RF-20 &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 2 \\
+RF-21 &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 1 \\
+RF-22 &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 2 \\
+RF-23 &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  & x &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  & 3 \\
+RF-24 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  & 1 \\
+RF-25 &  & x &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 2 \\
+RF-26 &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  & 2 \\
+RF-27 & x & x & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 3 \\
+RF-28 &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 2 \\
+RF-29 &  &  & x &  &  & x &  &  &  & x &  &  &  &  &  &  &  &  &  &  & x &  & x &  &  &  &  &  &  &  &  &  & 5 \\
+RF-30 &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x &  &  &  & 2 \\
+RF-31 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  & x &  &  &  & 2 \\
+RF-32 &  & x &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 2 \\
+RNF-01 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 0 \\
+RNF-02 &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 1 \\
+RNF-03 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x & x &  &  &  &  &  &  & 2 \\
+RNF-04 & x &  & x &  &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 3 \\
+RNF-05 &  &  &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 1 \\
+RNF-06 &  &  &  &  &  & x &  & x & x &  &  &  &  & x &  & x &  &  &  &  & x & x & x &  & x & x &  &  &  &  &  & x & 11 \\
+RNF-07 &  &  &  &  &  &  &  & x & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 2 \\
+RNF-08 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 1 \\
+RNF-09 &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 1 \\
+RNF-10 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 0 \\
+RNF-11 & x & x & x & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 4 \\
+RNF-12 & x &  &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x & x &  &  &  &  & 4 \\
+RNF-13 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 0 \\
+RNF-14 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 0 \\
+RNF-15 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 0 \\
+RNF-16 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 0 \\
+RNF-17 & x &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x &  &  &  &  &  & x & x &  &  &  & x &  &  &  &  & x & 6 \\
+RNF-18 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x &  &  &  &  &  &  &  &  &  &  &  & x &  &  &  &  & 2 \\
+RNF-19 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & x &  &  & 1 \\
+Totale & 12 & 10 & 8 & 2 & 0 & 16 & 1 & 9 & 2 & 6 & 0 & 0 & 0 & 4 & 0 & 11 & 0 & 1 & 0 & 0 & 4 & 2 & 4 & 0 & 3 & 2 & 2 & 2 & 2 & 1 & 0 & 2 & 106 \\
 \end{tblr}
 \end{adjustbox}
 \end{center}
