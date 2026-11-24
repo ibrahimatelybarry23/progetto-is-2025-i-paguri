@@ -47,6 +47,8 @@ Il testing black-box verifica il comportamento dell'app a partire dai requisiti,
     \item \textbf{Testing combinatorio (pairwise):} si usa solo dove il risultato dipende da più parametri insieme: ruolo (studente o docente), stato della rete (offline, rete cellulare, Wi-Fi) e disciplina (quattro). Le 24 combinazioni si riducono scegliendo i casi in modo che ogni coppia di valori compaia almeno una volta. Si applica ai permessi per disciplina (RF-04) e alla sincronizzazione (RF-10).
 \end{itemize}
 
+Per le funzioni del server le richieste si inviano anche direttamente con Postman, senza passare dall'app, ad esempio per provare la sincronizzazione (RF-10) e i permessi (RNF-11); il carico sul server si simula con JMeter (RNF-04).
+
 \subsection{Testing white-box}
 
 Il testing white-box progetta i test a partire dal codice Java dell'app (RNF-14). Si applica alle classi con più logica: controllo dei dati inseriti (RF-11), versionamento (RF-12), coda di sincronizzazione (RF-10), regole di visibilità per ruolo, gruppo e disciplina (RF-03, RF-04) e autocompletamento (RF-26). I test sono test di unità JUnit e la copertura si misura con JaCoCo in Android Studio. I criteri adottati sono:
@@ -88,9 +90,9 @@ Ogni RNF del D3 si verifica misurando la sua metrica e confrontandola con la sog
 Tipo di test & Requisiti & Metodo di verifica \\
 Prestazioni e scalabilità & da RNF-01 a RNF-05 & Sull'app si misurano i tempi di avvio, di salvataggio e di comparsa dei suggerimenti (in modalità aereo, con almeno 5.000 specie) e il tempo di sincronizzazione al ritorno della connessione. Sul server, test di carico con JMeter con almeno 70 utenti collegati insieme, misurando i tempi di risposta. \\
 Affidabilità e robustezza & da RNF-06 a RNF-08 & Tutte le funzioni di raccolta a priorità Alta provate in modalità aereo; chiusura forzata dell'app e spegnimento del dispositivo durante il salvataggio, verificando che nessun dato vada perso; prova di autonomia con GPS attivo per una giornata di uso tipico. \\
-Usabilità & RNF-09, RNF-10 & Nuovi utenti, dopo il tutorial, registrano un rilevamento: si misurano tempo, completamento senza aiuto ed errori commessi. Leggibilità dello schermo provata all'aperto, alla luce diretta del sole. \\
-Sicurezza & RNF-11, RNF-12, RNF-17, RNF-18 & Tentativi di accesso con credenziali errate e a dati di altri gruppi, ruoli o discipline; verifica che le comunicazioni usino HTTPS, che al primo accesso compaiano informativa e richiesta di consenso, e che la posizione sia salvata solo durante un rilevamento o un SOS. \\
+Usabilità & RNF-09, RNF-10 & Nuovi utenti, dopo il tutorial, registrano un rilevamento: si misurano tempo, completamento senza aiuto ed errori commessi e si raccoglie un questionario di soddisfazione. Una valutazione euristica e la prova di leggibilità dello schermo all'aperto, alla luce diretta del sole, verificano RNF-10. \\
+Sicurezza & RNF-11, RNF-12, RNF-17, RNF-18 & Tentativi di accesso con credenziali errate e a dati di altri gruppi, ruoli o discipline, anche con richieste inviate al server con Postman con un ruolo errato; analisi statica del codice e simulazione dell'intercettazione del traffico per verificare che le comunicazioni usino HTTPS, che al primo accesso compaiano informativa e richiesta di consenso, e che la posizione sia salvata solo durante un rilevamento o un SOS. \\
 Interoperabilità & RNF-13, RNF-19 & Test di sistema su dispositivi ed emulatori con diverse versioni di Android (da Android 8), dimensioni dello schermo e sensori disponibili; apertura dei file esportati (CSV, PDF) con i programmi usati dai docenti. \\
-Processo & RNF-14, RNF-15 & Verificati con l'inspection e con Lint. \\
+Processo & da RNF-14 a RNF-16 & RNF-14 e RNF-15 con la verifica statica (inspection e Lint); RNF-16 con un controllo documentale di date e formato di ogni consegna. \\
 \end{longtblr}
 

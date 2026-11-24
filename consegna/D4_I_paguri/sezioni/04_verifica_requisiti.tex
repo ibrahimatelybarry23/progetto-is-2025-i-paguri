@@ -1,8 +1,85 @@
 \section{Modalità di verifica dei requisiti}
-% Punto 3 del Piano di Testing: come viene verificato ogni singolo requisito.
+
+Ogni requisito del Documento dei Requisiti (D3) è verificato da uno o più casi di test (\texttt{TC-xx}) per i requisiti funzionali e da un test con una soglia di superamento per i requisiti non funzionali. I casi di test sono descritti nel formato \emph{condizione, allora esito atteso}; la loro descrizione completa, con precondizioni, input e postcondizioni, è nella Sezione~5. La priorità del requisito (Alta o Media) è quella usata per scegliere i test di regressione (Sezione~2).
 
 \subsection{Requisiti funzionali}
-% TODO: tabella RF -> tecnica di verifica -> casi di test (TC) che lo coprono.
+
+I requisiti RF-17, RF-20, RF-24, RF-27 e RF-31 sono possibili evoluzioni del sistema e non sono verificati in questo piano.
+
+\begin{longtblr}[
+  label=none,
+  entry=none
+]{
+  width=\linewidth,
+  rowhead=1,
+  colspec={X[0.45,l] X[0.45,l] X[5,l]},
+  cells={font=\small},
+  row{1}={bg=arancio, font=\small\bfseries},
+  hline{2-Z}={wd=0.5pt, fg=arancio}
+}
+ID & Priorità & Casi di test \\
+RF-01 & Alta & {\textbf{TC-01} email registrata di uno studente e password corretta, allora la sessione è aperta per l'area studente. \\ \textbf{TC-02} email registrata di un docente e password corretta, allora la sessione è aperta per l'area docente. \\ \textbf{TC-03} email non registrata o password errata, allora viene mostrato un messaggio di errore all'utente non autenticato. \\ \textbf{TC-04} campi vuoti o email non valida, allora viene mostrato un messaggio di errore all'utente non autenticato. \\ \textbf{TC-05} dopo TC-01, chiusura e riapertura dell'app senza rete, allora la sessione è ancora attiva.} \\
+RF-02 & Alta & {\textbf{TC-06} utente con ruolo studente, allora vede solo il menu e le funzioni dello studente. \\ \textbf{TC-07} utente con ruolo docente, allora vede solo l'area docente.} \\
+RF-03 & Alta & {\textbf{TC-08} il docente inserisce nome o id del gruppo, disciplina e uno o più studenti, allora il gruppo viene creato e i membri lo vedono dopo la sincronizzazione. \\ \textbf{TC-09} nome, id o disciplina mancanti, allora il gruppo non viene creato e viene mostrato un messaggio di errore. \\ \textbf{TC-10} il docente modifica la composizione di un gruppo esistente, allora la nuova composizione è salvata e i dati già raccolti dal gruppo restano invariati. \\ \textbf{TC-11} uno studente di un altro gruppo prova a modificare i dati del gruppo, allora la modifica viene rifiutata.} \\
+RF-04 & Alta & {\textbf{TC-12} studente che apre i dati di una disciplina diversa dalla chimica, allora vede e può modificare solo i dati del proprio gruppo e non vede quelli degli altri gruppi. \\ \textbf{TC-13} studente che apre i dati di chimica, allora vede i dati degli altri gruppi in sola lettura e la modifica viene rifiutata. \\ \textbf{TC-14} docente che apre i dati, allora vede i dati di tutti i gruppi.} \\
+RF-05 & Alta & {\textbf{TC-15} il docente crea un'uscita con i siti sulla mappa e la assegna a un gruppo, allora l'uscita viene salvata. \\ \textbf{TC-16} dopo la sincronizzazione, uno studente del gruppo assegnato e uno di un gruppo non assegnato, allora solo il primo vede l'uscita. \\ \textbf{TC-17} dispositivo senza rete, allora l'itinerario assegnato è comunque consultabile.} \\
+RF-06 & Alta & {\textbf{TC-18} apertura della scheda di ciascuna disciplina (botanica, biologia, geologia, chimica), allora compaiono i campi preimpostati di quella disciplina. \\ \textbf{TC-19} compilazione della scheda con valori scelti dai menu e salvataggio, allora la scheda viene salvata con i valori scelti.} \\
+RF-07 & Alta & {\textbf{TC-20} utente con permessi che seleziona un anno precedente, un'uscita o una disciplina, allora vede i dati consentiti e questi non vengono modificati. \\ \textbf{TC-21} dati non consentiti dalle regole scelte dal docente, allora non sono visibili.} \\
+RF-08 & Alta & {\textbf{TC-22} dispositivo in modalità aereo, compilazione e salvataggio di una scheda con un allegato, allora la scheda è salvata sul dispositivo. \\ \textbf{TC-23} riavvio dell'app senza rete, allora i dati salvati sono ancora presenti.} \\
+RF-09 & Alta & {\textbf{TC-24} scheda incompleta, allora viene salvata come bozza. \\ \textbf{TC-25} chiusura e riapertura dell'app, apertura della bozza e suo completamento, allora la scheda completa viene salvata.} \\
+RF-10 & Alta & {\textbf{TC-26} dati locali da inviare e rete presente, allora il server viene aggiornato, i dati sono visibili al gruppo e non risultano più dati in attesa. \\ \textbf{TC-27} modifiche fatte da altri dispositivi presenti sul server, allora vengono scaricate e si aggiornano lo stato e la data dell'ultima sincronizzazione. \\ \textbf{TC-28} rete interrotta durante la sincronizzazione, allora i dati restano in coda e l'invio viene ritentato, senza perdite né duplicati.} \\
+RF-11 & Media & {\textbf{TC-29} scheda con campi obbligatori presenti, formato e unità validi, allora viene salvata come definitiva. \\ \textbf{TC-30} campo obbligatorio mancante, oppure formato o unità errati, allora i campi errati vengono evidenziati e la scheda resta bozza. \\ \textbf{TC-31} valore numerico sul limite dell'intervallo ammesso e valore appena fuori, allora il primo viene accettato e il secondo rifiutato.} \\
+RF-12 & Alta & {\textbf{TC-32} utente con permesso che modifica un rilevamento già salvato, allora viene creata una nuova versione. \\ \textbf{TC-33} apertura dello storico, allora si vedono le versioni precedenti con autore, data e ora. \\ \textbf{TC-34} utente senza permesso che prova a modificare, allora la modifica non è consentita.} \\
+RF-13 & Media & {\textbf{TC-35} ricerca per testo presente nei dati e per testo assente, allora nel primo caso compaiono solo i risultati corrispondenti e nel secondo la tabella è vuota. \\ \textbf{TC-36} filtri singoli e coppie di filtri (pairwise tra disciplina, gruppo, data e stop), allora la tabella mostra solo le righe che li soddisfano. \\ \textbf{TC-37} ordinamento crescente e decrescente per una colonna, allora le righe sono ordinate di conseguenza.} \\
+RF-14 & Alta & {\textbf{TC-38} prima dell'uscita e con rete, download della mappa dell'area, allora la cartografia viene memorizzata sul dispositivo. \\ \textbf{TC-39} dispositivo senza rete e area già scaricata, allora mappa e punti di rilevamento sono consultabili.} \\
+RF-15 & Media & {\textbf{TC-40} il docente configura area, livelli e punti della mappa di un'uscita, allora la configurazione viene salvata. \\ \textbf{TC-41} mappa disattivata e poi attivata dal docente, allora gli studenti la vedono solo quando è attiva. \\ \textbf{TC-42} aiuti GPS limitati dal docente, allora lo studente vede la mappa solo con le limitazioni impostate.} \\
+RF-16 & Alta & {\textbf{TC-43} GPS attivo e acquisizione del punto, allora il punto viene salvato con coordinate, data, gruppo e osservazioni ed è visibile sulla mappa. \\ \textbf{TC-44} coordinate inserite a mano e valide, allora il punto viene salvato. \\ \textbf{TC-45} coordinate sui valori limite (latitudine $\pm$90, longitudine $\pm$180) e appena oltre (ad esempio 90,1 e 180,1), allora le prime sono accettate e le seconde rifiutate. \\ \textbf{TC-46} GPS spento in modalità automatica oppure modalità non consentita dal docente, allora il punto non viene salvato e viene mostrato un messaggio.} \\
+RF-18 & Media & {\textbf{TC-47} apertura della bussola con sensori presenti, allora viene mostrato l'orientamento in tempo reale e la misura si può salvare nella scheda. \\ \textbf{TC-48} apertura del clinometro con sensori presenti, allora viene mostrata l'inclinazione in tempo reale e la misura si può salvare nella scheda. \\ \textbf{TC-49} sensori assenti, allora lo strumento non è disponibile e resta l'inserimento manuale.} \\
+RF-19 & Media & {\textbf{TC-50} inserimento manuale di direzione e inclinazione con valori validi e sui limiti (direzione 0--360°, inclinazione 0--90°) e con valori fuori intervallo, allora i primi vengono salvati e i secondi rifiutati. \\ \textbf{TC-51} acquisizione appoggiando il dispositivo sulla superficie, allora direzione e inclinazione sono acquisite dai sensori. \\ \textbf{TC-52} giacitura salvata, allora la scheda indica se la misura è stata inserita a mano o acquisita dai sensori.} \\
+RF-21 & Alta & {\textbf{TC-53} nota testuale breve, allora la nota viene salvata nel rilevamento ed è visibile dopo il riavvio dell'app. \\ \textbf{TC-54} nota vuota e nota molto lunga, allora nel primo caso non viene creata nessuna nota e nel secondo viene salvata per intero.} \\
+RF-22 & Alta & {\textbf{TC-55} permesso del microfono concesso e registrazione dallo stop, allora la nota vocale viene collegata alle coordinate GPS dello stop. \\ \textbf{TC-56} riascolto della nota dalla scheda, anche senza rete, allora l'audio viene riprodotto. \\ \textbf{TC-57} permesso del microfono negato, allora la registrazione non parte e viene mostrato un messaggio.} \\
+RF-23 & Alta & {\textbf{TC-58} scatto con anteprima confermata, allora la foto viene collegata al rilevamento, alle coordinate e alle note. \\ \textbf{TC-59} anteprima scartata, allora la foto non viene salvata e si può scattare di nuovo. \\ \textbf{TC-60} permesso della fotocamera negato, allora viene mostrato un messaggio e non viene scattata nessuna foto.} \\
+RF-25 & Alta & {\textbf{TC-61} il docente importa un file valido e sceglie le liste per la giornata, allora le liste vengono importate e associate all'uscita. \\ \textbf{TC-62} file non valido, allora viene mostrato un errore e non viene importato nulla. \\ \textbf{TC-63} liste selezionate dal docente, allora sono disponibili sui dispositivi degli studenti anche senza rete.} \\
+RF-26 & Alta & {\textbf{TC-64} digitazione di un prefisso (1 carattere o più caratteri, maiuscole o minuscole) con corrispondenze nelle liste, allora compaiono i suggerimenti coerenti con il testo digitato. \\ \textbf{TC-65} scelta di un suggerimento, allora il nome viene inserito nel campo della scheda. \\ \textbf{TC-66} nessuna corrispondenza nelle liste, allora il nome si può scrivere a mano; senza rete il comportamento è lo stesso.} \\
+RF-28 & Media & {\textbf{TC-67} pressione del pulsante SOS con rete presente, allora i docenti ricevono l'avviso con la posizione e lo stato passa da in attesa a inviato a ricevuto. \\ \textbf{TC-68} pressione del pulsante SOS senza rete, allora l'avviso resta in attesa e viene inviato appena torna la connessione.} \\
+RF-29 & Media & {\textbf{TC-69} selezione di uscita, gruppo e disciplina con permessi sui dati e rete presente, allora viene generato un report con dati, tabelle, foto e annotazioni. \\ \textbf{TC-70} stessa selezione senza rete, allora il report contiene solo i dati locali e la data dell'ultima sincronizzazione. \\ \textbf{TC-71} selezione che include dati non consentiti dai permessi, allora quei dati non compaiono nel report.} \\
+RF-30 & Alta & {\textbf{TC-72} esportazione del report in PDF, allora il file viene creato. \\ \textbf{TC-73} esportazione dei dati in CSV ed Excel, allora i file vengono creati. \\ \textbf{TC-74} condivisione del file tramite le app del dispositivo, e tentativo di esportare da parte di un utente senza permesso, allora il file viene condiviso nel primo caso e l'esportazione viene rifiutata nel secondo.} \\
+RF-32 & Alta & {\textbf{TC-75} il docente carica una dispensa in PDF, allora il materiale è disponibile agli studenti. \\ \textbf{TC-76} lo studente scarica il PDF e poi resta senza rete, allora il PDF è consultabile.} \\
+\end{longtblr}
 
 \subsection{Requisiti non funzionali}
-% TODO: tabella RNF -> metrica e soglia del D3 -> tipo di test -> strumento.
+
+Per ogni requisito si indicano la soglia del D3 (Sezione~4), il tipo di test e il criterio con cui il test è superato.
+
+\begin{longtblr}[
+  label=none,
+  entry=none
+]{
+  width=\linewidth,
+  rowhead=1,
+  colspec={X[0.5,l] X[1,l] X[4.5,l]},
+  cells={font=\small},
+  row{1}={bg=arancio, font=\small\bfseries},
+  hline{2-Z}={wd=0.5pt, fg=arancio}
+}
+ID & Soglia & Test e criterio di superamento \\
+RNF-01 & $\leq$ 5 secondi & Test di prestazioni sul tempo di risposta: si misura più volte il tempo tra l'apertura dell'app e la visualizzazione della schermata iniziale. Superato se ogni misura è entro 5 secondi. \\
+RNF-02 & $\leq$ 2 secondi & Test di prestazioni sul tempo di risposta: si misura più volte il tempo tra il tocco del pulsante ``Salva'' e la conferma di avvenuto salvataggio. Superato se ogni misura è entro 2 secondi. \\
+RNF-03 & $\leq$ 1 secondo & Test di prestazioni sul tempo di risposta: con una lista di almeno 5.000 specie e il dispositivo senza rete si misura il tempo di comparsa dei suggerimenti durante la digitazione. Superato se ogni misura è entro 1 secondo. \\
+RNF-04 & $\geq$ 70 utenti & Test di carico e di scalabilità con JMeter: si simulano 70 utenti collegati contemporaneamente e si misurano i tempi di risposta. Superato se i tempi restano entro le soglie di RNF-01, RNF-02 e RNF-05. \\
+RNF-05 & $\leq$ 5 minuti & Test di prestazioni con un carico di dati tipico di una giornata di uscita: si ripristina la connessione e si misura il tempo fino al completamento della sincronizzazione. Superato se non supera 5 minuti. \\
+RNF-06 & 100\% & Test di affidabilità in condizioni d'uso diverse: si eseguono con il dispositivo in modalità aereo i casi di test delle funzioni di raccolta dati a priorità Alta. Superato se tutti i casi di test risultano superati. \\
+RNF-07 & 0 dati persi & Test di robustezza in condizioni estreme: si forza la chiusura dell'app e lo spegnimento del dispositivo prima, durante e dopo il salvataggio. Superato se alla riapertura rilevamenti e bozze salvati sono tutti presenti. \\
+RNF-08 & Intera giornata di uscita & Test di affidabilità nel tempo: si usa l'app in modo tipico con il GPS attivo per una giornata di uscita, monitorando il livello di batteria. Superato se il dispositivo arriva alla fine della giornata. \\
+RNF-09 & Senza assistenza dopo il tutorial & Test di usabilità con utenti: nuovi utenti seguono il tutorial e registrano un rilevamento, misurando tempo di completamento, tasso di successo ed errori, e compilano un questionario di soddisfazione. Superato se completano il compito senza assistenza. \\
+RNF-10 & Testi leggibili alla luce diretta del sole & Test di usabilità con utenti e valutazione euristica: più utenti leggono i testi dell'app all'aperto con il dispositivo alla massima luminosità. Superato se tutti i testi risultano leggibili. \\
+RNF-11 & 0 accessi non consentiti & Test di sicurezza su autenticazione e autorizzazione: con un utente di un gruppo si tenta di accedere ai dati di un altro gruppo e alle funzioni del docente, e con Postman si inviano richieste al server con ruolo errato. Superato se nessun accesso non consentito va a buon fine. \\
+RNF-12 & 100\% & Test di sicurezza con analisi statica del codice e simulazione di intercettazione del traffico: si controlla che tutte le comunicazioni con il server siano protette. Superato se nessuna comunicazione risulta in chiaro. \\
+RNF-13 & Android 8 & Test di interoperabilità su versioni e risoluzioni diverse: si eseguono i casi di test su dispositivi o emulatori con Android 8 e con una versione recente e con schermi di dimensioni diverse. Superato se l'app funziona su tutte le configurazioni provate. \\
+RNF-14 & 100\% del codice in Java & Verifica statica: si analizzano i listati e la struttura del progetto Android Studio. Superata se non ci sono file in altri linguaggi. \\
+RNF-15 & 0 violazioni & Verifica statica con inspection: un gruppo di almeno 4 persone (autore, lettore, ispettore e moderatore) esamina il codice con una checklist delle convenzioni Java. Superata se non vengono rilevate violazioni. \\
+RNF-16 & 100\% & Controllo documentale: per ogni deliverable si confronta la data di consegna con la scadenza del calendario e si controlla il formato prima dell'invio. Superato se tutti i deliverable sono consegnati in tempo e nel formato richiesto. \\
+RNF-17 & Conformità verificata prima del rilascio & Test black-box e verifica statica: al primo accesso si prova sia a dare sia a non dare il consenso e si rivedono i dati personali raccolti. Superata se informativa e richiesta di consenso compaiono, senza consenso non si procede e i dati raccolti sono solo quelli necessari. \\
+RNF-18 & 0 posizioni salvate fuori dagli eventi & Test black-box: si prova la sola visualizzazione della mappa, l'apertura dell'app, il salvataggio di un rilevamento e l'invio di un SOS, e si controllano le posizioni salvate. Superato se vengono salvate solo quelle degli ultimi due eventi. \\
+RNF-19 & Formati standard apribili dai programmi dei docenti & Test di interoperabilità: si esportano i dati e si aprono i file nei programmi usati dai docenti. Superato se i file si aprono e il contenuto è corretto. \\
+\end{longtblr}
