@@ -2,3 +2,44 @@
 % Punto 6 del Piano di Testing.
 % TODO: dispositivi Android ed emulatori (versioni minime, RNF-13), Android Studio,
 % framework di test (es. JUnit, Espresso), strumenti per misure e carico.
+L'ambiente di test comprende dispositivi Android reali ed emulatori, un server di prova con dati sintetici per la sincronizzazione, e gli strumenti per misurare le prestazioni, simulare il carico e controllare il codice senza eseguirlo.
+\subsection{Requisiti hardware}
+
+\definecolor{grigio}{HTML}{E0E0E0}
+
+\begin{longtblr}[entry=none,label=none]{width=\linewidth,
+  colspec={X[1.2,l] X[2.2,l] X[2.4,l]},
+  rowhead=1, cells={font=\small},
+  row{1}={bg=grigio, font=\small\bfseries},
+  hline{2-Z}={wd=0.5pt, fg=grigio}}
+Risorsa & Caratteristiche & Uso \\
+Smartphone Android fisici & Dispositivi dei componenti del gruppo, tra cui tre con Android 16 o 17. Tutti con schermi di dimensioni diverse, muniti di GPS, magnetometro, accelerometro/giroscopio, microfono e fotocamera funzionanti. % TODO: modelli reali del team
+ & Test di sistema e di integrazione con sensori reali (RF-16, RF-18, RF-19, RF-22, RF-23), prova di autonomia con GPS attivo (RNF-08), leggibilità alla luce del sole (RNF-10), compatibilità (RNF-13). \\
+Emulatori Android (AVD) & Almeno due configurazioni: Android 8 (API 26) e una versione recente, con schermi di dimensioni diverse. & Test di unità strumentati e di integrazione, test di compatibilità (RNF-13). Non sostituiscono i dispositivi reali per batteria, sensori e luce solare. \\
+PC di sviluppo & Computer dei componenti del gruppo, sia con sistema operativo Windows che con macOS, che eseguono Android Studio, emulatori e JMeter; memoria e CPU sufficienti per l'emulatore. % TODO: specifiche dei PC del team
+ & Sviluppo, esecuzione dei test e generazione dei report. \\
+Server di prova & Server raggiungibile via HTTPS con dati di prova: lista di almeno 5.000 specie, account di studenti e docenti, gruppi e discipline. % TODO: server reale
+ & Test di sincronizzazione (RF-10), permessi (RNF-11), comunicazioni protette (RNF-12), test di carico con almeno 70 utenti (RNF-04). \\
+Rete & Wi-Fi, rete cellulare e modalità aereo. & Test con e senza rete (RF-08, RNF-06) e sincronizzazione al ritorno della connessione (RNF-05). \\
+\end{longtblr}
+
+\subsection{Requisiti software}
+
+\begin{longtblr}[entry=none,label=none]{width=\linewidth,
+  colspec={X[1.2,l] X[2.2,l] X[2.4,l]},
+  rowhead=1, cells={font=\small},
+  row{1}={bg=grigio, font=\small\bfseries},
+  hline{2-Z}={wd=0.5pt, fg=grigio}}
+Strumento & Uso & Riferimento \\
+Android Studio e Gradle & Sviluppo in Java, esecuzione dei test e generazione dei report; analisi statica con Lint. & RNF-14, RNF-15 \\
+JUnit & Test di unità (white-box) delle classi con più logica. & Sezione~2 \\
+Espresso
+ & Test di integrazione e di interfaccia su emulatore e dispositivo fisico. & Sezione~2 \\
+JaCoCo & Misura della copertura delle istruzioni e delle decisioni (rami). & Sezione~2 \\
+Postman & Richieste dirette al server per provare sincronizzazione e permessi. & RF-10, RNF-11 \\
+JMeter & Test di carico con almeno 70 utenti collegati insieme. & RNF-04 \\
+Network Inspector di Android Studio
+ & Verifica che le richieste dell'app verso il server usino HTTPS. & RNF-12 \\
+Git e GitHub & Repository, pull request, issue di segnalazione dei difetti e verbali. & Sezione~7 \\
+\end{longtblr}
+
