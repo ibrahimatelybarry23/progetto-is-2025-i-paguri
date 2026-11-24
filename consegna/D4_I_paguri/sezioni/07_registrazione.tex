@@ -1,4 +1,24 @@
 \section{Procedure di registrazione dei test}
-% Punto 5 del Piano di Testing.
-% TODO: dove e come si registrano esecuzione ed esito dei test (es. tabella dei TC,
-% issue su GitHub per i malfunzionamenti trovati, report dei test automatici).
+
+Il team registra ogni esecuzione dei test in modo che sia ripetibile e che ogni malfunzionamento trovato sia seguito fino alla correzione. Il materiale è conservato nel repository GitHub del progetto, già usato per codice e documentazione (D2, Sezione~4).
+
+\subsection{Registrazione dei casi di test}
+
+I casi di test sono registrati nella tabella della Sezione~5, che fa da registro dei test. Ogni caso ha un identificativo univoco (\texttt{TC-xx}), il requisito o il caso d'uso che verifica (per mantenere la tracciabilità con il D3), precondizioni, input, output e postcondizioni attese, e priorità. A ogni esecuzione si compilano le colonne \emph{Output riscontrato} ed \emph{Esito}.
+
+Per ogni sessione di test si indicano, sopra la tabella, la data, chi ha eseguito i test, la versione dell'app (commit) e l'ambiente: dispositivo o emulatore, versione di Android e stato della rete (offline, rete cellulare, Wi-Fi).
+
+L'esito è \textbf{positivo} se il test ha avuto successo, cioè ha rilevato un malfunzionamento perché almeno un'asserzione non è rispettata; è \textbf{negativo} se output e postcondizioni riscontrati coincidono con quelli attesi. Quando un test viene ripetuto dopo una correzione, la riga viene aggiornata e lo storico resta nella cronologia dei commit del repository.
+
+\subsection{Registrazione dei test automatici}
+
+I test di unità e di integrazione producono un report di Android Studio e Gradle con i test eseguiti, superati e falliti, a cui si aggiunge il report di copertura di JaCoCo. I report si generano prima di ogni pull request verso il ramo principale, che si approva solo se tutti i test automatici sono superati.
+
+\subsection{Registrazione dei test non funzionali e della verifica statica}
+
+Per il test di carico si conservano i report di JMeter. Per quello di usabilità si registrano, in forma anonima, il tempo di completamento, il completamento senza aiuto e gli errori di ogni partecipante.
+Durante l'inspection e il walk-through il moderatore annota in un verbale il codice esaminato, la versione, i partecipanti e i difetti trovati, con la voce della checklist a cui si riferiscono. Il verbale è conservato nel repository.
+
+\subsection{Segnalazione dei malfunzionamenti}
+
+Ogni malfunzionamento trovato, da un test o dalla verifica statica, è aperto come \emph{issue} su GitHub con l'etichetta \texttt{bug}. La issue riporta il caso di test e il requisito coinvolti, i passi per riprodurre il problema, l'output atteso e quello riscontrato, l'ambiente e la gravità (bloccante, alta, media, bassa). La issue è assegnata a chi sviluppa il modulo, che corregge il difetto in un ramo dedicato e apre una pull request collegata. Dopo la correzione si riesegue il caso di test e i test di regressione (Sezione~2): se l'esito è negativo, cioè il malfunzionamento non si presenta più, la issue viene chiusa.

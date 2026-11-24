@@ -1,26 +1,96 @@
 \section{Tecniche di testing}
-% Punto 1 del Piano di Testing: le tecniche di testing che si vogliono usare.
+
+Il team sceglie le tecniche di testing in base al Documento dei Requisiti (D3): i requisiti funzionali (da \texttt{RF-01} a \texttt{RF-32}) e i casi d'uso (da UC01 a UC15) guidano i test funzionali, mentre i requisiti non funzionali (da \texttt{RNF-01} a \texttt{RNF-19}) indicano quali proprietà misurare e con quali soglie. Un test ha successo se fa emergere un malfunzionamento: per questo le tecniche sono concentrate sulle parti dell'app dove un errore è più probabile o più grave, cioè il lavoro offline, la sincronizzazione, i controlli sui dati inseriti e i permessi.
+
+La tabella riassume le tecniche adottate e dove si applicano.
+\begin{longtblr}[
+  label=none,
+  entry=none
+]{
+  width=\linewidth,
+  rowhead=1,
+  colspec={X[1.3,l] X[0.8,l] X[2.4,l]},
+  cells={font=\small},
+  row{1}={bg=arancio, font=\small\bfseries},
+  hline{2-Z}={wd=0.5pt, fg=arancio}
+}
+Tecnica & Uso & Dove si applica \\
+Classi di equivalenza e valori limite & Sempre & Tutti gli RF con dati in ingresso, in particolare RF-01, RF-11, RF-19, RF-26 \\
+Testing combinatorio (pairwise) & Mirato & Funzioni che dipendono da ruolo, rete e disciplina: RF-04, RF-10 \\
+Copertura delle istruzioni e delle decisioni & Sempre & Classi della logica dell'app (validazione, versioni, sincronizzazione, permessi) \\
+Copertura delle condizioni & Mirato & Regole di visibilità con condizioni composte (RF-04, RNF-11) \\
+Copertura dei cammini & Mirato & Pochi metodi critici: gestione dei conflitti di sincronizzazione \\
+Test di regressione & Sempre & Prima di ogni pull request e di ogni rilascio \\
+Inspection & Sempre & Tutto il codice Java, prima dell'integrazione nel ramo principale \\
+Walk-through & Mirato & Sincronizzazione, permessi, salvataggio offline \\
+Test non funzionali & Per requisito & Gli RNF del D3, con le loro soglie \\
+\end{longtblr}
+
+\subsection{Livelli di test}
+
+Seguendo il modello a V, a ogni fase dello sviluppo corrisponde un livello di test, e i test di accettazione si ricavano già dal D3.
+
+\begin{itemize}
+    \item \textbf{Test di unità:} su singole classi e metodi, con JUnit, scritti da chi sviluppa la funzione durante lo sviluppo (D2, Sezione~4).
+    \item \textbf{Test di integrazione:} verificano che i moduli collaborino, ad esempio database locale e coda di sincronizzazione, oppure fotocamera, GPS e scheda del rilevamento (RF-16, RF-23). Sono test strumentati Android, eseguiti su emulatore e su dispositivo fisico.
+    \item \textbf{Test di sistema:} l'app completa su dispositivi reali, con rete e in modalità aereo, simulando un'uscita dall'accesso fino all'esportazione dei dati.
+    \item \textbf{Test di accettazione:} con alcuni docenti e studenti del Laboratorio in Campo, sugli scenari dei casi d'uso del D3.
+\end{itemize}
 
 \subsection{Testing black-box}
-% TODO: test funzionale basato sui requisiti del D3 e sui casi d'uso UC01--UC15.
-% Tecniche: partizione in classi di equivalenza (equivalence partitioning),
-% analisi dei valori limite (boundary value analysis), eventualmente pairwise.
+
+Il testing black-box verifica il comportamento dell'app a partire dai requisiti, senza guardare il codice. È la tecnica principale per gli RF: ogni RF a priorità Alta e Media ha almeno un caso di test ricavato dalla sua specifica e dai casi d'uso in cui compare (D3, Sezione~5), compresi i flussi alternativi e di errore. I dati di test si scelgono così:
+
+\begin{itemize}
+    \item \textbf{Partizione in classi di equivalenza:} si divide ogni input in classi trattate allo stesso modo e si prova un valore per classe. Per l'accesso (RF-01) le classi dell'e-mail sono: istituzionale valida, di un altro dominio, non conforme al formato, vuota. Per l'autocompletamento (RF-26): testo che corrisponde a una sola specie, a più specie, a nessuna.
+    \item \textbf{Analisi dei valori limite:} si provano i valori sul limite e quelli subito dentro e subito fuori. Per l'inclinazione della giacitura (RF-19), ammessa tra 0° e 90°, si provano $-1$, $0$, $1$, $89$, $90$ e $91$; allo stesso modo la direzione (tra 0° e 360°) e i valori chimici con un intervallo noto, come il pH (da 0 a 14), nei controlli sui dati inseriti (RF-11).
+    \item \textbf{Testing combinatorio (pairwise):} si usa solo dove il risultato dipende da più parametri insieme: ruolo (studente o docente), stato della rete (offline, rete cellulare, Wi-Fi) e disciplina (quattro). Le 24 combinazioni si riducono scegliendo i casi in modo che ogni coppia di valori compaia almeno una volta. Si applica ai permessi per disciplina (RF-04) e alla sincronizzazione (RF-10).
+\end{itemize}
 
 \subsection{Testing white-box}
-% TODO: test sul codice Java dell'app (unit test, es. JUnit).
-% Criteri di copertura: istruzioni, decisioni, condizioni (valori critici), cammini.
 
-\subsection{Test di integrazione, di sistema e di accettazione}
-% TODO: corrispondenza con il modello a V (unit -> integrazione -> sistema -> accettazione).
+Il testing white-box progetta i test a partire dal codice Java dell'app (RNF-14). Si applica alle classi con più logica: controllo dei dati inseriti (RF-11), versionamento (RF-12), coda di sincronizzazione (RF-10), regole di visibilità per ruolo, gruppo e disciplina (RF-03, RF-04) e autocompletamento (RF-26). I test sono test di unità JUnit e la copertura si misura con JaCoCo in Android Studio. I criteri adottati sono:
+
+\begin{itemize}
+    \item \textbf{copertura delle istruzioni e delle decisioni} per tutte queste classi: ogni istruzione eseguita almeno una volta e ogni \texttt{if}, \texttt{while} o \texttt{switch} reso sia vero sia falso, così che un controllo dimenticato non faccia accettare un dato errato;
+    \item \textbf{copertura delle condizioni} per le regole di visibilità, dove una decisione unisce più condizioni (ruolo, gruppo, disciplina) e ognuna deve assumere sia il valore vero sia il valore falso (RNF-11);
+    \item \textbf{copertura dei cammini} solo per la gestione dei conflitti di sincronizzazione: è il punto in cui una combinazione di rami non provata può far perdere dati, e i suoi metodi sono abbastanza brevi da rendere il criterio applicabile.
+\end{itemize}
 
 \subsection{Test di regressione}
-% TODO: rieseguire i test dopo ogni modifica; automazione dei test ripetitivi.
+
+Prima di ogni \emph{pull request} verso il ramo principale (D2, Sezione~3) si riesegue l'intera serie di test automatici di unità e di integrazione; prima di ogni rilascio si ripetono anche i casi di test manuali a priorità Alta. Quando si corregge un difetto, si riesegue il caso di test che lo aveva trovato e si aggiunge un test automatico che lo riproduce, così che non torni nelle versioni successive. Poiché il team sviluppa l'app per moduli (D2, Sezione~2), i test si eseguono a ogni modulo e non solo alla fine.
 
 \subsection{Verifica statica}
-% TODO: inspection (checklist, es. Java Code Inspection Checklist) e walk-through
-% del codice; ruoli nel team (autore, lettore, ispettore, moderatore).
+
+\begin{itemize}
+    \item \textbf{Inspection:} prima di entrare nel ramo principale, il codice è letto con una checklist basata sulla Java Code Inspection Checklist e sulle convenzioni di Java del D2 (RNF-15): variabili inizializzate, eccezioni gestite, risorse chiuse (file, database, fotocamera), controlli sui valori nulli, nomi conformi. Il gruppo di ispezione è di 4 persone: l'autore del codice e tre altri membri del team nei ruoli di lettore, ispettore e moderatore.
+    \item \textbf{Walk-through:} solo per sincronizzazione, permessi e salvataggio offline, dove un errore di logica può far perdere dati o mostrare dati non consentiti. Sviluppatori e verificatori percorrono il codice simulandone l'esecuzione con alcuni casi di test.
+\end{itemize}
+
+Prima di ogni pull request si esegue anche l'analisi automatica di Android Studio (Lint).
 
 \subsection{Test dei requisiti non funzionali}
-% TODO: per ogni categoria di RNF del D3 indicare il tipo di test:
-% usabilità (RNF-09, RNF-10), sicurezza (RNF-11, RNF-12), compatibilità (RNF-13),
-% prestazioni e carico (RNF-01--RNF-05), affidabilità e uso sul campo (RNF-06--RNF-08).
+
+Ogni RNF del D3 si verifica misurando la sua metrica e confrontandola con la soglia (D3, Sezione~4).
+
+\begin{longtblr}[
+  label=none,
+  entry=none
+]{
+  width=\linewidth,
+  rowhead=1,
+  colspec={X[1,l] X[0.9,l] X[3.1,l]},
+  cells={font=\small},
+  row{1}={bg=arancio, font=\small\bfseries},
+  hline{2-Z}={wd=0.5pt, fg=arancio}
+}
+Tipo di test & Requisiti & Metodo di verifica \\
+Prestazioni e scalabilità & da RNF-01 a RNF-05 & Sull'app si misurano i tempi di avvio, di salvataggio e di comparsa dei suggerimenti (in modalità aereo, con almeno 5.000 specie) e il tempo di sincronizzazione al ritorno della connessione. Sul server, test di carico con JMeter con almeno 70 utenti collegati insieme, misurando i tempi di risposta. \\
+Affidabilità e robustezza & da RNF-06 a RNF-08 & Tutte le funzioni di raccolta a priorità Alta provate in modalità aereo; chiusura forzata dell'app e spegnimento del dispositivo durante il salvataggio, verificando che nessun dato vada perso; prova di autonomia con GPS attivo per una giornata di uso tipico. \\
+Usabilità & RNF-09, RNF-10 & Nuovi utenti, dopo il tutorial, registrano un rilevamento: si misurano tempo, completamento senza aiuto ed errori commessi. Leggibilità dello schermo provata all'aperto, alla luce diretta del sole. \\
+Sicurezza & RNF-11, RNF-12, RNF-17, RNF-18 & Tentativi di accesso con credenziali errate e a dati di altri gruppi, ruoli o discipline; verifica che le comunicazioni usino HTTPS, che al primo accesso compaiano informativa e richiesta di consenso, e che la posizione sia salvata solo durante un rilevamento o un SOS. \\
+Interoperabilità & RNF-13, RNF-19 & Test di sistema su dispositivi ed emulatori con diverse versioni di Android (da Android 8), dimensioni dello schermo e sensori disponibili; apertura dei file esportati (CSV, PDF) con i programmi usati dai docenti. \\
+Processo & RNF-14, RNF-15 & Verificati con l'inspection e con Lint. \\
+\end{longtblr}
+
