@@ -44,9 +44,9 @@ Per il codice Java controllato con JUnit e JaCoCo (Sezione~1), valutiamo la bont
 \end{itemize}
 
 \subsection{Priorità dei test}
-Suddividiamo i test in tre fasce per decidere l'ordine di esecuzione:
+In coerenza con la classificazione dei requisiti del D3 (ripresa nella Sezione~3), i casi di test vengono suddivisi in due fasce di priorità per guidare la pianificazione e i test di regressione:
 \begin{itemize}
-    \item \textbf{P1 - Bloccante (Alta):} funzioni indispensabili per lavorare sul campo senza connessione e salvare i dati (\texttt{RF-01}, \texttt{RF-06}, \texttt{RF-08}, \texttt{RF-09}, \texttt{RF-10}, \texttt{RF-11}, \texttt{RF-28}). Per rilasciare il codice, il 100\% di questi test deve passare con zero bug aperti.
-    \item \textbf{P2 - Importante (Media):} rilievi con sensori, mappe e filtri (\texttt{RF-14}, \texttt{RF-16}, \texttt{RF-18}, \texttt{RF-19}, \texttt{RF-23}, \texttt{RF-29}). Richiediamo almeno il 90\% di esito positivo; eventuali difetti residui devono avere una soluzione temporanea documentata.
-    \item \textbf{P3 - Minore (Bassa):} funzioni secondarie come note vocali o dettagli grafici (\texttt{RF-22}, \texttt{RF-26}, \texttt{RF-27}, \texttt{RF-32}), verificate in base al tempo rimasto prima della consegna.
+    \item \textbf{Priorità Alta (P1):} casi di test legati alle funzionalità indispensabili sul campo e all'integrità dei dati (autenticazione, salvataggio schede, lavoro offline, sincronizzazione, mappe, fotocamera, note vocali e dispense: da \texttt{TC-01} a \texttt{TC-28}, \texttt{TC-32}--\texttt{TC-34}, \texttt{TC-38}--\texttt{TC-39}, \texttt{TC-43}--\texttt{TC-46}, \texttt{TC-53}--\texttt{TC-66}, \texttt{TC-72}--\texttt{TC-76}). Per il rilascio, il 100\% di questi test deve passare con zero difetti aperti.
+    \item \textbf{Priorità Media (P2):} casi di test associati a controlli avanzati, filtri, sensori specialistici, SOS e reportistica (\texttt{TC-29}--\texttt{TC-31}, \texttt{TC-35}--\texttt{TC-37}, \texttt{TC-40}--\texttt{TC-42}, \texttt{TC-47}--\texttt{TC-52}, \texttt{TC-67}--\texttt{TC-71}). Richiedono almeno il 90\% di superamento con eventuali difetti minori documentati.
 \end{itemize}
+I requisiti \texttt{RF-17}, \texttt{RF-20}, \texttt{RF-24}, \texttt{RF-27} e \texttt{RF-31}, essendo identificati nel D3 come possibili evoluzioni future del sistema, sono esclusi dal perimetro di test di questa versione.
