@@ -1,0 +1,69 @@
+\section{Schedule del testing: tempo e risorse allocate}
+
+In coerenza con il modello di processo ibrido adottato (D2, Sezione~2), l'attività di testing non è relegata a una fase finale, ma accompagna l'intero ciclo di sviluppo articolandosi su tre fasi operative principali sincronizzate con le scadenze del corso.
+
+\subsection{Timeline delle attività di test}
+
+\begin{itemize}
+    \item \textbf{Fase 1 -- Predisposizione e Progettazione dei Test (25/11/2026 -- 07/12/2026):} In parallelo alla stesura del Documento di Progettazione (D5), viene configurato l'ambiente di test in Android Studio (JUnit, JaCoCo, mock dei sensori GPS e fotocamera) e vengono formalizzate le matrici di test case Black-box a partire dai requisiti del D3.
+    \item \textbf{Fase 2 -- Unit Testing e Integrazione Continua (08/12/2026 -- 23/12/2026):} Durante lo sviluppo della prima release, ogni modulo implementato viene affiancato dai relativi test di unità. Vengono eseguiti i test di integrazione tra database locale, fotocamera e sensori. Questa fase culmina con la consegna della versione 1.0 del codice (D6, 23/12/2026), rispettando la soglia dell'80\% di branch coverage.
+    \item \textbf{Fase 3 -- System Testing, Collaudo sul Campo e Regressione (24/12/2026 -- 20/01/2027):} Test di sistema end-to-end su dispositivi fisici reali simulando uscite sul campo in modalità aereo; prove di carico sul server con JMeter; sessioni di accettazione con gli scenari del D3 e regression testing completo prima della consegna della versione 1.1 (D7, 20/01/2027) e della demo live.
+\end{itemize}
+
+\subsection{Schedulazione delle attività}
+
+La tabella riassume la pianificazione delle attività di collaudo e le relative dipendenze.
+
+\begin{longtblr}[
+  label=none,
+  entry=none
+]{
+  width=\linewidth,
+  rowhead=1,
+  colspec={X[0.8,c] X[2.4,l] X[1.2,c] X[1,c]},
+  cells={font=\small},
+  row{1}={bg=arancio, font=\small\bfseries},
+  hline{2-Z}={wd=0.5pt, fg=arancio}
+}
+ID & Attività di Testing & Periodo & Milestone \\
+T1 & Setup ambiente di test (JUnit, JaCoCo, mock sensori) & 25/11 -- 30/11/2026 & D4 \\
+T2 & Progettazione dettagliata test case Black-Box (RF-01 -- RF-32) & 01/12 -- 07/12/2026 & D5 \\
+T3 & Unit Testing su logica, validazione (RF-11) e database Room & 08/12 -- 15/12/2026 & D6 \\
+T4 & Integration Testing (sensori GPS/bussola, fotocamera, storage) & 16/12 -- 22/12/2026 & D6 \\
+T5 & Verifica della copertura JaCoCo e collaudo versione v1.0 & 23/12/2026 & \textbf{D6 (23/12)} \\
+T6 & Test non funzionali (prestazioni, usabilità all'aperto, sicurezza) & 27/12 -- 05/01/2027 & D7 \\
+T7 & System e Acceptance Testing outdoor (simulazione offline/online) & 06/01 -- 14/01/2027 & D7 \\
+T8 & Test di regressione finale, verifica bug fix e prova demo & 15/01 -- 20/01/2027 & \textbf{D7 (20/01)} \\
+\end{longtblr}
+
+\subsection{Allocazione delle risorse umane}
+
+Per garantire obiettività ed evitare bias di conferma, il team adotta la revisione incrociata: chi implementa un modulo non è l'unico responsabile della validazione funzionale dello stesso. L'impegno complessivo per il testing è stimato in circa \textbf{45 ore-persona}, ripartite tra i componenti del gruppo:
+
+\begin{longtblr}[
+  label=none,
+  entry=none
+]{
+  width=\linewidth,
+  rowhead=1,
+  colspec={X[1.5,l] X[1.5,l] X[2.5,l] X[0.6,c]},
+  cells={font=\small},
+  row{1}={bg=arancio, font=\small\bfseries},
+  hline{2-Z}={wd=0.5pt, fg=arancio}
+}
+Membro & Ruolo nel Testing & Compiti Principali & Ore \\
+Taj Uddin & QA Lead & Coordinamento suite di test, monitoraggio copertura JaCoCo, gestione bug tracking. & 11 h \\
+Claudia Cogoni & Data Layer Tester & Unit test su database Room, logiche di sincronizzazione (RF-10) e controlli dati (RF-11). & 9 h \\
+Damiano Scarpa & UI \& Usability Tester & Test interfaccia, usabilità delle schede di rilevamento (RF-06) e prove di leggibilità all'aperto. & 8 h \\
+Nicola Sossai & Hardware Tester & Test d'integrazione per GPS (RF-16), bussola/clinometro (RF-18, RF-19) e fotocamera (RF-23). & 9 h \\
+Ibrahima Tely Barry & Acceptance Tester & Test scenari d'uso (RF-01--RF-04), collaudo SOS (RF-28), prove con Postman/JMeter e demo. & 8 h \\
+\textbf{Totale} & & & \textbf{45 h} \\
+\end{longtblr}
+
+\subsection{Criteri di sospensione e uscita (Exit Criteria)}
+L'attività di testing delle release è governata da precisi criteri formali:
+\begin{itemize}
+    \item \textbf{Criteri di uscita v1.0 (D6):} 100\% dei test P1 superati; branch coverage $\ge 80\%$; zero anomalie aperte di livello Bloccante.
+    \item \textbf{Criteri di uscita v1.1 (D7 / Demo):} Superamento del 100\% dei test di regressione (P1 e P2); superamento dei test sul campo (raccolta offline $\to$ sincronizzazione); verbale di collaudo approvato.
+    \item \textbf{Criteri di sospensione:} Qualora una nuova build provochi un arresto anomalo all'avvio (\emph{crash on launch}) o la corruzione del database locale, la sessione di test viene sospesa fino al rilascio di un hotfix da parte dello sviluppatore del modulo.
+\end{itemize}
