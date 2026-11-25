@@ -1,15 +1,53 @@
 \section{Introduzione}
-% TODO: scopo del Piano di Testing: descrivere come verranno verificati i requisiti
-% definiti nel D3 (RF-01--RF-32, RNF-01--RNF-19) e a chi è rivolto il documento.
-% Ricordare che il testing serve a far emergere i malfunzionamenti, non a dimostrare
-% l'assenza di difetti.
 
 \subsection{Scopo del documento}
-% TODO
+
+Il Piano di Testing descrive come il team verifica che l'app Android per il Laboratorio in Campo rispetti i requisiti definiti nel Documento dei Requisiti (D3): 27 dei 32 requisiti funzionali (da \texttt{RF-01} a \texttt{RF-32}, esclusi i cinque a priorità Bassa, che sono possibili evoluzioni) e tutti i 19 requisiti non funzionali (da \texttt{RNF-01} a \texttt{RNF-19}). Il documento è rivolto ai membri del team, che lo usano per scrivere ed eseguire i test, e al docente, che lo usa per valutare il metodo di verifica scelto.
+
+Il testing serve a far emergere i malfunzionamenti: un test ha successo se ne rileva uno, e nessun numero di test dimostra l'assenza di difetti. Provare tutte le esecuzioni possibili è impraticabile, quindi il piano sceglie un numero limitato di casi di test con buone probabilità di trovare difetti.
+
+Il documento segue i punti richiesti per il Piano di Testing:
+\begin{itemize}
+    \item le tecniche di testing che si usano (Sezione~2);
+    \item i criteri per scegliere i casi di test (Sezione~3);
+    \item le modalità di verifica di ogni requisito (Sezione~4);
+    \item lo schedule del testing, con tempi e risorse (Sezione~5);
+    \item le procedure di registrazione dei test (Sezione~6);
+    \item i requisiti hardware e software per il testing (Sezione~7);
+    \item i vincoli che condizionano il testing (Sezione~8).
+\end{itemize}
 
 \subsection{Riferimenti}
-% TODO: D1 (Studio di fattibilità), D2 (Piano di Progetto), D3 (Documento dei Requisiti).
+
+\begin{itemize}
+    \item D1 -- Studio di fattibilità;
+    \item D2 -- Piano di Progetto, in particolare organizzazione del team (Sezione~2), strumenti e gestione della configurazione (Sezione~4) e rischi (Sezione~3);
+    \item D3 -- Documento dei Requisiti, da cui derivano i requisiti verificati (Sezioni~3 e~4) e i casi d'uso (Sezione~2);
+    \item slide del corso \emph{Tecniche di Testing nel Software} (2026\_IS\_08).
+\end{itemize}
 
 \subsection{Definizioni}
-% TODO: errore, difetto (fault/bug), malfunzionamento (failure); dato di test, caso di test;
-% esito positivo/negativo di un test.
+
+\begin{description}
+    \item[Errore:] sbaglio commesso da una persona durante lo sviluppo; è la causa.
+    \item[Difetto:] parte del codice o del progetto che contiene l'errore (\emph{fault}, \emph{bug}); è il luogo.
+    \item[Malfunzionamento:] comportamento del sistema diverso da quello atteso (\emph{failure}), che si manifesta durante l'esecuzione; è l'evento.
+    \item[Esito di un test:] \emph{positivo} se il test ha successo, cioè rileva un malfunzionamento perché almeno un'asserzione non è rispettata; \emph{negativo} se il comportamento coincide con quello atteso.
+    \item[RF, RNF, UC:] requisito funzionale, requisito non funzionale e caso d'uso, con i codici del D3.
+    \item[TC:] caso di test, identificato da un codice \texttt{TC-xx} (Sezione~4).
+\end{description}
+
+I concetti di dato di test e di caso di test sono definiti nella Sezione~3.
+
+\subsection{Uso di strumenti di intelligenza artificiale}
+
+ Si dichiara l'uso di strumenti di intelligenza artificiale generativa. Un componente del team ha usato Claude per creare la struttura in sezioni del documento e per scrivere la prima bozza in \LaTeX{} di alcune sezioni di questo documento, a partire dalle slide del corso, dal D2 e dal D3 (requisiti, soglie e casi d'uso). Lo stesso componente ha poi riletto le sezioni e le ha confrontate con le slide e con i documenti precedenti.
+
+Per le sezioni 2 e 6 il confronto con le slide e con il D3 ha portato a queste correzioni:
+\begin{itemize}
+    \item Sezione~2: il pairwise era previsto per RF-04 e RF-10, ma nessun caso di test lo applicava. È stato limitato ai filtri di RF-13 (TC-36).
+    \item Sezione~2: RNF-11 era descritto con la disciplina, mentre il D3 parla solo di ruolo e gruppo. La disciplina riguarda RF-04, e il testo ora dice ``ruolo e gruppo''.
+    \item Sezione~2: le pull request erano attribuite alla Sezione~3 del D2, ma sono nella Sezione~4.
+    \item Sezione~2: gli intervalli numerici dei valori limite (inclinazione da 0° a 90°, direzione da 0° a 360°, pH da 0 a 14) non derivano dal D3, e ora sono dichiarati come scelte di questo piano.
+    \item Sezione~6: il registro non aveva le colonne per le postcondizioni riscontrate e per la priorità, richieste dal formato della slide 45. Sono state aggiunte.
+\end{itemize}

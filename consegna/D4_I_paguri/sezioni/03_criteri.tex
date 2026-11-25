@@ -1,8 +1,8 @@
 \section{Criteri per la scelta dei casi di test}
 
-Collegandoci alle tecniche descritte nella Sezione~2, in questa sezione definiamo i criteri con cui selezioniamo i dati e i casi di prova. Non è pensabile testare l'app in modo esaustivo: le combinazioni tra stati della rete, permessi, ruoli e sensori (GPS, fotocamera, bussola) sono troppe. Per questo motivo abbiamo stabilito dei criteri precisi per individuare i test più significativi.
+Questa sezione, che si collega alle tecniche della Sezione~2, definisce i criteri con cui si scelgono i dati e i casi di prova. Non è pensabile testare l'app in modo esaustivo: le combinazioni tra stati della rete, permessi, ruoli e sensori (GPS, fotocamera, bussola) sono troppe. Il team ha quindi fissato criteri per scegliere i test con più probabilità di trovare difetti.
 
-In linea con le definizioni del corso, distinguiamo chiaramente tra:
+In linea con le definizioni del corso, si distingue tra:
 \begin{itemize}
     \item \textbf{Dati di test:} l'insieme dei valori di input forniti per testare il sistema;
     \item \textbf{Casi di test:} l'insieme degli input unito agli output attesi corrispondenti, formalizzati come coppie:
@@ -10,41 +10,41 @@ In linea con le definizioni del corso, distinguiamo chiaramente tra:
     TC = \langle \text{input}, \: \text{output atteso} \rangle
     \]
 \end{itemize}
-Nella pratica del progetto, per collegare ogni test ai requisiti del D3, corrediamo ciascuna coppia con un identificativo univoco e il requisito tracciato.
+Nella pratica del progetto, per collegare ogni test ai requisiti del D3, ogni coppia ha un identificativo univoco e il requisito tracciato.
 
-L'obiettivo è scegliere un criterio $C$ che risulti sia \textbf{affidabile} (i test scelti da $C$ danno sempre lo stesso risultato a parità di condizioni) sia \textbf{valido} (se c'è un errore nel programma, esiste almeno un test scelto da $C$ in grado di individuarlo). Come ricordano il teorema di Goodenough-Gerhart e Dijkstra (\emph{«il testing può mostrare la presenza di errori, ma mai la loro assenza»}), nessun criterio garantisce la correttezza assoluta su programmi non banali; perciò combiniamo approcci funzionali, strutturali e di verifica statica.
+L'obiettivo è scegliere un criterio $C$ che risulti sia \textbf{affidabile} (i test scelti da $C$ danno sempre lo stesso risultato a parità di condizioni) sia \textbf{valido} (se c'è un errore nel programma, esiste almeno un test scelto da $C$ in grado di individuarlo). Come ricordano il teorema di Goodenough-Gerhart e Dijkstra (\emph{«il testing può mostrare la presenza di errori, ma mai la loro assenza»}), nessun criterio garantisce la correttezza assoluta su programmi non banali; perciò si combinano approcci funzionali, strutturali e di verifica statica.
 
 \subsection{Criteri funzionali (Black-Box)}
 I test funzionali derivano direttamente dai requisiti del D3, senza guardare il codice sorgente:
 
 \begin{itemize}
-    \item \textbf{Classi di equivalenza:} per ogni dato in ingresso partizioniamo i possibili valori in classi valide e non valide. Scegliamo poi un test per ciascuna classe valida e un test per ciascuna classe non valida presa singolarmente, evitando casi ridondanti.
-    \item \textbf{Analisi dei valori limite (BVA):} per i valori numerici o continui (come le coordinate in \texttt{RF-16}, la pendenza della giacitura in \texttt{RF-19} o i parametri chimici in \texttt{RF-11}), oltre ai valori tipici testiamo i valori di frontiera dell'intervallo $[min, max]$:
+    \item \textbf{Classi di equivalenza:} per ogni dato in ingresso si partizionano i possibili valori in classi valide e non valide. Si sceglie poi un test per ciascuna classe valida e un test per ciascuna classe non valida presa singolarmente, evitando casi ridondanti.
+    \item \textbf{Analisi dei valori limite (BVA):} per i valori numerici o continui (come le coordinate in \texttt{RF-16}, la pendenza della giacitura in \texttt{RF-19} o i parametri chimici in \texttt{RF-11}), oltre ai valori tipici si testano i valori di frontiera dell'intervallo $[min, max]$:
     \[
     \{min-1, \: min, \: min+1, \: max-1, \: max, \: max+1\}
     \]
-    \item \textbf{Pairwise per parametri combinati:} per le funzioni che dipendono da più variabili (\texttt{RF-04} e \texttt{RF-10}), usiamo l'approccio pairwise a due vie. Invece di provare tutte le 24 combinazioni tra Ruolo, Rete e Disciplina, selezioniamo un sottoinsieme di test in cui ogni coppia di valori compare almeno una volta.
-    \item \textbf{Transizione di stato:} per la gestione offline (\texttt{RF-08}, \texttt{RF-09}, \texttt{RF-10}) verifichiamo i cambi di stato del dato: \emph{Bozza $\to$ Salvataggio locale $\to$ Coda di invio $\to$ Sincronizzato}, testando anche cosa succede se il processo si interrompe a metà.
+    \item \textbf{Pairwise per parametri combinati:} per i filtri delle tabelle dei dati (\texttt{RF-13}), che dipendono da più variabili (disciplina, gruppo, data e stop), si usa l'approccio pairwise a due vie. Invece di provare tutte le combinazioni, si seleziona un sottoinsieme di test in cui ogni coppia di valori compare almeno una volta (\texttt{TC-36}).
+    \item \textbf{Transizione di stato:} per la gestione offline (\texttt{RF-08}, \texttt{RF-09}, \texttt{RF-10}) si verificano i cambi di stato del dato: \emph{Bozza $\to$ Salvataggio locale $\to$ Coda di invio $\to$ Sincronizzato}, testando anche cosa succede se il processo si interrompe a metà.
 \end{itemize}
 
 \subsection{Criteri strutturali (White-Box)}
-Per il codice Java controllato con JUnit e JaCoCo (Sezione~1), valutiamo la bontà della suite di test in base alla copertura del codice:
+Per il codice Java controllato con JUnit e JaCoCo (Sezione~2), si valuta la bontà della suite di test in base alla copertura del codice:
 
 \begin{itemize}
-    \item \textbf{Copertura delle decisioni (Branch Coverage):} puntiamo ad almeno l'\textbf{80\%} sui moduli con più logica: validazione dati (\texttt{RF-11}), calcolo permessi (\texttt{RF-03}, \texttt{RF-04}) e versionamento (\texttt{RF-12}). Ogni ramo di un \texttt{if}, \texttt{switch} o ciclo deve essere percorso sia come vero che come falso.
-    \item \textbf{Copertura delle istruzioni (Statement Coverage):} manteniamo una soglia minima dell'\textbf{85\%} per le classi principali e i DAO del database Room.
-    \item \textbf{Copertura delle condizioni composte:} quando una regola combina più controlli (ad esempio ruolo, gruppo e connessione in \texttt{RNF-11}), ogni singola condizione booleana deve essere verificata sia vera che falsa.
-    \item \textbf{Copertura dei cammini:} limitata alla risoluzione dei conflitti durante la sincronizzazione (\texttt{RF-10}), dove percorrere tutti i rami logici è indispensabile per essere certi di non perdere o sovrascrivere dati per sbaglio.
+    \item \textbf{Copertura delle decisioni (Branch Coverage):} si punta ad almeno l'\textbf{80\%} sui moduli con più logica: validazione dati (\texttt{RF-11}), calcolo permessi (\texttt{RF-03}, \texttt{RF-04}) e versionamento (\texttt{RF-12}). Ogni ramo di un \texttt{if}, \texttt{switch} o ciclo deve essere percorso sia come vero che come falso.
+    \item \textbf{Copertura delle istruzioni (Statement Coverage):} si mantiene una soglia minima dell'\textbf{85\%} per le classi principali e i DAO del database Room.
+    \item \textbf{Copertura delle condizioni composte:} quando una regola combina più controlli (ad esempio ruolo e gruppo in \texttt{RNF-11}), ogni singola condizione booleana deve essere verificata sia vera che falsa.
+    \item \textbf{Copertura dei cammini:} limitata alla risoluzione dei conflitti durante la sincronizzazione (\texttt{RF-10}), dove un ramo non provato può far perdere o sovrascrivere dati.
 \end{itemize}
 
 \subsection{Criteri per requisiti non funzionali e verifica statica}
 \begin{itemize}
-    \item \textbf{Requisiti non funzionali (RNF):} selezioniamo casi di prova per situazioni critiche sul campo: arresto forzato dell'app o spegnimento del telefono mentre si scrive su DB (\texttt{RNF-07}), perdita improvvisa del segnale GPS (\texttt{RNF-08}), revoca dei permessi da impostazioni Android (\texttt{RNF-11}) e rotazione dello schermo mentre si compila una scheda (\texttt{RNF-10}).
-    \item \textbf{Criteri di accettazione per l'Inspection:} prima di integrare una pull request nel ramo principale, il codice deve superare la lettura a 4 ruoli (Sezione~1). Non accettiamo codice con risorse rimaste aperte (sensori o cursori DB), eccezioni ignorate o segnalazioni gravi di Android Lint (\texttt{RNF-14}, \texttt{RNF-15}).
+    \item \textbf{Requisiti non funzionali (RNF):} si selezionano casi di prova per situazioni critiche sul campo: arresto forzato dell'app o spegnimento del telefono mentre si scrive su DB (\texttt{RNF-07}), perdita improvvisa del segnale GPS (\texttt{RF-16}), revoca dei permessi di microfono e fotocamera da impostazioni Android (\texttt{RF-22}, \texttt{RF-23}) e rotazione dello schermo mentre si compila una scheda (\texttt{RF-06}).
+    \item \textbf{Criteri di accettazione per l'Inspection:} prima di integrare una pull request nel ramo principale, il codice deve superare la lettura a 4 ruoli (Sezione~2). Non si accetta codice con risorse rimaste aperte (sensori o cursori DB), eccezioni ignorate o segnalazioni gravi di Android Lint (\texttt{RNF-14}, \texttt{RNF-15}).
 \end{itemize}
 
 \subsection{Priorità dei test}
-In coerenza con la classificazione dei requisiti del D3 (ripresa nella Sezione~3), i casi di test vengono suddivisi in due fasce di priorità per guidare la pianificazione e i test di regressione:
+In coerenza con la classificazione dei requisiti del D3 (ripresa nella Sezione~4), i casi di test vengono suddivisi in due fasce di priorità per guidare la pianificazione e i test di regressione:
 \begin{itemize}
     \item \textbf{Priorità Alta (P1):} casi di test legati alle funzionalità indispensabili sul campo e all'integrità dei dati (autenticazione, salvataggio schede, lavoro offline, sincronizzazione, mappe, fotocamera, note vocali e dispense: da \texttt{TC-01} a \texttt{TC-28}, \texttt{TC-32}--\texttt{TC-34}, \texttt{TC-38}--\texttt{TC-39}, \texttt{TC-43}--\texttt{TC-46}, \texttt{TC-53}--\texttt{TC-66}, \texttt{TC-72}--\texttt{TC-76}). Per il rilascio, il 100\% di questi test deve passare con zero difetti aperti.
     \item \textbf{Priorità Media (P2):} casi di test associati a controlli avanzati, filtri, sensori specialistici, SOS e reportistica (\texttt{TC-29}--\texttt{TC-31}, \texttt{TC-35}--\texttt{TC-37}, \texttt{TC-40}--\texttt{TC-42}, \texttt{TC-47}--\texttt{TC-52}, \texttt{TC-67}--\texttt{TC-71}). Richiedono almeno il 90\% di superamento con eventuali difetti minori documentati.

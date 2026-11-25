@@ -4,7 +4,10 @@ Il team registra ogni esecuzione dei test in modo che sia ripetibile e che ogni 
 
 \subsection{Registrazione dei casi di test}
 
-I casi di test sono registrati nella tabella della Sezione~5, che fa da registro dei test. Ogni caso ha un identificativo univoco (\texttt{TC-xx}), il requisito o il caso d'uso che verifica (per mantenere la tracciabilità con il D3), precondizioni, input, output e postcondizioni attese, e priorità. A ogni esecuzione si compilano le colonne \emph{Output riscontrato} ed \emph{Esito}.
+Ogni caso di test ha un identificativo univoco (\texttt{TC-xx}) ed è associato al requisito che verifica, come in Sezione~4, così da mantenere la tracciabilità con il D3. Il registro dei test è una tabella con una riga per ogni caso e le colonne \emph{TC}, \emph{Requisito}, \emph{Priorità}, \emph{Output riscontrato}, \emph{Postcondizioni riscontrate} ed \emph{Esito}; a ogni esecuzione si compilano le ultime tre. Descrizione, precondizioni, valori di input, output attesi e postcondizioni attese sono quelli del caso di test descritto in Sezione~4, cioè la parte prima e quella dopo la virgola.
+% DA VERIFICARE: decidere il formato e il percorso del registro (file nel repository o foglio condiviso).
+
+I test di accettazione con docenti e studenti si registrano come i casi di test manuali.
 
 Per ogni sessione di test si indicano, sopra la tabella, la data, chi ha eseguito i test, la versione dell'app (commit) e l'ambiente: dispositivo o emulatore, versione di Android e stato della rete (offline, rete cellulare, Wi-Fi).
 
@@ -17,8 +20,11 @@ I test di unità e di integrazione producono un report di Android Studio e Gradl
 \subsection{Registrazione dei test non funzionali e della verifica statica}
 
 Per il test di carico si conservano i report di JMeter. Per quello di usabilità si registrano, in forma anonima, il tempo di completamento, il completamento senza aiuto e gli errori di ogni partecipante, insieme alle risposte al questionario di soddisfazione.
+
 Durante l'inspection e il walk-through il moderatore annota in un verbale il codice esaminato, la versione, i partecipanti e i difetti trovati, con la voce della checklist a cui si riferiscono. Il verbale è conservato nel repository.
 
 \subsection{Segnalazione dei malfunzionamenti}
 
-Ogni malfunzionamento trovato, da un test o dalla verifica statica, è aperto come \emph{issue} su GitHub con l'etichetta \texttt{bug}. La issue riporta il caso di test e il requisito coinvolti, i passi per riprodurre il problema, l'output atteso e quello riscontrato, l'ambiente e la gravità (bloccante, alta, media, bassa). La issue è assegnata a chi sviluppa il modulo, che corregge il difetto in un ramo dedicato e apre una pull request collegata. Dopo la correzione si riesegue il caso di test e i test di regressione (Sezione~2): se l'esito è negativo, cioè il malfunzionamento non si presenta più, la issue viene chiusa.
+Ogni malfunzionamento trovato, da un test o dalla verifica statica, è aperto come \emph{issue} su GitHub con l'etichetta \texttt{bug}.
+La issue riporta il caso di test e il requisito coinvolti, i passi per riprodurre il problema, l'output atteso e quello riscontrato, l'ambiente e la gravità (bloccante, alta, media, bassa). La issue è assegnata a chi sviluppa il modulo, che corregge il difetto in un ramo dedicato e apre una pull request collegata. Dopo la correzione si riesegue il caso di test e i test di regressione (Sezione~2): se l'esito è negativo, cioè il malfunzionamento non si presenta più, la issue viene chiusa.
+% DA VERIFICARE: l'etichetta bug e la scala di gravità sono scelte di questo piano, non presenti nel D2.

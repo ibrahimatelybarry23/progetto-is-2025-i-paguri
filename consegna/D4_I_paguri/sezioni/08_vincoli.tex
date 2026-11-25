@@ -3,15 +3,22 @@
 Le attività di testing descritte in questo documento sono soggette a vincoli legati al calendario del corso, alle risorse del team, all'ambiente hardware e alle condizioni d'uso sul campo.
 
 % DA VERIFICARE (riga Calendario): la demo finale non è nel calendario delle slide né nel D2; l'anno del D7 è troncato nella slide.
-\begin{center}
-\begin{tblr}{width=\linewidth, colspec={X[0.9,l]X[1.8,l]X[1.8,l]}, cells={font=\small},
-             row{1}={bg=arancio}, hline{2-Z}={wd=0.5pt, fg=arancio}}
+\begin{longtblr}[
+  label=none,
+  entry=none
+]{
+  width=\linewidth,
+  rowhead=1,
+  colspec={X[0.9,l] X[1.8,l] X[1.8,l]},
+  cells={font=\small},
+  row{1}={bg=arancio, font=\small\bfseries},
+  hline{2-Z}={wd=0.5pt, fg=arancio}
+}
 Ambito & Vincolo & Effetto sul testing \\
-Calendario del corso & Le consegne hanno date fisse: codice v1.0 il 23/12/2026 (D6), codice v1.1 il 20/01/2027 (D7) e demo finale a gennaio 2027. & Non è possibile eseguire un testing esaustivo; i casi di test danno priorità ai requisiti a priorità Alta del D3. \\
+Calendario del corso & Le consegne hanno date fisse: codice v1.0 il 23/12/2026 (D6), codice v1.1 il 20/01/2027 (D7) e demo finale a gennaio 2027. & Il tempo disponibile riduce ulteriormente i test eseguibili: i casi di test danno priorità ai requisiti a priorità Alta del D3. \\
 Risorse del team & Il gruppo è composto da 5 studenti con esperienza limitata nello sviluppo Android (rischio R2 del D2). & Il tempo per scrivere test automatici e gestire l'ambiente di prova compete con quello dello sviluppo. \\
 Dispositivi disponibili & Il team dispone solo dei propri smartphone personali e degli emulatori di Android Studio; l'app deve supportare da Android 8 in su (RNF-13). & Non si possono verificare tutte le combinazioni di versioni Android, schermi e sensori reali (rischio R5 del D2 per RF-18 e RF-19). \\
 Condizioni sul campo & In laboratorio la modalità aereo e le coordinate fittizie dell'emulatore non riproducono cali di segnale improvvisi, attenuazione GPS sotto bosco o consumo della batteria. & Le prove di autonomia (RNF-08), leggibilità al sole (RNF-10) e sincronizzazione reale (RF-10, RNF-05) richiedono uscite di prova all'aperto. \\
 Carico e utenti reali & RNF-04 richiede almeno 70 utenti simultanei; il campione di stakeholder coinvolti finora è ridotto (7 risposte al questionario del D1, rischio R7 del D2). & Il carico sul server va simulato con JMeter anziché con 70 dispositivi fisici; i test di usabilità (RNF-09) dipendono dalla disponibilità di studenti e docenti. \\
 Privacy e dati personali & L'app tratta posizione GPS, foto, note vocali e account istituzionali ed è soggetta al GDPR (RNF-17, RNF-18). & I test devono usare account e dati fittizi ed evitare di salvare posizioni fuori dagli eventi consentiti. \\
-\end{tblr}
-\end{center}
+\end{longtblr}
